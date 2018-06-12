@@ -146,14 +146,12 @@ public class setActivity extends AppCompatActivity {
                                     checkint = 1;
                                    // checkAlram = new boolean[]{true};
                                     checkvalue = true;
-                                    MySharedPreferencesManager.setCheckbox(checkvalue,setActivity.this);
                                 }
                                 else{
                                   //  Toast.makeText(setActivity.this, "해제됨", Toast.LENGTH_SHORT).show();
                                     checkint = 2;
                                     //checkAlram = new boolean[]{false};
                                     checkvalue = false;
-                                    MySharedPreferencesManager.setCheckbox(checkvalue,setActivity.this);
                                 }
 
                             }
@@ -166,10 +164,12 @@ public class setActivity extends AppCompatActivity {
                                     case AlertDialog.BUTTON_POSITIVE:
                                         if(checkint == 1){
                                             Intent refintent = new Intent(setActivity.this, MyNotificationService.class);
+                                            MySharedPreferencesManager.setCheckbox(checkvalue,setActivity.this);
                                             startService(refintent);
                                         }
                                         else if(checkint == 2){
                                             Intent refIntent = new Intent(setActivity.this, MyNotificationService.class);
+                                            MySharedPreferencesManager.setCheckbox(checkvalue,setActivity.this);
                                             stopService(refIntent);
                                         }
                                         break;
