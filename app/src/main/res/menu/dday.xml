@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="www.khj08.com.dateplan.PlanActivity">
+
+    <item
+        android:id="@+id/yearBtn"
+        android:title="매년 단위로 보기"
+        app:showAsAction="withText"/>
+    <item
+        android:id="@+id/dayBtn"
+        android:title="100일 단위로 보기"
+        app:showAsAction="withText"/>
+
+</menu>

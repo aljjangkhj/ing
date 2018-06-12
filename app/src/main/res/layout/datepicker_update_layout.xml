@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/notepad02"
+    app:menu="@menu/loadsave">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="25dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/date_picker_text01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:hint="0001년 01월 01일"
+                android:layout_marginLeft="15dp"
+                android:textColorHint="#000" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="날짜 설정"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="5pt"
+                    android:layout_weight="1"
+                    android:id="@+id/font1"/>
+
+                <Button
+                    android:id="@+id/date_picker_btn01"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@mipmap/ic_launcher_date" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/hello_time_text01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="만난 시간: 0시 0분"
+                    android:textColorHint="#000" />
+
+                <TextView
+                    android:id="@+id/bye_time_text01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="헤어진 시간: 0시 0분"
+                    android:textColorHint="#000" />
+
+                <TextView
+                    android:id="@+id/resulthour01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="총 만난 시간: 0시간 0분"
+                    android:textColorHint="#000" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/starttimeText01"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="만난 시간 설정"
+                        android:layout_gravity="right"
+                        android:gravity="center"
+                        android:textSize="5pt" />
+
+                    <TextView
+                        android:id="@+id/endtimeText01"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:text="헤어진 시간 설정"
+                        android:textSize="5pt"
+                        android:visibility="invisible" />
+
+                    <TextView
+                        android:id="@+id/timeresetText01"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:text="시간 설정 초기화"
+                        android:textSize="5pt"
+                        android:visibility="invisible" />
+                </FrameLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/time_Hello_btn01"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="right"
+                        android:background="@mipmap/starttimeimage" />
+
+                    <Button
+                        android:id="@+id/time_Bye_btn01"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="right"
+                        android:background="@mipmap/endtimeimage"
+                        android:visibility="invisible" />
+
+                    <Button
+                        android:id="@+id/time_reset_btn01"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="right"
+                        android:background="@mipmap/timeresetimage"
+                        android:visibility="invisible" />
+                </FrameLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="남자친구의 데이트 비용: "
+                        android:textColor="#000"
+                        android:id="@+id/font2"/>
+
+                    <EditText
+                        android:id="@+id/man_money01"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittextshape01"
+                        android:digits="0123456789"
+                        android:gravity="center"
+                        android:hint="             0"
+                        android:inputType="numberSigned"
+                        android:maxLength="7" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="원"
+                        android:id="@+id/font3"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="여자친구의 데이트 비용: "
+                        android:textColor="#000"
+                        android:id="@+id/font4"/>
+
+                    <EditText
+                        android:id="@+id/woman_money01"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittextshape01"
+                        android:digits="0123456789"
+                        android:gravity="center"
+                        android:hint="             0"
+                        android:inputType="numberSigned"
+                        android:maxLength="7" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="원"
+                        android:id="@+id/font5"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/addmoneybtn01"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center|right"
+                    android:background="@mipmap/moneyimage"
+                    android:gravity="center|bottom"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="총 비용 계산하기"
+                    android:layout_marginRight="5dp"
+                    android:layout_gravity="bottom|right"
+                    android:id="@+id/font6"
+                    android:textSize="5pt"/>
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="총 데이트 비용 : "
+                android:textColor="#000"
+                android:id="@+id/font7"/>
+
+            <TextView
+                android:id="@+id/add_money01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="0원" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageButton
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="#00ff0000"
+                    android:src="@mipmap/plancamera"
+                    android:id="@+id/dateplan_imagebtn01"/>
+                <www.khj08.com.dateplan.CircleImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="right"
+                    android:id="@+id/dateplan_imageView01"/>
+            </FrameLayout>
+
+            <EditText
+                android:id="@+id/edit_text_title01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:background="@android:drawable/edit_text"
+                android:hint="일기 제목을 입력하세요."
+                android:layout_gravity="bottom"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="내용"
+                android:textColor="#000"
+                android:id="@+id/font8"/>
+
+            <EditText
+                android:id="@+id/edit_text_content01"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginBottom="20dp"
+                android:background="@android:drawable/edit_text"
+                android:gravity="top"
+                android:hint="일기 내용을 입력하세요." />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

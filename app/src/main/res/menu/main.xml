@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="www.khj08.com.dateplan.PlanActivity">
+
+    <item
+        android:id="@+id/path_Btn"
+        android:icon="@mipmap/ic_launcher_path"
+        android:title="설정"
+        app:showAsAction="withText"/>
+    <item
+        android:id="@+id/backgroundColor_btn"
+        android:title="배경 색상 바꾸기"
+        app:showAsAction="withText"/>
+</menu>

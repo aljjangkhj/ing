@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="www.khj08.com.dateplan.PlanActivity">
+
+    <item
+        android:id="@+id/delete_btn"
+        android:icon="@mipmap/deleteimage"
+        android:title="삭제"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/insert_btn"
+        android:icon="@mipmap/insertimage"
+        android:title="수정"
+        app:showAsAction="always"/>
+
+</menu>

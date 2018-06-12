@@ -1,0 +1,84 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00ff0000"
+    android:orientation="vertical"
+    android:padding="@dimen/widget_margin"
+    android:gravity="center">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00ff0000"
+            android:id="@+id/widget_btn"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/appwidget_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="사진과 시작날을 선택해주세요"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="#000"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" ~잉ing"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="#000"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="25dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="길동"
+                android:textColor="#000"
+                android:id="@+id/widget_name1"
+                android:layout_marginRight="5dp"/>
+
+            <ImageView
+                android:id="@+id/widget_Img01"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_centerInParent="true" />
+
+
+            <ImageView
+                android:id="@+id/widget_img02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/mainthreadlogo" />
+
+            <ImageView
+                android:id="@+id/widget_Img03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="둘리"
+                android:textColor="#000"
+                android:id="@+id/widget_Name2"
+                android:layout_marginLeft="5dp"/>
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

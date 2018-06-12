@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">잉ing</string>
+    <string name="app_name01">일기 쓰기</string>
+    <string name="app_name02">일기 목록</string>
+    <string name="app_name03">일기 불러오기</string>
+    <string name="app_name04">D - DAY</string>
+    <string name="app_name05">가계부</string>
+    <string name="app_name06">설정</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">설정</string>
+    <string name="title_activity_plan">일기쓰기</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_d__day_">D-DAY 목록</string>
+    <string name="title_activity_calc_result">가계부</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="configure">Configure</string>
+    <string name="add_widget">Add widget</string>
+    <string name="banner_ad_unit_id">ca-app-pub-8169681360843984/9306096651</string>
+    <!--나의 광고 코드 ca-app-pub-8169681360843984/9306096651--> <!--테스트용 코드ca-app-pub-3940256099942544/6300978111-->
+
+
+</resources>

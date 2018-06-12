@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="기능">
+        <menu>
+            <item
+                android:id="@+id/nav_camera"
+                android:icon="@mipmap/ic_launcher_plan"
+                android:title="일기 쓰기" />
+            <item
+                android:id="@+id/nav_slideshow"
+                android:icon="@mipmap/ic_launcher_date"
+                android:title="일기 목록" />
+            <item
+                android:id="@+id/nav_gallery"
+                android:icon="@drawable/ic_exposure_neg_1_black_24dp"
+                android:title="D-DAY" />
+            <item
+                android:id="@+id/nav_calc"
+                android:icon="@mipmap/ic_launcher_calc"
+                android:title="가계부" />
+
+            <!--<item
+                android:id="@+id/nav_massage"
+                android:icon="@mipmap/ic_launcher_talk"
+                android:title="대화하기" />-->
+        </menu>
+    </item>
+    <item android:title="사용자 설정">
+        <menu>
+            <item
+                android:id="@+id/nav_set"
+                android:icon="@mipmap/ic_launcher_path"
+                android:title="설정" />
+        </menu>
+    </item>
+
+</menu>
