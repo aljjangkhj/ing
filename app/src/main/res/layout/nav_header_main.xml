@@ -23,7 +23,7 @@
             android:layout_gravity="center"
             android:src="@mipmap/ic_menu_camera" />
 
-        <www.khj08.com.dateplan.CircleImageView
+        <www.khj08.com.dateplan.ui.CircleImageView
             android:id="@+id/nav_header_layout_imageView"
             android:layout_width="80dp"
             android:layout_height="80dp"

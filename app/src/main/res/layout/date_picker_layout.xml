@@ -120,38 +120,38 @@
                         android:visibility="invisible" />
                 </FrameLayout>
             </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <Button
-                    android:id="@+id/time_Hello_btn"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="right"
-                    android:background="@mipmap/starttimeimage" />
+                    <Button
+                        android:id="@+id/time_Hello_btn"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="right"
+                        android:background="@mipmap/starttimeimage" />
 
-                <Button
-                    android:id="@+id/time_Bye_btn"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="right"
-                    android:background="@mipmap/endtimeimage"
-                    android:visibility="invisible" />
+                    <Button
+                        android:id="@+id/time_Bye_btn"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="right"
+                        android:background="@mipmap/endtimeimage"
+                        android:visibility="invisible" />
 
-                <Button
-                    android:id="@+id/time_reset_btn"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="right"
-                    android:background="@mipmap/timeresetimage"
-                    android:visibility="invisible" />
-            </FrameLayout>
-        </LinearLayout>
+                    <Button
+                        android:id="@+id/time_reset_btn"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="right"
+                        android:background="@mipmap/timeresetimage"
+                        android:visibility="invisible" />
+                </FrameLayout>
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -286,11 +286,11 @@
                     android:background="#00ff0000"
                     android:src="@mipmap/plancamera"
                     android:id="@+id/dateplan_imagebtn"/>
-            <www.khj08.com.dateplan.CircleImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="right"
-                android:id="@+id/dateplan_imageView"/>
+                <www.khj08.com.dateplan.ui.CircleImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="right"
+                    android:id="@+id/dateplan_imageView"/>
             </FrameLayout>
 
             <EditText

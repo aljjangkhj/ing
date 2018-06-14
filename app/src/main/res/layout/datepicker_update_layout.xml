@@ -290,7 +290,7 @@
                     android:background="#00ff0000"
                     android:src="@mipmap/plancamera"
                     android:id="@+id/dateplan_imagebtn01"/>
-                <www.khj08.com.dateplan.CircleImageView
+                <www.khj08.com.dateplan.ui.CircleImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="right"

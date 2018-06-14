@@ -6,18 +6,15 @@
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mainimage02"
+    android:background="#333333"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="www.khj08.com.dateplan.MainActivity"
+    tools:context="www.khj08.com.dateplan.ui.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
     <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="495dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"
-        tools:ignore="MissingConstraints">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,9 +23,10 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="300px"
                 android:layout_gravity="center"
-                android:src="@drawable/mainlogo01" />
+                android:src="@drawable/mainlogo01"
+                android:layout_marginTop="120px"/>
 
             <TextView
                 android:id="@+id/main_dday_text"
@@ -39,7 +37,8 @@
                 android:text="00일째 ~잉"
                 android:textColor="#fff"
                 android:textSize="9pt"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="80px"/>
 
             <TextView
                 android:id="@+id/main_textview01"
@@ -55,7 +54,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="200px"
                 android:gravity="center">
 
                 <FrameLayout
@@ -69,7 +68,7 @@
                         android:background="#00ff0000"
                         android:src="@mipmap/ic_menu_camera" />
 
-                    <www.khj08.com.dateplan.CircleImageView
+                    <www.khj08.com.dateplan.ui.CircleImageView
                         android:id="@+id/man01"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
@@ -81,8 +80,8 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="120px"
+                    android:layout_marginRight="120px"
                     android:background="@drawable/mainthreadlogo1" />
 
                 <FrameLayout
@@ -96,7 +95,7 @@
                         android:background="#00ff0000"
                         android:src="@mipmap/ic_menu_camera" />
 
-                    <www.khj08.com.dateplan.CircleImageView
+                    <www.khj08.com.dateplan.ui.CircleImageView
                         android:id="@+id/woman2"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
@@ -120,8 +119,8 @@
                     android:id="@+id/manName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="160px"
+                    android:layout_marginTop="80px"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="사진1"
@@ -133,8 +132,8 @@
                     android:id="@+id/womanName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="160px"
+                    android:layout_marginTop="80px"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="사진2"
@@ -145,14 +144,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="200px"
                     android:gravity="center">
 
                     <TextView
@@ -198,24 +197,8 @@
                         android:textSize="7pt" />
 
                 </LinearLayout>
-
-                <!--<Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:drawable/ic_menu_rotate"/>-->
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="right"
-                android:layout_gravity="right">
-
-
             </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
