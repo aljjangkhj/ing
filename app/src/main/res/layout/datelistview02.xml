@@ -2,51 +2,46 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <www.khj08.com.dateplan.ui.CircleImageView
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="160px"
+            android:layout_height="160px"
+            android:gravity="center"
             android:id="@+id/Date_list_ImageVIew"
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="center"
-            android:foregroundGravity="center"
-            android:layout_weight="1"/>
+            android:layout_marginLeft="40px"/>
 
         <TextView
             android:id="@+id/Date_list_TextView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="1234"
             android:textColor="#000"
-            android:textSize="6pt"
+            android:textSize="14dp"
+            android:gravity="center"
             android:textStyle="bold"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:layout_marginRight="40px"
+            android:layout_marginLeft="40px"/>
 
         <TextView
             android:id="@+id/Date_title_TextView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:ellipsize="marquee"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:layout_gravity="center"
             android:marqueeRepeatLimit="1"
             android:singleLine="true"
+            android:gravity="center"
             android:textColor="#000"
-            android:text="title" />
+            android:text="title"
+            android:layout_weight="1" />
 
 
     </LinearLayout>
-
-
 </LinearLayout>

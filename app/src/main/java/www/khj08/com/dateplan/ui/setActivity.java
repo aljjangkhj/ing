@@ -20,6 +20,7 @@ import java.util.Calendar;
 
 import www.khj08.com.dateplan.BaseActivity;
 import www.khj08.com.dateplan.R;
+import www.khj08.com.dateplan.popup.Popup;
 import www.khj08.com.dateplan.ui.list_adapter.ListViewAdapter;
 
 public class setActivity extends BaseActivity {
@@ -96,7 +97,6 @@ public class setActivity extends BaseActivity {
                         datePickerDialog.show();
                         break;
                     case 1:
-                        Toast.makeText(setActivity.this, "사진1 문구정하기", Toast.LENGTH_SHORT).show();
                         LayoutInflater layoutInflater = getLayoutInflater();
                         final View dialogView = layoutInflater.inflate(R.layout.edittext_dialog, null);
                         final AlertDialog.Builder builder = new AlertDialog.Builder(setActivity.this);
@@ -106,14 +106,14 @@ public class setActivity extends BaseActivity {
                         builder.setPositiveButton("이 문구로 할게요!", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                EditText firstName = (EditText)dialogView.findViewById(R.id.picName01);
-                                EditText secondName = (EditText)dialogView.findViewById(R.id.picName02);
-                                String strFirst = firstName.getText().toString();
-                                String strSec = secondName.getText().toString();
-                                MySharedPreferencesManager.setPic01(strFirst,setActivity.this);
-                                MySharedPreferencesManager.setPic02(strSec,setActivity.this);
-                                Toast.makeText(setActivity.this, "사진1을 "+strFirst+"로 변경하였습니다.", Toast.LENGTH_SHORT).show();
-                                Toast.makeText(setActivity.this, "사진2를 "+strSec+"로 변경하였습니다.", Toast.LENGTH_SHORT).show();
+//                                EditText firstName = (EditText)dialogView.findViewById(R.id.picName01);
+//                                EditText secondName = (EditText)dialogView.findViewById(R.id.picName02);
+//                                String strFirst = firstName.getText().toString();
+//                                String strSec = secondName.getText().toString();
+//                                MySharedPreferencesManager.setPic01(strFirst,setActivity.this);
+//                                MySharedPreferencesManager.setPic02(strSec,setActivity.this);
+//                                Toast.makeText(setActivity.this, "사진1을 "+strFirst+"로 변경하였습니다.", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(setActivity.this, "사진2를 "+strSec+"로 변경하였습니다.", Toast.LENGTH_SHORT).show();
                             }
                         });
                         builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -124,6 +124,21 @@ public class setActivity extends BaseActivity {
                         });
                         AlertDialog dialog = builder.create();
                         dialog.show();
+
+                        Popup popup4 = new Popup(mContext,"","메인("+MySharedPreferencesManager.getPic01(mContext)+","+MySharedPreferencesManager.getPic02(mContext)+") 문구 정하기","취소","확인");
+                        popup4.OK_Click = new Popup.onClick() {
+                            @Override
+                            public void onClick() {
+
+                            }
+                        };
+                        popup4.Cancel_Click = new Popup.onClick() {
+                            @Override
+                            public void onClick() {
+
+                            }
+                        };
+                        popup4.show();
                         break;
                     case 2:
                         AlertDialog alterDialog = null;
@@ -182,9 +197,31 @@ public class setActivity extends BaseActivity {
 
                     case 3:
                      //   Toast.makeText(setActivity.this, "사용 설명서", Toast.LENGTH_SHORT).show();
-                        AlertDialog alterDialog01 = null;
-                        AlertDialog.Builder alert01 = new AlertDialog.Builder(setActivity.this);
-                        alert01.setMessage("잉ing을 이용해 주셔서 감사합니다"+"\n"+"\n"+
+//                        AlertDialog alterDialog01 = null;
+//                        AlertDialog.Builder alert01 = new AlertDialog.Builder(setActivity.this);
+//                        alert01.setMessage("잉ing을 이용해 주셔서 감사합니다"+"\n"+"\n"+
+//                                "첫번째, 잉ing은 사진을 넣을 수 있는 일기장이 제공됩니다."+"\n"+"\n"+
+//                                "두번째, 사람과 사람간의 만남 시간과 사용한 비용을 간략히 정리할 수 있습니다."+"\n"+"\n"+
+//                                "세번째, D-DAY를 항시 상단 알림에 출력이 가능합니다." +"\n"+"\n"+
+//                                "네번째, 메인 화면에 사랑하는 사람의 얼굴과 한줄 평을 남길 수 있습니다."+ "\n"+"\n"+
+//                                "다섯번째, D-DAY로 100일부터 18200일의 기념일과 1년부터 50년의 기념일이 제공됩니다."+ "\n"+"\n"+
+//                                "여섯번째, 일기 목록을 통해 간편하게 자신이 써왔던 일기를 볼 수 있습니다." + "\n"+"\n"+
+//                                "※ 사용시 주의할점: 저장이 되어있는 날짜의 일기는 또 다시 저장할 수 없습니다!! 또한 상단 알림은 메인화면에서 사진을 선택 하셔야 상단 알림을 출력 할 수 있습니다. "+
+//                                "일기나 D-DAY를 저장 또는 삭제 하였으나 출력이 되지 않을시 새로고침 버튼을 눌러주시거나 어플을 종료 후 다시 실행하면 출력됩니다." +"\n"+"\n"+ "감사합니다.");
+//                                //"사용하실 때 불편한 점이나 더 편리한 기능을 넣고싶다면"+"\n"
+//                                //"개발자 이메일: aljjangkhj@nate.com 으로 메일을 넣어주십시오."
+//                        alert01.setPositiveButton("닫기", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//
+//                            }
+//                        });
+//                        alterDialog01 = alert01.create();
+//                        alterDialog01.setTitle("사용 TIP");
+//                        alterDialog01.setIcon(R.mipmap.askicon);
+//                        alterDialog01.show();
+
+                        Popup popup = new Popup(mContext,"","잉ing을 이용해 주셔서 감사합니다"+"\n"+"\n"+
                                 "첫번째, 잉ing은 사진을 넣을 수 있는 일기장이 제공됩니다."+"\n"+"\n"+
                                 "두번째, 사람과 사람간의 만남 시간과 사용한 비용을 간략히 정리할 수 있습니다."+"\n"+"\n"+
                                 "세번째, D-DAY를 항시 상단 알림에 출력이 가능합니다." +"\n"+"\n"+
@@ -192,62 +229,102 @@ public class setActivity extends BaseActivity {
                                 "다섯번째, D-DAY로 100일부터 18200일의 기념일과 1년부터 50년의 기념일이 제공됩니다."+ "\n"+"\n"+
                                 "여섯번째, 일기 목록을 통해 간편하게 자신이 써왔던 일기를 볼 수 있습니다." + "\n"+"\n"+
                                 "※ 사용시 주의할점: 저장이 되어있는 날짜의 일기는 또 다시 저장할 수 없습니다!! 또한 상단 알림은 메인화면에서 사진을 선택 하셔야 상단 알림을 출력 할 수 있습니다. "+
-                                "일기나 D-DAY를 저장 또는 삭제 하였으나 출력이 되지 않을시 새로고침 버튼을 눌러주시거나 어플을 종료 후 다시 실행하면 출력됩니다." +"\n"+"\n"+ "감사합니다.");
-                                //"사용하실 때 불편한 점이나 더 편리한 기능을 넣고싶다면"+"\n"
-                                //"개발자 이메일: aljjangkhj@nate.com 으로 메일을 넣어주십시오."
-                        alert01.setPositiveButton("닫기", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                        alterDialog01 = alert01.create();
-                        alterDialog01.setTitle("사용 TIP");
-                        alterDialog01.setIcon(R.mipmap.askicon);
-                        alterDialog01.show();
+                                "일기나 D-DAY를 저장 또는 삭제 하였으나 출력이 되지 않을시 새로고침 버튼을 눌러주시거나 어플을 종료 후 다시 실행하면 출력됩니다." +"\n"+"\n"+ "감사합니다.","","확인");
+                        popup.show();
 
                         break;
                     case 4:
-                         AlertDialog alterDialog02 = null;
-                         AlertDialog.Builder alert02 = new AlertDialog.Builder(setActivity.this);
-                         alert02.setMessage("사용하실 때 불편한 점이나 더 편리한 기능을 넣고싶다면 "+"\n"+
-                                 "개발자 이메일: aljjangkhj@nate.com "+"\n"+
-                                 "메일 주세요. "+"\n"+"좋은 하루 되세요^^ ");
-                         //"사용하실 때 불편한 점이나 더 편리한 기능을 넣고싶다면"+"\n"
-                         //"개발자 이메일: aljjangkhj@nate.com 으로 메일을 넣어주십시오."
-                         alert02.setPositiveButton("메일 보내기", new DialogInterface.OnClickListener() {
-                             @Override
-                             public void onClick(DialogInterface dialog, int which) {
+//                         AlertDialog alterDialog02 = null;
+//                         AlertDialog.Builder alert02 = new AlertDialog.Builder(setActivity.this);
+//                         alert02.setMessage("사용하실 때 불편한 점이나 더 편리한 기능을 넣고싶다면 "+"\n"+
+//                                 "개발자 이메일: aljjangkhj@nate.com "+"\n"+
+//                                 "메일 주세요. "+"\n"+"좋은 하루 되세요^^ ");
+//                         //"사용하실 때 불편한 점이나 더 편리한 기능을 넣고싶다면"+"\n"
+//                         //"개발자 이메일: aljjangkhj@nate.com 으로 메일을 넣어주십시오."
+//                         alert02.setPositiveButton("메일 보내기", new DialogInterface.OnClickListener() {
+//                             @Override
+//                             public void onClick(DialogInterface dialog, int which) {
+//
+//                                 Intent it = new Intent(Intent.ACTION_SEND);
+//                                 String[] mailaddr = {"aljjangkhj@nate.com"};
+//
+//                                 it.setType("plaine/text");
+//                                 it.putExtra(Intent.EXTRA_EMAIL, mailaddr); // 받는사람
+//                                 it.putExtra(Intent.EXTRA_SUBJECT, ""); // 제목
+//                                 it.putExtra(Intent.EXTRA_TEXT,""); // 첨부내용
+//
+//                                 MoveToActivity(it);
+//                             }
+//                         });
+//                         alert02.setNegativeButton("닫기", new DialogInterface.OnClickListener() {
+//                             @Override
+//                             public void onClick(DialogInterface dialog, int which) {
+//
+//                             }
+//                         });
+//                         alterDialog02 = alert02.create();
+//                         alterDialog02.setTitle("피드백");
+//                         alterDialog02.setIcon(R.mipmap.myicon);
+//                         alterDialog02.show();
 
-                                 Intent it = new Intent(Intent.ACTION_SEND);
-                                 String[] mailaddr = {"aljjangkhj@nate.com"};
+                        Popup popup2 = new Popup(mContext,"","사용하실 때 불편한 점이나 더 편리한 기능을 넣고싶다면 "+"\n"+
+                                "개발자 이메일: aljjangkhj@nate.com "+"\n"+
+                                "메일 주세요. "+"\n"+"좋은 하루 되세요^^ ","취소","메일 보내기");
+                        popup2.OK_Click = new Popup.onClick() {
+                            @Override
+                            public void onClick() {
+                                Intent it = new Intent(Intent.ACTION_SEND);
+                                String[] mailaddr = {"aljjangkhj@nate.com"};
 
-                                 it.setType("plaine/text");
-                                 it.putExtra(Intent.EXTRA_EMAIL, mailaddr); // 받는사람
-                                 it.putExtra(Intent.EXTRA_SUBJECT, ""); // 제목
-                                 it.putExtra(Intent.EXTRA_TEXT,""); // 첨부내용
+                                it.setType("plaine/text");
+                                it.putExtra(Intent.EXTRA_EMAIL, mailaddr); // 받는사람
+                                it.putExtra(Intent.EXTRA_SUBJECT, ""); // 제목
+                                it.putExtra(Intent.EXTRA_TEXT,""); // 첨부내용
 
-                                 MoveToActivity(it);
-                             }
-                         });
-                         alert02.setNegativeButton("닫기", new DialogInterface.OnClickListener() {
-                             @Override
-                             public void onClick(DialogInterface dialog, int which) {
+                                MoveToActivity(it);
+                            }
+                        };
+                        popup2.show();
 
-                             }
-                         });
-                         alterDialog02 = alert02.create();
-                         alterDialog02.setTitle("피드백");
-                         alterDialog02.setIcon(R.mipmap.myicon);
-                         alterDialog02.show();
                          break;
                     case 5:
-                        AlertDialog alterDialog03 = null;
-                        AlertDialog.Builder alert03 = new AlertDialog.Builder(setActivity.this);
-                        alert03.setMessage("데이터들을 모두 삭제하시겠습니까? "+"\n삭제된 정보들은 되돌릴 수 없습니다.");
-                        alert03.setPositiveButton("삭제할래", new DialogInterface.OnClickListener() {
+//                        AlertDialog alterDialog03 = null;
+//                        AlertDialog.Builder alert03 = new AlertDialog.Builder(setActivity.this);
+//                        alert03.setMessage("데이터들을 모두 삭제하시겠습니까? "+"\n삭제된 정보들은 되돌릴 수 없습니다.");
+//                        alert03.setPositiveButton("삭제할래", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                MySharedPreferencesManager.setStartLoveDay(0,0,0,setActivity.this);
+//                                MySharedPreferencesManager.setDdaySave(0,setActivity.this);
+//                                MySharedPreferencesManager.setLoveDay(0,setActivity.this);
+//                                MySharedPreferencesManager.setToday(0,setActivity.this);
+//                                MySharedPreferencesManager.setManPicture("",setActivity.this);
+//                                MySharedPreferencesManager.setWomanPicture("",setActivity.this);
+//                                MySharedPreferencesManager.setYear(0,setActivity.this);
+//                                MySharedPreferencesManager.setMonth(0,setActivity.this);
+//                                MySharedPreferencesManager.setDay(0,setActivity.this);
+//                                MySharedPreferencesManager.setPic01("",setActivity.this);
+//                                MySharedPreferencesManager.setPic02("",setActivity.this);
+//                                MySharedPreferencesManager.setMainPicture("",setActivity.this);
+//                                MySharedPreferencesManager.setMainEdit("",setActivity.this);
+//                                mSQLiteDBManager.delete(null,null);
+//                                Toast.makeText(setActivity.this, "삭제되었습니다.", Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
+//                        alert03.setNegativeButton("닫기", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                Toast.makeText(setActivity.this, "혹시라도 삭제하면 추억들이 다 날아가요:)", Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
+//                        alterDialog03 = alert03.create();
+//                        alterDialog03.setTitle("데이터를 모두 삭제합니다.");
+//                        alterDialog03.setIcon(R.mipmap.deletecolor);
+//                        alterDialog03.show();
+                        Popup popup3 = new Popup(mContext,"","데이터들을 모두 삭제하시겠습니까? \"+\"\\n삭제된 정보들은 되돌릴 수 없습니다.","취소","삭제");
+                        popup3.OK_Click = new Popup.onClick() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                            public void onClick() {
                                 MySharedPreferencesManager.setStartLoveDay(0,0,0,setActivity.this);
                                 MySharedPreferencesManager.setDdaySave(0,setActivity.this);
                                 MySharedPreferencesManager.setLoveDay(0,setActivity.this);
@@ -264,17 +341,14 @@ public class setActivity extends BaseActivity {
                                 mSQLiteDBManager.delete(null,null);
                                 Toast.makeText(setActivity.this, "삭제되었습니다.", Toast.LENGTH_SHORT).show();
                             }
-                        });
-                        alert03.setNegativeButton("닫기", new DialogInterface.OnClickListener() {
+                        };
+                        popup3.Cancel_Click = new Popup.onClick() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                            public void onClick() {
                                 Toast.makeText(setActivity.this, "혹시라도 삭제하면 추억들이 다 날아가요:)", Toast.LENGTH_SHORT).show();
                             }
-                        });
-                        alterDialog03 = alert03.create();
-                        alterDialog03.setTitle("데이터를 모두 삭제합니다.");
-                        alterDialog03.setIcon(R.mipmap.deletecolor);
-                        alterDialog03.show();
+                        };
+                        popup3.show();
                         break;
                 }
             }

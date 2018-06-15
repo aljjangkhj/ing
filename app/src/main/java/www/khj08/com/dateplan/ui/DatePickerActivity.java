@@ -114,6 +114,8 @@ public class DatePickerActivity extends BaseActivity {
     private ListView dateListView;
     private SQLiteDBListView listViewAdapter;
 
+    private TextView firstName,secondName;
+
     //데이터베이스 함수
     public SQLiteDBManager mSQLiteDBManager = null;
 
@@ -187,7 +189,10 @@ public class DatePickerActivity extends BaseActivity {
         this.editText_content = (EditText) this.findViewById(R.id.edit_text_content);
         this.manMoney = (EditText) this.findViewById(R.id.man_money);
         this.womanMoney = (EditText) this.findViewById(R.id.woman_money);
-
+        firstName = (TextView)findViewById(R.id.first_name_datepicker);
+        secondName = (TextView)findViewById(R.id.second_name_datepicker);
+        firstName.setText(MySharedPreferencesManager.getPic01(mContext)+"의 지출");
+        secondName.setText(MySharedPreferencesManager.getPic02(mContext)+"의 지출");
 
         TextWatcher watcher = new TextWatcher() {
             @Override
@@ -218,17 +223,19 @@ public class DatePickerActivity extends BaseActivity {
                     womanMoney.setSelection(womanMoney.getText().length());
                     int imanMoney = Integer.parseInt(manMoney.getText().toString().replaceAll(",",""));
                     int iwomanMoney = Integer.parseInt(womanMoney.getText().toString().replaceAll(",",""));
-                    int iaddmoney = imanMoney + iwomanMoney;
+                    int iiaddmoney = imanMoney + iwomanMoney;
                     String sAddMoney = String.valueOf(imanMoney + iwomanMoney);
-                    if (iaddmoney >= 100000) {
+                    if (iiaddmoney >= 100000) {
                         addMoney.setText(sAddMoney);
                         addMoney.setTextColor(Color.RED);
-                    }else if (iaddmoney <= 50000){
+                    }else if (iiaddmoney <= 50000){
                         addMoney.setText(sAddMoney);
                         addMoney.setTextColor(Color.GREEN);
                     }else{
                         addMoney.setText(sAddMoney);
                     }
+
+                    iaddmoney = iiaddmoney;
                 }
             }
 
@@ -559,9 +566,6 @@ public class DatePickerActivity extends BaseActivity {
                                 return;
                             }else if(strWomanMoney == null || strWomanMoney.length() == 0){
                                 Toast.makeText(DatePickerActivity.this, "여자친구의 데이트 비용을 입력 해주세요", Toast.LENGTH_SHORT).show();
-                                return;
-                            }else if(addMoney == null || addMoney.length() == 0){
-                                Toast.makeText(DatePickerActivity.this, "+ 버튼을 눌러 주세요", Toast.LENGTH_SHORT).show();
                                 return;
                             }
                         }

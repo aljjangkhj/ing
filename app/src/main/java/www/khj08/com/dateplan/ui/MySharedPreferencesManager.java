@@ -186,13 +186,13 @@ public class MySharedPreferencesManager {
     //사진1 editText 불러오기 함수
     public static String getPic01(Context context){
         SharedPreferences sharedPreferences = context.getSharedPreferences("picNameData01",context.MODE_PRIVATE);
-        String picName01 = sharedPreferences.getString("picName01","사진1");
+        String picName01 = sharedPreferences.getString("picName01","길동");
         return  picName01;
     }
     //사진2 editText 불러오기 함수
     public static String getPic02(Context context){
         SharedPreferences sharedPreferences = context.getSharedPreferences("picNameData02",context.MODE_PRIVATE);
-        String picName01 = sharedPreferences.getString("picName02","사진2");
+        String picName01 = sharedPreferences.getString("picName02","둘리");
         return  picName01;
     }
     //메인앱바 사진을 저장하는 함수
@@ -219,7 +219,7 @@ public class MySharedPreferencesManager {
     //명언 남기기 editText 불러오기 함수
     public static String getMainEdit(Context context){
         SharedPreferences sharedPreferences = context.getSharedPreferences("mainEditData",context.MODE_PRIVATE);
-        String picName01 = sharedPreferences.getString("mainEdit","한 줄 명언을 남겨보세요!");
+        String picName01 = sharedPreferences.getString("mainEdit",getPic01(context)+","+getPic02(context)+"에게 하고싶은 말");
         return  picName01;
     }
 

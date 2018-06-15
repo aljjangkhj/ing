@@ -51,6 +51,8 @@ import com.google.android.gms.ads.AdView;
 
 import www.khj08.com.dateplan.BaseActivity;
 import www.khj08.com.dateplan.R;
+import www.khj08.com.dateplan.popup.MainSideMenuDialog;
+import www.khj08.com.dateplan.popup.Popup;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
@@ -97,6 +99,7 @@ public class MainActivity extends BaseActivity
     private int savebackground;
     String mCurrentPhotoPath;
     Uri photoURI;
+    private TextView firstname1,secondname1,firstname2,secondname2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,6 +197,10 @@ public class MainActivity extends BaseActivity
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf");//폰트
         mainText = (TextView) this.findViewById(R.id.main_textview01);
         MainDdayText = (TextView) this.findViewById(R.id.main_dday_text);
+        firstname1 = (TextView)findViewById(R.id.first_name_tv);
+        firstname2 = (TextView)findViewById(R.id.first_name_tv2);
+        secondname1 = (TextView)findViewById(R.id.second_name_tv);
+        secondname2 = (TextView)findViewById(R.id.second_name_tv2);
         resultTime = (TextView) this.findViewById(R.id.resultTime);
         resultmoney = (TextView) this.findViewById(R.id.resultMoney);
         manName = (TextView) this.findViewById(R.id.manName);
@@ -224,7 +231,14 @@ public class MainActivity extends BaseActivity
         this.womanName.setText(MySharedPreferencesManager.getPic02(this));
         this.nav_textView.setText(MySharedPreferencesManager.getMainEdit(MainActivity.this));
 
-
+        firstname1.setText(MySharedPreferencesManager.getPic01(mContext));
+        firstname2.setText(MySharedPreferencesManager.getPic01(mContext));
+        secondname1.setText(MySharedPreferencesManager.getPic02(mContext));
+        secondname2.setText(MySharedPreferencesManager.getPic02(mContext));
+        firstname1.setTypeface(typeface);
+        firstname2.setTypeface(typeface);
+        secondname1.setTypeface(typeface);
+        secondname2.setTypeface(typeface);
         Bitmap bitmap = StringToBitMap(MySharedPreferencesManager.getManPicture(this));
         this.imageView01.setImageBitmap(bitmap);
         Bitmap bitmap2 = StringToBitMap(MySharedPreferencesManager.getWomanPicture(this));
@@ -354,60 +368,76 @@ public class MainActivity extends BaseActivity
         nav_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LayoutInflater layoutInflater = getLayoutInflater();
-                final View dialogView = layoutInflater.inflate(R.layout.edittext_nav_dialog, null);
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setIcon(R.mipmap.ic_launcher_plan);
-                builder.setTitle("딱! 한!줄!만~");
-                builder.setView(dialogView);
-                builder.setPositiveButton("명언 남기기", new DialogInterface.OnClickListener() {
+                final MainSideMenuDialog mainSideMenuDialog = new MainSideMenuDialog(mContext);
+                mainSideMenuDialog.OK_Click = new MainSideMenuDialog.onClick() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        EditText firstName = (EditText) dialogView.findViewById(R.id.shortEdit);
-                        String shortName = firstName.getText().toString();
-                        MySharedPreferencesManager.setMainEdit(shortName, MainActivity.this);
-                        nav_textView.setText(shortName);
-
+                    public void onClick() {
+                        MySharedPreferencesManager.setMainEdit(mainSideMenuDialog.getDialogString(), MainActivity.this);
+                        nav_textView.setText(mainSideMenuDialog.getDialogString());
                     }
-                });
-                builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                };
+                mainSideMenuDialog.show();
+//                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+//                builder.setIcon(R.mipmap.ic_launcher_plan);
+//                builder.setTitle("딱! 한!줄!만~");
+//                builder.setView(dialogView);
+//                builder.setPositiveButton("명언 남기기", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        EditText firstName = (EditText) dialogView.findViewById(R.id.shortEdit);
+//                        String shortName = firstName.getText().toString();
+//                        MySharedPreferencesManager.setMainEdit(shortName, MainActivity.this);
+//                        nav_textView.setText(shortName);
+//
+//                    }
+//                });
+//                builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                    }
+//                });
+//                AlertDialog dialog = builder.create();
+//                dialog.show();
             }
         });
         imageButton_nav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 imagebtn01 = 2;
-                DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener() {
+                Popup popup = new Popup(mContext,"","사랑하는 사람의 사진을 올려보세요!","취소","앨범선택");
+                popup.OK_Click = new Popup.onClick() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        doTakePhotoAction();
-                    }
-                };
-                DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick() {
                         doTakeAlbumAction();
                     }
                 };
-                DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                };
-                new AlertDialog.Builder(MainActivity.this).setTitle("업로드할 사진을 선택합니다.")
-                        .setMessage("사랑하는 사람의 사진을 올려보세요!")
-                        .setIcon(R.mipmap.plancamera)
-                        .setPositiveButton("사진 촬영", cameraListener)
-                        .setNegativeButton("앨범 선택", albumListener)
-                        .setNeutralButton("취소", cancelListener).show();
+                popup.show();
+//                DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        doTakePhotoAction();
+//                    }
+//                };
+//                DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        doTakeAlbumAction();
+//                    }
+//                };
+//                DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                    }
+//                };
+//                new AlertDialog.Builder(MainActivity.this).setTitle("업로드할 사진을 선택합니다.")
+//                        .setMessage("사랑하는 사람의 사진을 올려보세요!")
+//                        .setIcon(R.mipmap.plancamera)
+//                        .setPositiveButton("사진 촬영", cameraListener)
+//                        .setNegativeButton("앨범 선택", albumListener)
+//                        .setNeutralButton("취소", cancelListener).show();
             }
         });
     }
@@ -574,7 +604,8 @@ public class MainActivity extends BaseActivity
     @Override
     public void onBackPressed() {
         //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        backPressCloseSystem.onBackPressed();
+//        backPressCloseSystem.onBackPressed();
+        ShowPopup_APPEND();
         /*if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -888,63 +919,79 @@ public class MainActivity extends BaseActivity
             @Override
             public void onClick(View v) {
                 imagebtn01 = 0;
-                DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener() {
+                Popup popup = new Popup(mContext,"","사랑하는 사람의 사진을 올려보세요!","취소","앨범선택");
+                popup.OK_Click = new Popup.onClick() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        doTakePhotoAction();
-                    }
-                };
-                DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick() {
                         doTakeAlbumAction();
                     }
                 };
-                DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                };
-                new AlertDialog.Builder(MainActivity.this)
-                        .setIcon(R.mipmap.plancamera)
-                        .setTitle("업로드할 사진을 선택합니다.")
-                        .setMessage("사랑하는 사람의 사진을 올려보세요!")
-                        .setPositiveButton("사진 촬영", cameraListener)
-                        .setNegativeButton("앨범 선택", albumListener)
-                        .setNeutralButton("취소", cancelListener).show();
-
+                popup.show();
+//                DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        doTakePhotoAction();
+//                    }
+//                };
+//                DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        doTakeAlbumAction();
+//                    }
+//                };
+//                DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                    }
+//                };
+//                new AlertDialog.Builder(MainActivity.this)
+//                        .setIcon(R.mipmap.plancamera)
+//                        .setTitle("업로드할 사진을 선택합니다.")
+//                        .setMessage("사랑하는 사람의 사진을 올려보세요!")
+//                        .setPositiveButton("사진 촬영", cameraListener)
+//                        .setNegativeButton("앨범 선택", albumListener)
+//                        .setNeutralButton("취소", cancelListener).show();
+//
             }
         });
         imageButton02.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 imagebtn01 = 1;
-                DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener() {
+                Popup popup = new Popup(mContext,"","사랑하는 사람의 사진을 올려보세요!","취소","앨범선택");
+                popup.OK_Click = new Popup.onClick() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        doTakePhotoAction();
-                    }
-                };
-                DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick() {
                         doTakeAlbumAction();
                     }
                 };
-                DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                };
-                new AlertDialog.Builder(MainActivity.this)
-                        .setIcon(R.mipmap.plancamera)
-                        .setTitle("업로드할 사진을 선택합니다.")
-                        .setMessage("사랑하는 사람의 사진을 올려보세요!")
-                        .setPositiveButton("사진 촬영", cameraListener)
-                        .setNegativeButton("앨범 선택", albumListener)
-                        .setNeutralButton("취소", cancelListener).show();
+                popup.show();
+//                DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        doTakePhotoAction();
+//                    }
+//                };
+//                DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        doTakeAlbumAction();
+//                    }
+//                };
+//                DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                    }
+//                };
+//                new AlertDialog.Builder(MainActivity.this)
+//                        .setIcon(R.mipmap.plancamera)
+//                        .setTitle("업로드할 사진을 선택합니다.")
+//                        .setMessage("사랑하는 사람의 사진을 올려보세요!")
+//                        .setPositiveButton("사진 촬영", cameraListener)
+//                        .setNegativeButton("앨범 선택", albumListener)
+//                        .setNeutralButton("취소", cancelListener).show();
             }
         });
     }

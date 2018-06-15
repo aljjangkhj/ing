@@ -15,6 +15,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
@@ -26,20 +29,23 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Calendar;
 
 import www.khj08.com.dateplan.BaseActivity;
 import www.khj08.com.dateplan.R;
 import www.khj08.com.dateplan.ui.list_adapter.SQLiteDBListView;
-
 
 public class LoadDatePickerActivity extends BaseActivity {
     //날짜 정보를 가져올때 사용할 변수 선언: 달력 변수
@@ -49,6 +55,8 @@ public class LoadDatePickerActivity extends BaseActivity {
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
     private static final int CROP_FROM_CAMERA = 2;
+    private DecimalFormat decimalFormat = new DecimalFormat("#,###");
+    private String result="";
 
     private Bitmap myBitmap;
     //날짜 정보를 저장할 전역변수 선언: 년도 / 월 / 일
@@ -84,7 +92,7 @@ public class LoadDatePickerActivity extends BaseActivity {
     //화면에 날짜(연도, 월, 일)을 보여주는 텍스트 뷰의 주소 보관 변수 선언
     private TextView datePickerTxt;
     private TextView addMoney;
-    private TextView resultHour01;
+//    private TextView resultHour01;
     private TextView starttimeText;
     private TextView endtimeText;
     private TextView resetTimeText;
@@ -96,12 +104,12 @@ public class LoadDatePickerActivity extends BaseActivity {
     private EditText womanMoney;
 
     private Button list_Btn;
-    private Button addmoneyBtn;
-    private Button datePickerBtn;
-    private Button timeHelloBtn;
-    private Button timeByeBtn;
-    private Button timeResetBtn;
-    private Button save_Btn;
+//    private Button addmoneyBtn;
+    private LinearLayout datePickerBtn;
+    private LinearLayout timeHelloBtn;
+    private LinearLayout timeByeBtn;
+//    private Button timeResetBtn;
+//    private Button save_Btn;
 
     private ListView dateListView;
     private SQLiteDBListView listViewAdapter;
@@ -112,11 +120,12 @@ public class LoadDatePickerActivity extends BaseActivity {
     //데이터베이스 함수
     public SQLiteDBManager mSQLiteDBManager = null;
 
+    private TextView firstName,secondName;
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        this.setContentView(R.layout.datepicker_update_layout);
+        this.setContentView(R.layout.datepicker_update_layout2);
         init_autoscreen(1);
         listViewAdapter = new SQLiteDBListView();
 
@@ -128,47 +137,49 @@ public class LoadDatePickerActivity extends BaseActivity {
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        this.datePickerBtn = (Button) this.findViewById(R.id.date_picker_btn01);
-        this.timeHelloBtn = (Button) this.findViewById(R.id.time_Hello_btn01);
-        this.timeByeBtn = (Button) this.findViewById(R.id.time_Bye_btn01);
-        this.timeResetBtn = (Button) this.findViewById(R.id.time_reset_btn01);
+        this.datePickerBtn = (LinearLayout) this.findViewById(R.id.date_picker_btn01);
+        this.timeHelloBtn = (LinearLayout) this.findViewById(R.id.time_Hello_btn01);
+        this.timeByeBtn = (LinearLayout) this.findViewById(R.id.time_Bye_btn01);
+//        this.timeResetBtn = (Button) this.findViewById(R.id.time_reset_btn01);
         // this.save_Btn = (Button) this.findViewById(R.id.save_diaryBtn01);
         // this.list_Btn = (Button) this.findViewById(R.id.diary_list01);
-        this.addmoneyBtn = (Button) this.findViewById(R.id.addmoneybtn01);
+//        this.addmoneyBtn = (Button) this.findViewById(R.id.addmoneybtn01);
 
         this.datePickerTxt = (TextView) this.findViewById(R.id.date_picker_text01);
         this.timeHelloText = (TextView) this.findViewById(R.id.hello_time_text01);
         this.timeByeText = (TextView) this.findViewById(R.id.bye_time_text01);
-        this.resultHour01 = (TextView) this.findViewById(R.id.resulthour01);
+//        this.resultHour01 = (TextView) this.findViewById(R.id.resulthour01);
         this.addMoney = (TextView) this.findViewById(R.id.add_money01);
         this.starttimeText = (TextView) this.findViewById(R.id.starttimeText01);
         this.endtimeText = (TextView) this.findViewById(R.id.endtimeText01);
         this.resetTimeText = (TextView) this.findViewById(R.id.timeresetText01);
-        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf");
-        this.datePickerTxt.setTypeface(typeface);
-        this.timeHelloText.setTypeface(typeface);
-        this.timeByeText.setTypeface(typeface);
-        this.resultHour01.setTypeface(typeface);
-        this.addMoney.setTypeface(typeface);
-        this.starttimeText.setTypeface(typeface);
-        this.endtimeText.setTypeface(typeface);
-        this.resetTimeText.setTypeface(typeface);
-        TextView font01 = (TextView) this.findViewById(R.id.font1);
-        TextView font02 = (TextView) this.findViewById(R.id.font2);
-        TextView font03 = (TextView) this.findViewById(R.id.font3);
-        TextView font04 = (TextView) this.findViewById(R.id.font4);
-        TextView font05 = (TextView) this.findViewById(R.id.font5);
-        TextView font06 = (TextView) this.findViewById(R.id.font6);
-        TextView font07 = (TextView) this.findViewById(R.id.font7);
-        TextView font08 = (TextView) this.findViewById(R.id.font8);
-        font01.setTypeface(typeface);
-        font02.setTypeface(typeface);
-        font03.setTypeface(typeface);
-        font04.setTypeface(typeface);
-        font05.setTypeface(typeface);
-        font06.setTypeface(typeface);
-        font07.setTypeface(typeface);
-        font08.setTypeface(typeface);
+        firstName = (TextView)findViewById(R.id.first_name_u_datepicker);
+        secondName = (TextView)findViewById(R.id.second_name_u_datepicker);
+//        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf");
+//        this.datePickerTxt.setTypeface(typeface);
+//        this.timeHelloText.setTypeface(typeface);
+//        this.timeByeText.setTypeface(typeface);
+//        this.resultHour01.setTypeface(typeface);
+//        this.addMoney.setTypeface(typeface);
+//        this.starttimeText.setTypeface(typeface);
+//        this.endtimeText.setTypeface(typeface);
+//        this.resetTimeText.setTypeface(typeface);
+//        TextView font01 = (TextView) this.findViewById(R.id.font1);
+//        TextView font02 = (TextView) this.findViewById(R.id.font2);
+//        TextView font03 = (TextView) this.findViewById(R.id.font3);
+//        TextView font04 = (TextView) this.findViewById(R.id.font4);
+//        TextView font05 = (TextView) this.findViewById(R.id.font5);
+//        TextView font06 = (TextView) this.findViewById(R.id.font6);
+//        TextView font07 = (TextView) this.findViewById(R.id.font7);
+//        TextView font08 = (TextView) this.findViewById(R.id.font8);
+//        font01.setTypeface(typeface);
+//        font02.setTypeface(typeface);
+//        font03.setTypeface(typeface);
+//        font04.setTypeface(typeface);
+//        font05.setTypeface(typeface);
+//        font06.setTypeface(typeface);
+//        font07.setTypeface(typeface);
+//        font08.setTypeface(typeface);
 
         this.editText_title = (EditText) this.findViewById(R.id.edit_text_title01);
         this.editText_content = (EditText) this.findViewById(R.id.edit_text_content01);
@@ -176,6 +187,78 @@ public class LoadDatePickerActivity extends BaseActivity {
         this.womanMoney = (EditText) this.findViewById(R.id.woman_money01);
         this.imageView = (ImageView) this.findViewById(R.id.dateplan_imageView01);
         this.imageButton = (ImageButton) this.findViewById(R.id.dateplan_imagebtn01);
+
+        firstName.setText(MySharedPreferencesManager.getPic01(mContext)+"의 지출");
+        secondName.setText(MySharedPreferencesManager.getPic02(mContext)+"의 지출");
+        TextWatcher watcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!TextUtils.isEmpty(s.toString()) && !s.toString().equals(result)){
+                    result = decimalFormat.format(Double.parseDouble(s.toString().replaceAll(",","")));
+                    manMoney.setText(result);
+                    manMoney.setSelection(manMoney.getText().length());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) { }
+        };
+
+        TextWatcher watcher2 = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!TextUtils.isEmpty(s.toString()) && !s.toString().equals(result)){
+                    result = decimalFormat.format(Double.parseDouble(s.toString().replaceAll(",","")));
+                    womanMoney.setText(result);
+                    womanMoney.setSelection(womanMoney.getText().length());
+                    int imanMoney = Integer.parseInt(manMoney.getText().toString().replaceAll(",",""));
+                    int iwomanMoney = Integer.parseInt(womanMoney.getText().toString().replaceAll(",",""));
+                    int iiaddmoney = imanMoney + iwomanMoney;
+                    String sAddMoney = String.valueOf(imanMoney + iwomanMoney);
+                    if (iiaddmoney >= 100000) {
+                        addMoney.setText(sAddMoney);
+                        addMoney.setTextColor(Color.RED);
+                    }else if (iiaddmoney <= 50000){
+                        addMoney.setText(sAddMoney);
+                        addMoney.setTextColor(Color.GREEN);
+                    }else{
+                        addMoney.setText(sAddMoney);
+                    }
+
+                    iaddmoney = iiaddmoney;
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) { }
+        };
+
+        TextWatcher watcher3 = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!TextUtils.isEmpty(s.toString()) && !s.toString().equals(result)){
+                    result = decimalFormat.format(Double.parseDouble(s.toString().replaceAll(",","")));
+                    addMoney.setText(result);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) { }
+        };
+
+        manMoney.addTextChangedListener(watcher);
+        womanMoney.addTextChangedListener(watcher2);
+        addMoney.addTextChangedListener(watcher3);
+
         this.imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -238,7 +321,7 @@ public class LoadDatePickerActivity extends BaseActivity {
                 datePickerTxt.setText(mRefDate);
                 timeHelloText.setText(mRefstart);
                 timeByeText.setText(mRefEnd);
-                resultHour01.setText(mRefResulthour);
+//                resultHour01.setText(mRefResulthour);
                 addMoney.setText(mRefresultmoeny);
                 editText_title.setText(mRefTitle);
                 editText_content.setText(mRefContent);
@@ -275,12 +358,12 @@ public class LoadDatePickerActivity extends BaseActivity {
                 timePickerDialog01.setIcon(R.mipmap.starttimeimage);
                 timePickerDialog01.setTitle("만난 시간 정하기");
                 timePickerDialog01.show();
-                timeHelloBtn.setVisibility(View.INVISIBLE);
-                timeByeBtn.setVisibility(View.VISIBLE);
-                timeResetBtn.setVisibility(View.INVISIBLE);
-                starttimeText.setVisibility(View.INVISIBLE);
-                endtimeText.setVisibility(View.VISIBLE);
-                resetTimeText.setVisibility(View.INVISIBLE);
+//                timeHelloBtn.setVisibility(View.INVISIBLE);
+//                timeByeBtn.setVisibility(View.VISIBLE);
+//                timeResetBtn.setVisibility(View.INVISIBLE);
+//                starttimeText.setVisibility(View.INVISIBLE);
+//                endtimeText.setVisibility(View.VISIBLE);
+//                resetTimeText.setVisibility(View.INVISIBLE);
             }
         });
         this.timeByeBtn.setOnClickListener(new View.OnClickListener() {
@@ -290,36 +373,36 @@ public class LoadDatePickerActivity extends BaseActivity {
                 timePickerDialog02.setIcon(R.mipmap.endtimeimage);
                 timePickerDialog02.setTitle("헤어진 시간 정하기");
                 timePickerDialog02.show();
-                timeHelloBtn.setVisibility(View.INVISIBLE);
-                timeByeBtn.setVisibility(View.INVISIBLE);
-                timeResetBtn.setVisibility(View.VISIBLE);
-                starttimeText.setVisibility(View.INVISIBLE);
-                endtimeText.setVisibility(View.INVISIBLE);
-                resetTimeText.setVisibility(View.VISIBLE);
+//                timeHelloBtn.setVisibility(View.INVISIBLE);
+//                timeByeBtn.setVisibility(View.INVISIBLE);
+//                timeResetBtn.setVisibility(View.VISIBLE);
+//                starttimeText.setVisibility(View.INVISIBLE);
+//                endtimeText.setVisibility(View.INVISIBLE);
+//                resetTimeText.setVisibility(View.VISIBLE);
             }
         });
-        this.timeResetBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                timeHelloText.setText("");
-                timeByeText.setText("");
-                resultHour01.setText("");
-                timeHelloBtn.setVisibility(View.VISIBLE);
-                timeByeBtn.setVisibility(View.INVISIBLE);
-                timeResetBtn.setVisibility(View.INVISIBLE);
-                starttimeText.setVisibility(View.VISIBLE);
-                endtimeText.setVisibility(View.INVISIBLE);
-                resetTimeText.setVisibility(View.INVISIBLE);
-            }
-        });
-        this.addmoneyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dateMoney();
-            }
-        });
-        addmoneyBtn.performClick();//계산 강제클릭
-
+//        this.timeResetBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                timeHelloText.setText("");
+//                timeByeText.setText("");
+//                resultHour01.setText("");
+//                timeHelloBtn.setVisibility(View.VISIBLE);
+//                timeByeBtn.setVisibility(View.INVISIBLE);
+//                timeResetBtn.setVisibility(View.INVISIBLE);
+//                starttimeText.setVisibility(View.VISIBLE);
+//                endtimeText.setVisibility(View.INVISIBLE);
+//                resetTimeText.setVisibility(View.INVISIBLE);
+//            }
+//        });
+//        this.addmoneyBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dateMoney();
+//            }
+//        });
+//        addmoneyBtn.performClick();//계산 강제클릭
+//
     }
 
     public void myTime() {
@@ -329,12 +412,12 @@ public class LoadDatePickerActivity extends BaseActivity {
         if (ihour > ihour2) {
             //Toast.makeText(DatePickerActivity.this, "헤어진 시간이 더 작을 수 없습니다.", Toast.LENGTH_SHORT).show();
             timeByeText.setText("");
-            resultHour01.setText("");
+//            resultHour01.setText("");
         }
         if (ihour == ihour2 && iminute > iminute2) {
             //Toast.makeText(.this, "헤어진 시간이 더 작을 수 없습니다.", Toast.LENGTH_SHORT).show();
             timeByeText.setText("");
-            resultHour01.setText("");
+//            resultHour01.setText("");
         }
         if (resultMinute < 0) {
             resultHour = ihour2 - ihour - 1;
@@ -354,8 +437,8 @@ public class LoadDatePickerActivity extends BaseActivity {
             Log.v("mylog", "시간2: " + resultHour);
             Log.v("mylog", "분2: " + resultMinute);
         }
-        resultHour01.setText("총 만난 시간: " + resultHour + " 시간" + resultMinute + " 분");
-        resultHour01.setTextColor(Color.BLACK);
+//        resultHour01.setText("총 만난 시간: " + resultHour + " 시간" + resultMinute + " 분");
+//        resultHour01.setTextColor(Color.BLACK);
         FinalresultTime = resultHour * 60 + resultMinute;
     }
 
@@ -430,10 +513,10 @@ public class LoadDatePickerActivity extends BaseActivity {
                         TimeValue02 = timeByeText.getText().toString();
                         TitleValue = editText_title.getText().toString();
                         ContentValue = editText_content.getText().toString();
-                        strManMoney = manMoney.getText().toString();
-                        strWomanMoney = womanMoney.getText().toString();
-                        numberstr = addMoney.getText().toString();
-                        strResulthour = resultHour01.getText().toString();
+                        strManMoney = manMoney.getText().toString().replaceAll(",","");;
+                        strWomanMoney = womanMoney.getText().toString().replaceAll(",","");;
+                        numberstr = addMoney.getText().toString().replaceAll(",","");;
+//                        strResulthour = resultHour01.getText().toString();
                         String LoadBitmap = "";
                         if(myBitmap != null) {
                             LoadBitmap = BitMapToString(myBitmap);
@@ -442,7 +525,7 @@ public class LoadDatePickerActivity extends BaseActivity {
                                 && TimeValue02 != null && TimeValue02.length() != 0 && TitleValue != null && TitleValue.length() != 0
                                 && ContentValue != null && ContentValue.length() != 0 && strManMoney != null && strManMoney.length() != 0
                                 && strWomanMoney != null && strWomanMoney.length() != 0 && addMoney != null && addMoney.length() != 0
-                                && resultHour01 != null && resultHour01.length() != 0) {
+                                /*&& resultHour01 != null && resultHour01.length() != 0*/) {
                             //img01 = BitMapToString(myBitmap);
 
                             ContentValues updateRowValue = new ContentValues();

@@ -208,7 +208,7 @@ public class BaseActivity extends AppCompatActivity
     {
         if(!BaseActivity.this.isFinishing())
         {
-            final Popup popup = new Popup(mContext, "종료", "앱을 종료하시겠습니까?", "취소", "종료");
+            final Popup popup = new Popup(mContext, "종료", "잉ing 종료하시겠습니까?", "취소", "종료");
             popup.Cancel_Click = new Popup.onClick()
             {
                 @Override

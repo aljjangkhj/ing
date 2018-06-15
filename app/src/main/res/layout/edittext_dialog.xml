@@ -1,33 +1,214 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="10dp">
+    android:layout_width="1200px"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:layout_gravity="center"
+    android:orientation="vertical" >
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="사진1 이름 정하기"
-        android:layout_marginTop="10dp"
-        android:textColor="#000"
-        android:gravity="center"/>
-
-    <EditText
-        android:id="@+id/picName01"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="사진2 이름 정하기"
         android:gravity="center"
-        android:textColor="#000"/>
+        android:orientation="vertical"
+        android:background="#ffffff">
 
-    <EditText
-        android:id="@+id/picName02"
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="192px"
+            android:layout_marginTop="80px"
+            android:layout_marginLeft="96px"
+            android:layout_marginRight="96px"
+            android:background="@color/color_ffffff">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4px"
+                android:background="@color/color_d9d9d9"
+                android:layout_gravity="bottom"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4px"
+                android:background="@color/color_d9d9d9"
+                android:layout_gravity="top"/>
+            <View
+                android:layout_width="4px"
+                android:layout_height="match_parent"
+                android:background="@color/color_d9d9d9"
+                android:layout_gravity="right"/>
+            <View
+                android:layout_width="4px"
+                android:layout_height="match_parent"
+                android:background="@color/color_d9d9d9"
+                android:layout_gravity="left"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="300px"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="48px"
+                    android:text="이름"
+                    android:textSize="13dp"
+                    android:textColor="#000000"
+                    android:id="@+id/first_name_dialog"/>
+
+                <View
+                    android:layout_width="4px"
+                    android:layout_height="72px"
+                    android:layout_marginLeft="48px"
+                    android:background="#000000"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="left">
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:id="@+id/edit_new_customer_name"
+                        android:layout_marginLeft="48px" 
+                        android:maxLength="10"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="188px"
+            android:layout_marginLeft="96px"
+            android:layout_marginRight="96px"
+            android:background="@color/color_ffffff">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4px"
+                android:background="@color/color_d9d9d9"
+                android:layout_gravity="bottom"/>
+            <View
+                android:layout_width="4px"
+                android:layout_height="match_parent"
+                android:background="@color/color_d9d9d9"
+                android:layout_gravity="right"/>
+            <View
+                android:layout_width="4px"
+                android:layout_height="match_parent"
+                android:background="@color/color_d9d9d9"
+                android:layout_gravity="left"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="300px"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="48px"
+                    android:text="이름"
+                    android:id="@+id/second_name_dialog"
+                    android:textColor="#000000"
+                    android:textSize="14dp"/>
+
+                <View
+                    android:layout_width="4px"
+                    android:layout_height="72px"
+                    android:layout_marginLeft="48px"
+                    android:background="#000000"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="left">
+
+                    <EditText
+                        android:layout_marginLeft="48px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:id="@+id/edit_new_customer_phone_number"
+                        android:maxLength="10"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="80px"
+        android:background="@color/color_ffffff"/>
 
-</LinearLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/layout_popup_1btn"
+            android:layout_width="match_parent"
+            android:layout_height="200px"
+            android:orientation="horizontal">
+            <FrameLayout
+                android:id="@+id/btn_popup_1btn_ok"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_popup_1btn_ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:text="확인" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_popup_2btn"
+            android:layout_width="match_parent"
+            android:layout_height="188px"
+            android:weightSum="2"
+            android:orientation="horizontal">
+            <FrameLayout
+                android:id="@+id/btn_popup_2btn_cancel"
+                android:contentDescription="취소"
+                android:layout_weight="1"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:background="@drawable/selector_cancel_btn">
+                <TextView
+                    android:id="@+id/tv_popup_2btn_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_ffffff"
+                    android:text="취소" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/btn_popup_2btn_ok"
+                android:contentDescription="확인"
+                android:layout_weight="1"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:background="@drawable/selector_btn">
+                <TextView
+                    android:id="@+id/tv_popup_2btn_ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"
+                    android:text="확인" />
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>

@@ -11,8 +11,10 @@
         android:id="@+id/listview1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginLeft="132px"
+        android:layout_marginTop="40px"
+        android:layout_marginRight="160px"
+        android:layout_marginBottom="40px"
+        android:divider="#000000"
+        android:dividerHeight="4px"/>
 </LinearLayout>

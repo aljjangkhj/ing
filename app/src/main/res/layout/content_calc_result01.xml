@@ -2,49 +2,55 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF"
+    android:background="@drawable/memopark"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="160px">
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="600px"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:text="날짜"
                 android:textColor="#000"
                 android:textStyle="bold"
-                android:id="@+id/fonts1"/>
+                android:textSize="18dp"
+                android:id="@+id/fonts1"
+                android:layout_marginLeft="120px"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:text="데이트 비용"
                 android:textColor="#000"
                 android:textStyle="bold"
+                android:textSize="18dp"
                 android:id="@+id/fonts2"/>
+
     </LinearLayout>
 
+    <View
+        android:layout_width="1200px"
+        android:layout_height="8px"
+        android:layout_gravity="center"
+        android:layout_marginTop="40px"
+        android:background="#000000"/>
+
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp">
+        android:layout_width="1200px"
+        android:layout_height="1420px"
+        android:layout_gravity="center">
 
         <ListView
             android:id="@+id/content_calc_listview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:divider="#000000"
+            android:dividerHeight="8px"/>
 
         <www.khj08.com.dateplan.ui.CircleImageView
             android:layout_width="80dp"
