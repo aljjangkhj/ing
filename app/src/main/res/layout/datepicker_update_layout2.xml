@@ -386,10 +386,10 @@
                             android:background="@drawable/plancamera_web"
                             android:id="@+id/dateplan_imagebtn01"/>
 
-                        <www.khj08.com.dateplan.ui.CircleImageView
+                        <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_gravity="right"
+                            android:layout_margin="40px"
                             android:id="@+id/dateplan_imageView01"/>
 
                     </FrameLayout>
