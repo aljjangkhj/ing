@@ -61,19 +61,20 @@
 
                 <FrameLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
 
                     <ImageButton
                         android:id="@+id/man"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="400px"
+                        android:layout_height="400px"
                         android:background="#00ff0000"
                         android:src="@mipmap/ic_menu_camera" />
 
                     <www.khj08.com.dateplan.ui.CircleImageView
                         android:id="@+id/man01"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="400px"
+                        android:layout_height="400px"
                         android:layout_centerInParent="true"
                         app:civ_border_color="@android:color/white"
                         app:civ_border_width="2dp" />
@@ -82,25 +83,26 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_marginLeft="200px"
-                    android:layout_marginRight="200px"
+                    android:layout_marginLeft="120px"
+                    android:layout_marginRight="120px"
                     android:background="@drawable/mainthreadlogo1" />
 
                 <FrameLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
 
                     <ImageButton
                         android:id="@+id/woman"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="400px"
+                        android:layout_height="400px"
                         android:background="#00ff0000"
                         android:src="@mipmap/ic_menu_camera" />
 
                     <www.khj08.com.dateplan.ui.CircleImageView
                         android:id="@+id/woman2"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="400px"
+                        android:layout_height="400px"
                         android:layout_centerInParent="true"
                         app:civ_border_color="@android:color/white"
                         app:civ_border_width="2dp" />
@@ -122,7 +124,7 @@
                 <TextView
                     android:fontFamily="@font/bmjua_ttf"
                     android:id="@+id/manName"
-                    android:layout_width="100dp"
+                    android:layout_width="400px"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="사진1"
@@ -133,13 +135,13 @@
                 <LinearLayout
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="200px"
-                    android:layout_marginRight="200px"/>
+                    android:layout_marginLeft="120px"
+                    android:layout_marginRight="120px"/>
 
                 <TextView
                     android:fontFamily="@font/bmjua_ttf"
                     android:id="@+id/womanName"
-                    android:layout_width="100dp"
+                    android:layout_width="400px"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="사진2"
