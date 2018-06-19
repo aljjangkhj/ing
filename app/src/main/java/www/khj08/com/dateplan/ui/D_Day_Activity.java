@@ -1,6 +1,6 @@
 package www.khj08.com.dateplan.ui;
 
-import android.graphics.Typeface;
+//import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -54,12 +54,12 @@ public class D_Day_Activity extends BaseActivity {
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        this.setContentView(R.layout.d_day_layout);
+        setContentView(R.layout.d_day_layout);
         init_autoscreen(1);
         listViewAdapter = new D_Day_Adapter(this);
         listView = (ListView) this.findViewById(R.id.dday_listview);
         listView.setAdapter(listViewAdapter);
-        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf");
+//        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf");
         DdayActivity();
     }
 

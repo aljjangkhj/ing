@@ -9,7 +9,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Typeface;
+//import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -45,6 +45,7 @@ import java.util.Calendar;
 
 import www.khj08.com.dateplan.BaseActivity;
 import www.khj08.com.dateplan.R;
+import www.khj08.com.dateplan.popup.Popup;
 import www.khj08.com.dateplan.ui.list_adapter.SQLiteDBListView;
 
 public class LoadDatePickerActivity extends BaseActivity {
@@ -125,7 +126,7 @@ public class LoadDatePickerActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        this.setContentView(R.layout.datepicker_update_layout2);
+        setContentView(R.layout.datepicker_update_layout2);
         init_autoscreen(1);
         listViewAdapter = new SQLiteDBListView();
 
@@ -155,7 +156,6 @@ public class LoadDatePickerActivity extends BaseActivity {
         this.resetTimeText = (TextView) this.findViewById(R.id.timeresetText01);
         firstName = (TextView)findViewById(R.id.first_name_u_datepicker);
         secondName = (TextView)findViewById(R.id.second_name_u_datepicker);
-//        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf");
 //        this.datePickerTxt.setTypeface(typeface);
 //        this.timeHelloText.setTypeface(typeface);
 //        this.timeByeText.setTypeface(typeface);
@@ -262,33 +262,14 @@ public class LoadDatePickerActivity extends BaseActivity {
         this.imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener() {
+                Popup popup = new Popup(mContext, "일기 사진 수정하기","인생샷을 수정합니다.","취소","앨범선택");
+                popup.OK_Click = new Popup.onClick() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        doTakePhotoAction();
-                    }
-                };
-                DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick() {
                         doTakeAlbumAction();
                     }
                 };
-                DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                };
-                AlertDialog.Builder alert = new AlertDialog.Builder(LoadDatePickerActivity.this);
-                alert.setTitle("오늘의 인생 샷 수정");
-                alert.setIcon(R.mipmap.plancamera);
-                alert.setMessage("오늘의 인생 샷 사진을 수정 합니다!");
-                alert.setPositiveButton("사진 촬영", cameraListener);
-                alert.setNegativeButton("앨범 선택", albumListener);
-                alert.setNeutralButton("취소", cancelListener);
-                alert.show();
-
+                popup.show();
             }
         });
 
@@ -370,7 +351,7 @@ public class LoadDatePickerActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 timePickerDialog02 = new TimePickerDialog(LoadDatePickerActivity.this, timeset02, 00, 00, true);
-                timePickerDialog02.setIcon(R.mipmap.endtimeimage);
+                timePickerDialog02.setIcon(R.mipmap.timeresetimage);
                 timePickerDialog02.setTitle("헤어진 시간 정하기");
                 timePickerDialog02.show();
 //                timeHelloBtn.setVisibility(View.INVISIBLE);
@@ -475,7 +456,7 @@ public class LoadDatePickerActivity extends BaseActivity {
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
             ihour = hourOfDay;
             iminute = minute;
-            timeHelloText.setText("만난 시간: " + ihour + "시 " + iminute + "분");
+            timeHelloText.setText(ihour + "시 " + iminute + "분");
             timeHelloText.setTextColor(Color.BLACK);
         }
     };
@@ -484,7 +465,7 @@ public class LoadDatePickerActivity extends BaseActivity {
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
             ihour2 = hourOfDay;
             iminute2 = minute;
-            timeByeText.setText("헤어진 시간: " + ihour2 + "시 " + iminute2 + "분");
+            timeByeText.setText(ihour2 + "시 " + iminute2 + "분");
             timeByeText.setTextColor(Color.BLACK);
             myTime();
         }
@@ -500,14 +481,10 @@ public class LoadDatePickerActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.insert_btn:
-                AlertDialog.Builder alert01 = new AlertDialog.Builder(LoadDatePickerActivity.this);
-                alert01.setTitle("일기를 수정합니다.");
-                alert01.setIcon(R.mipmap.insertcolor);
-                alert01.setMessage("수정 하시겠습니까?");
-                alert01.setPositiveButton("응!", new DialogInterface.OnClickListener() {
+                Popup LoadDatePopup = new Popup(mContext, "일기 수정하기","일기를 수정하시겠습니까?","취소","확인");
+                LoadDatePopup.OK_Click = new Popup.onClick() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //Toast.makeText(LoadDatePickerActivity.this, "수정 버튼 클릭", Toast.LENGTH_SHORT).show();
+                    public void onClick() {
                         DateValue = datePickerTxt.getText().toString();
                         TimeValue01 = timeHelloText.getText().toString();
                         TimeValue02 = timeByeText.getText().toString();
@@ -521,11 +498,11 @@ public class LoadDatePickerActivity extends BaseActivity {
                         if(myBitmap != null) {
                             LoadBitmap = BitMapToString(myBitmap);
                         }
-                        if (DateValue != null && DateValue.length() != 0 && TimeValue01 != null && TimeValue01.length() != 0
-                                && TimeValue02 != null && TimeValue02.length() != 0 && TitleValue != null && TitleValue.length() != 0
-                                && ContentValue != null && ContentValue.length() != 0 && strManMoney != null && strManMoney.length() != 0
-                                && strWomanMoney != null && strWomanMoney.length() != 0 && addMoney != null && addMoney.length() != 0
-                                /*&& resultHour01 != null && resultHour01.length() != 0*/) {
+                        if (!DateValue.equals("") && DateValue.length() != 0 && !TimeValue01.equals("") && TimeValue01.length() != 0
+                                && !TimeValue02.equals("") && TimeValue02.length() != 0 && !TitleValue.equals("") && TitleValue.length() != 0
+                                && !ContentValue.equals("") && ContentValue.length() != 0 && !strManMoney.equals("") && strManMoney.length() != 0
+                                && !strWomanMoney.equals("") && strWomanMoney.length() != 0 && !addMoney.equals("") && addMoney.length() != 0
+                            /*&& resultHour01 != null && resultHour01.length() != 0*/) {
                             //img01 = BitMapToString(myBitmap);
 
                             ContentValues updateRowValue = new ContentValues();
@@ -560,64 +537,52 @@ public class LoadDatePickerActivity extends BaseActivity {
                             Toast.makeText(LoadDatePickerActivity.this, "수정 되었습니다!", Toast.LENGTH_SHORT).show();
                             finish();
                         } else {
-                            if(DateValue == null || DateValue.length() == 0){
-                                Toast.makeText(LoadDatePickerActivity.this, "날짜를 설정 해주세요", Toast.LENGTH_SHORT).show();
+                            if(DateValue.equals("") || DateValue.length() == 0){
+                                Popup popup = new Popup(mContext,"오류 메시지","날짜를 설정 해주세요.","","확인");
+                                popup.show();
                                 return;
-                            }else if(TimeValue01 == null || TimeValue01.length() == 0){
-                                Toast.makeText(LoadDatePickerActivity.this, "만난 시간을 설정 해주세요", Toast.LENGTH_SHORT).show();
+                            }else if(TimeValue01.equals("") || TimeValue01.length() == 0){
+                                Popup popup = new Popup(mContext,"오류 메시지","만난 시간을 설정 해주세요.","","확인");
+                                popup.show();
                                 return;
-                            }else if(TimeValue02 == null || TimeValue02.length() == 0){
-                                Toast.makeText(LoadDatePickerActivity.this, "헤어진 시간을 설정 해주세요", Toast.LENGTH_SHORT).show();
+                            }else if(TimeValue02.equals("") || TimeValue02.length() == 0){
+                                Popup popup = new Popup(mContext,"오류 메시지","헤어진 시간을 설정 해주세요.","","확인");
+                                popup.show();
                                 return;
-                            }else if(TitleValue == null || TitleValue.length() == 0){
-                                Toast.makeText(LoadDatePickerActivity.this, "제목을 입력 해주세요", Toast.LENGTH_SHORT).show();
+                            }else if(TitleValue.equals("") || TitleValue.length() == 0){
+                                Popup popup = new Popup(mContext,"오류 메시지","일기 제목을 입력 해주세요.","","확인");
+                                popup.show();
                                 return;
-                            }else if(ContentValue == null || ContentValue.length() == 0){
-                                Toast.makeText(LoadDatePickerActivity.this, "일기 내용을 입력 해주세요", Toast.LENGTH_SHORT).show();
+                            }else if(ContentValue.equals("") || ContentValue.length() == 0){
+                                Popup popup = new Popup(mContext,"오류 메시지","일기 내용을 입력 해주세요.","","확인");
+                                popup.show();
                                 return;
-                            }else if(strManMoney == null || strManMoney.length() == 0){
-                                Toast.makeText(LoadDatePickerActivity.this, "남자친구의 데이트 비용을 입력 해주세요", Toast.LENGTH_SHORT).show();
+                            }else if(strManMoney.equals("") || strManMoney.length() == 0){
+                                Popup popup = new Popup(mContext,"오류 메시지",MySharedPreferencesManager.getPic01(mContext)+ "의 지출을 입력 해주세요.","","확인");
+                                popup.show();
                                 return;
-                            }else if(strWomanMoney == null || strWomanMoney.length() == 0){
-                                Toast.makeText(LoadDatePickerActivity.this, "여자친구의 데이트 비용을 입력 해주세요", Toast.LENGTH_SHORT).show();
-                                return;
-                            }else if(addMoney == null || addMoney.length() == 0){
-                                Toast.makeText(LoadDatePickerActivity.this, "+ 버튼을 눌러 주세요", Toast.LENGTH_SHORT).show();
+                            }else if(strWomanMoney.equals("") || strWomanMoney.length() == 0){
+                                Popup popup = new Popup(mContext,"오류 메시지",MySharedPreferencesManager.getPic02(mContext)+ "의 지출을 입력 해주세요.","","확인");
+                                popup.show();
                                 return;
                             }
                         }
                     }
-                });
-                alert01.setNegativeButton("아니!", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                alert01.show();
+                };
+                LoadDatePopup.show();
 
                 break;
             case R.id.delete_btn:
-                AlertDialog.Builder alert = new AlertDialog.Builder(LoadDatePickerActivity.this);
-                alert.setTitle("일기를 삭제합니다.");
-                alert.setIcon(R.mipmap.deletecolor);
-                alert.setMessage("정말로 삭제 하시겠습니까?!" + "\n" + "삭제된 데이터는 복구할 수 없습니다.");
-                alert.setPositiveButton("응!", new DialogInterface.OnClickListener() {
+                Popup deletePopup = new Popup(mContext,"일기 삭제하기","일기를 삭제하시겠습니까?","취소","확인");
+                deletePopup.OK_Click = new Popup.onClick() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(LoadDatePickerActivity.this, "삭제합니다.", Toast.LENGTH_SHORT).show();
+                    public void onClick() {
                         String deleteManager = "date='" + intid + "'";
                         mSQLiteDBManager.delete(deleteManager, null);
                         finish();
                     }
-                });
-                alert.setNegativeButton("아니!", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(LoadDatePickerActivity.this, "추억을 간직하세요♥", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                alert.show();
+                };
+                deletePopup.show();
                 break;
         }
         return super.onOptionsItemSelected(menuItem);

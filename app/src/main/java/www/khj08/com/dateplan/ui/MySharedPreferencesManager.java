@@ -29,7 +29,7 @@ public class MySharedPreferencesManager {
         //1.프레퍼런스로부터 데이터(이름)을 읽어와서 EditText 창에 출력하기
         SharedPreferences refTempSharedPreferences = refContext.getSharedPreferences("StartLoveData", Context.MODE_PRIVATE);
         //2. 프레퍼런스 파일에 저장되어있는 데이터 가져오기
-        String year = refTempSharedPreferences.getString("ymd", "설정 → 만남 시작한날 정하기");
+        String year = refTempSharedPreferences.getString("ymd", "Touch!!");
         return year;
     }
     //오늘 날짜 시간변환된 함수를 저장하는 함수
@@ -94,7 +94,6 @@ public class MySharedPreferencesManager {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("img1str", str);
         editor.commit();
-        Toast.makeText(context, "사진1이 저장되었습니다.", Toast.LENGTH_SHORT).show();
     }
     //사진1불러오기함수
     public static String getManPicture(Context context) {
@@ -109,7 +108,6 @@ public class MySharedPreferencesManager {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("img2str", str);
         editor.commit();
-        Toast.makeText(context, "사진2가 저장되었습니다.", Toast.LENGTH_SHORT).show();
     }
     //사진2 불러오기함수
     public static String getWomanPicture(Context context) {

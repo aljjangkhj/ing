@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
-    android:background="#ffffff"
+    android:background="@drawable/side_nav_bar"
     android:gravity="bottom"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -12,15 +12,16 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
     <FrameLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
         <ImageButton
             android:id="@+id/nav_header_layout_imageButton"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:background="#00ff0000"
             android:layout_gravity="center"
-            android:background="@drawable/plancamera_web" />
+            android:src="@mipmap/ic_menu_camera"/>
 
         <www.khj08.com.dateplan.ui.CircleImageView
             android:id="@+id/nav_header_layout_imageView"
@@ -28,7 +29,8 @@
             android:layout_height="80dp"
             android:layout_centerInParent="true"
             app:civ_border_color="#FFF"
-            app:civ_border_width="2dp"/>
+            app:civ_border_width="2dp"
+            android:layout_gravity="center"/>
 
     </FrameLayout>
 <FrameLayout
@@ -40,6 +42,7 @@
         android:id="@+id/nav_header_layout_Btn"
         android:background="#00ff0000"/>
     <TextView
+        android:fontFamily="@font/bmjua_ttf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"

@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
+//import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Base64;
@@ -21,6 +21,7 @@ import java.util.List;
 
 import www.khj08.com.dateplan.BaseActivity;
 import www.khj08.com.dateplan.R;
+import www.khj08.com.dateplan.popup.Popup;
 import www.khj08.com.dateplan.ui.list_adapter.SQLiteDBListView;
 
 public class DateListView extends BaseActivity {
@@ -39,7 +40,7 @@ public class DateListView extends BaseActivity {
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        this.setContentView(R.layout.datelistview);
+        setContentView(R.layout.datelistview);
         init_autoscreen(1);
         listViewAdapter = new SQLiteDBListView();
         listview01 = (ListView) this.findViewById(R.id.datelistview01);
@@ -47,15 +48,15 @@ public class DateListView extends BaseActivity {
         font1 = (TextView) this.findViewById(R.id.fonts01);
         font2 = (TextView) this.findViewById(R.id.fonts02);
         font3 = (TextView) this.findViewById(R.id.fonts03);
-        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf");
-        font1.setTypeface(typeface);
-        font2.setTypeface(typeface);
-        font3.setTypeface(typeface);
+//        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf");
+//        font1.setTypeface(typeface);
+//        font2.setTypeface(typeface);
+//        font3.setTypeface(typeface);
         final List<String> users = new ArrayList<>();
 
         mSQLiteDBManager = SQLiteDBManager.getInstance(this);
         String[] columns = new String[]{"_id", "date", "title", "bestphoto"};
-        Cursor c = mSQLiteDBManager.query(columns, null, null, null, null, null);
+        Cursor c = mSQLiteDBManager.query(columns, null, null, null, null, "date ASC");
         if (c != null) {
             while (c.moveToNext()) {
                 int id = c.getInt(0);
@@ -67,7 +68,6 @@ public class DateListView extends BaseActivity {
                 listViewAdapter.addItem(id, bitmap, mRefDate, mRefTitle);
                 users.add(c.getString(1));
             }
-            Log.v("mylog","CXHR2- "+ users);
             c.close();
         } else {
             Toast.makeText(this, "일기를 쓰지않아 등록이 되어있지 않습니다.", Toast.LENGTH_SHORT).show();
@@ -88,15 +88,10 @@ public class DateListView extends BaseActivity {
                             while (c.moveToNext()) {
                                 mRefDate = c.getString(0);
                                 Log.v("mylog", "date: " + mRefDate);
-
-                                AlertDialog.Builder alert = new AlertDialog.Builder(DateListView.this);
-                                alert.setIcon(R.mipmap.mainlogo01);
-                                alert.setMessage(mRefDate + "의 일기입니다.");
-                                DateDelete = mRefDate;
-                                alert.setTitle("일기 불러오기/삭제하기");
-                                alert.setPositiveButton("불러오기", new DialogInterface.OnClickListener() {
+                                Popup popup = new Popup(mContext,"일기 불러오기",mRefDate+ "의 일기를 불러오시겠습니까?","취소","확인");
+                                popup.OK_Click = new Popup.onClick() {
                                     @Override
-                                    public void onClick(DialogInterface dialog, int which) {
+                                    public void onClick() {
                                         Intent intent = new Intent(DateListView.this, LoadDatePickerActivity.class);
                                         intent.putExtra("위치값", mRefDate);
                                         Log.v("mylog", "mRefDate: " + mRefDate);
@@ -104,39 +99,57 @@ public class DateListView extends BaseActivity {
                                         MoveToActivity(intent);
                                         finish();
                                     }
-                                });
-                                alert.setNegativeButton("삭제하기", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        AlertDialog.Builder alert = new AlertDialog.Builder(DateListView.this);
-                                        alert.setTitle("일기를 삭제합니다.");
-                                        alert.setIcon(R.mipmap.deletecolor);
-                                        alert.setMessage("정말로 삭제 하시겠습니까?!" + "\n" + "삭제된 데이터는 복구할 수 없습니다.");
-                                        alert.setPositiveButton("응!", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                Toast.makeText(DateListView.this, "삭제합니다.", Toast.LENGTH_SHORT).show();
-                                                String deleteManager = "date = '" + DateDelete + "';";
-                                                mSQLiteDBManager.delete(deleteManager, null);
-                                                finish();
-                                            }
-                                        });
-                                        alert.setNegativeButton("아니!", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                Toast.makeText(DateListView.this, "추억을 간직하세요♥", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                                        alert.show();
-                                    }
-                                });
-                                alert.setNeutralButton("취소", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
+                                };
+                                popup.show();
 
-                                    }
-                                });
-                                alert.show();
+//                                AlertDialog.Builder alert = new AlertDialog.Builder(DateListView.this);
+//                                alert.setIcon(R.mipmap.mainlogo01);
+//                                alert.setMessage(mRefDate + "의 일기입니다.");
+//                                DateDelete = mRefDate;
+//                                alert.setTitle("일기 불러오기/삭제하기");
+//                                alert.setPositiveButton("불러오기", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        Intent intent = new Intent(DateListView.this, LoadDatePickerActivity.class);
+//                                        intent.putExtra("위치값", mRefDate);
+//                                        Log.v("mylog", "mRefDate: " + mRefDate);
+//                                        //   Toast.makeText(DateListView.this, "위치값은 " + idResult, Toast.LENGTH_SHORT).show();
+//                                        MoveToActivity(intent);
+//                                        finish();
+//                                    }
+//                                });
+//                                alert.setNegativeButton("삭제하기", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        AlertDialog.Builder alert = new AlertDialog.Builder(DateListView.this);
+//                                        alert.setTitle("일기를 삭제합니다.");
+//                                        alert.setIcon(R.mipmap.deletecolor);
+//                                        alert.setMessage("정말로 삭제 하시겠습니까?!" + "\n" + "삭제된 데이터는 복구할 수 없습니다.");
+//                                        alert.setPositiveButton("응!", new DialogInterface.OnClickListener() {
+//                                            @Override
+//                                            public void onClick(DialogInterface dialog, int which) {
+//                                                Toast.makeText(DateListView.this, "삭제합니다.", Toast.LENGTH_SHORT).show();
+//                                                String deleteManager = "date = '" + DateDelete + "';";
+//                                                mSQLiteDBManager.delete(deleteManager, null);
+//                                                finish();
+//                                            }
+//                                        });
+//                                        alert.setNegativeButton("아니!", new DialogInterface.OnClickListener() {
+//                                            @Override
+//                                            public void onClick(DialogInterface dialog, int which) {
+//                                                Toast.makeText(DateListView.this, "추억을 간직하세요♥", Toast.LENGTH_SHORT).show();
+//                                            }
+//                                        });
+//                                        alert.show();
+//                                    }
+//                                });
+//                                alert.setNeutralButton("취소", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//
+//                                    }
+//                                });
+//                                alert.show();
                             }
                             c.close();
                         }

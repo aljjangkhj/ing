@@ -14,7 +14,8 @@
             android:layout_height="match_parent"
             android:text="Date list"
             android:textColor="#000"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:fontFamily="@font/bmjua_ttf"/>
 
     </LinearLayout>
     <LinearLayout
@@ -33,7 +34,8 @@
                 android:text="둘리의 지출: "
                 android:textColor="#000"
                 android:textStyle="bold"
-                android:id="@+id/first_name_calc" />
+                android:id="@+id/first_name_calc"
+                android:fontFamily="@font/bmjua_ttf"/>
 
             <TextView
                 android:id="@+id/MyResultMan"
@@ -43,13 +45,15 @@
                 android:textColor="#000"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:layout_marginRight="12px"/>
+                android:layout_marginRight="12px"
+                android:fontFamily="@font/bmjua_ttf"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="원"
-                android:textColor="#000" />
+                android:textColor="#000"
+                android:fontFamily="@font/bmjua_ttf"/>
 
         </LinearLayout>
 
@@ -62,7 +66,8 @@
                 android:text="길동의 지출: "
                 android:textColor="#000"
                 android:textStyle="bold"
-                android:id="@+id/second_name_calc"/>
+                android:id="@+id/second_name_calc"
+                android:fontFamily="@font/bmjua_ttf"/>
 
                 <TextView
                     android:id="@+id/myResultWoman"
@@ -72,13 +77,15 @@
                     android:textColor="#000"
                     android:layout_weight="1"
                     android:gravity="right"
-                    android:layout_marginRight="12px"/>
+                    android:layout_marginRight="12px"
+                    android:fontFamily="@font/bmjua_ttf"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="원"
-                    android:textColor="#000" />
+                    android:textColor="#000"
+                    android:fontFamily="@font/bmjua_ttf"/>
         </LinearLayout>
 
         <LinearLayout
@@ -90,7 +97,8 @@
                 android:layout_height="wrap_content"
                 android:text="총 지출: "
                 android:textColor="#000"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/bmjua_ttf"/>
 
             <TextView
                 android:id="@+id/myResultMoney"
@@ -100,12 +108,16 @@
                 android:textColor="#000"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:layout_marginRight="12px"/>
+                android:layout_marginRight="12px"
+                android:fontFamily="@font/bmjua_ttf"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="원"
-                android:textColor="#000"/>
+                android:textColor="#000"
+                android:fontFamily="@font/bmjua_ttf"/>
+
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

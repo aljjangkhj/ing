@@ -3,6 +3,7 @@ package www.khj08.com.dateplan.ui;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -20,6 +21,8 @@ import java.util.Calendar;
 
 import www.khj08.com.dateplan.BaseActivity;
 import www.khj08.com.dateplan.R;
+import www.khj08.com.dateplan.popup.CheckBoxPopup;
+import www.khj08.com.dateplan.popup.NameChangePopup;
 import www.khj08.com.dateplan.popup.Popup;
 import www.khj08.com.dateplan.ui.list_adapter.ListViewAdapter;
 
@@ -54,13 +57,15 @@ public class setActivity extends BaseActivity {
         listview.setAdapter(adapter);
         // 첫 번째 아이템 추가.
 
-        adapter.addItem(ContextCompat.getDrawable(this, R.mipmap.ic_launcher_date), "만남 시작한 날 정하기", "메인화면에 만나기 시작한 날을 지정합니다.");
+        adapter.addItem(ContextCompat.getDrawable(this, R.mipmap.ic_launcher_date), "만남 시작한 날 정하기", "메인화면에 "+MySharedPreferencesManager.getPic01(mContext)+"(와)과"+
+                MySharedPreferencesManager.getPic02(mContext)+"(이)가 만나기 시작한 날을 지정합니다.");
         // 두 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(this, R.mipmap.ic_launcher_plan), "메인 문구 정하기", "메인 화면에 사진1,사진2 이름을 작성합니다.");
+        adapter.addItem(ContextCompat.getDrawable(this, R.mipmap.ic_launcher_plan), "메인 문구 정하기", "메인 화면에 "+MySharedPreferencesManager.getPic01(mContext)+"(와)과"+
+                MySharedPreferencesManager.getPic02(mContext)+"의 이름을 수정합니다.");
         // 세 번째 아이템 추가.
         //adapter.addItem(ContextCompat.getDrawable(this, R.mipmap.ic_launcher_cake), "기념일 추가하기", "기념일을 추가합니다.");
         //네번째 아이템 추가
-        adapter.addItem(ContextCompat.getDrawable(this, R.mipmap.alram), "상단 알림 표시", "상단 알림창에 푸쉬알림을 표시 또는 해제 합니다.");
+        adapter.addItem(ContextCompat.getDrawable(this, R.mipmap.alram), "상단 알림 표시", "상단 알림창에 잉ing알림을 표시 또는 해제 합니다.");
        // adapter.addItem(ContextCompat.getDrawable(this, R.mipmap.ic_launcher), "배경 화면 색상 바꾸기", "메인 배경화면의 색상을 지정 합니다.");
         adapter.addItem(ContextCompat.getDrawable(this, R.mipmap.askicon),"사용 TIP","잉ing 어플리케이션의 사용법을 설명 해드립니다.");
 
@@ -73,10 +78,38 @@ public class setActivity extends BaseActivity {
                 switch (position) {
                     case 0: // 첫번째 리스트뷰를 클릭할시 달력Dialog 출력
                         //  Toast.makeText(setActivity.this, "달력", Toast.LENGTH_SHORT).show();
-                        DatePickerDialog.OnDateSetListener callBack = new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year01, int month01, int dayOfMonth) {
+//                        DatePickerDialog.OnDateSetListener callBack = new DatePickerDialog.OnDateSetListener() {
+//                            @Override
+//                            public void onDateSet(DatePicker view, int year01, int month01, int dayOfMonth) {
+//
+//                                year = year01;
+//                                month = month01 + 1;
+//                                day = dayOfMonth;
+//                                MySharedPreferencesManager.setStartLoveDay(year, month, day, setActivity.this);
+//                                //  Toast.makeText(setActivity.this,year+"년"+month+"월"+day+"일" , Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(setActivity.this, "메인화면에 등록 되었습니다.", Toast.LENGTH_SHORT).show();
+//
+//                                DdayManager(year, month, day);
+//                            }
+//                        };
+//
+//                        //달력의 현재 날짜를 읽어오고 현재 날짜부터 선택이 가능합니다.
+//                        calendar = Calendar.getInstance();
+//                        year = calendar.get(Calendar.YEAR);
+//                        month = calendar.get(Calendar.MONTH);
+//                        day = calendar.get(Calendar.DAY_OF_MONTH);
+//                        datePickerDialog = new DatePickerDialog(setActivity.this, callBack, year, month, day);
+//                        datePickerDialog.show();
 
+                        calendar = Calendar.getInstance();
+                        int MyYear = calendar.get(Calendar.YEAR);
+                        int MyMonth = calendar.get(Calendar.MONTH);
+                        int MyDay = calendar.get(Calendar.DAY_OF_MONTH);
+
+                        DatePickerDialog dialog = new DatePickerDialog(mContext, android.R.style.Theme_Holo_Light_Dialog , new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker datePicker, int year01, int month01, int dayOfMonth) {
+                                //Todo your work here
                                 year = year01;
                                 month = month01 + 1;
                                 day = dayOfMonth;
@@ -86,26 +119,24 @@ public class setActivity extends BaseActivity {
 
                                 DdayManager(year, month, day);
                             }
-                        };
+                        }, MyYear, MyMonth, MyDay);
 
-                        //달력의 현재 날짜를 읽어오고 현재 날짜부터 선택이 가능합니다.
-                        calendar = Calendar.getInstance();
-                        year = calendar.get(Calendar.YEAR);
-                        month = calendar.get(Calendar.MONTH);
-                        day = calendar.get(Calendar.DAY_OF_MONTH);
-                        datePickerDialog = new DatePickerDialog(setActivity.this, callBack, year, month, day);
-                        datePickerDialog.show();
+                        dialog.setTitle("만남 시작한 날 정하기");
+                        dialog.setIcon(R.mipmap.mainlogo01);
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                        dialog.show();
+
                         break;
                     case 1:
-                        LayoutInflater layoutInflater = getLayoutInflater();
-                        final View dialogView = layoutInflater.inflate(R.layout.edittext_dialog, null);
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(setActivity.this);
-                        builder.setIcon(R.mipmap.ic_launcher_plan);
-                        builder.setTitle("메인(사진1,사진2) 문구 정하기");
-                        builder.setView(dialogView);
-                        builder.setPositiveButton("이 문구로 할게요!", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+//                        LayoutInflater layoutInflater = getLayoutInflater();
+//                        final View dialogView = layoutInflater.inflate(R.layout.edittext_dialog, null);
+//                        final AlertDialog.Builder builder = new AlertDialog.Builder(setActivity.this);
+//                        builder.setIcon(R.mipmap.ic_launcher_plan);
+//                        builder.setTitle("메인(사진1,사진2) 문구 정하기");
+//                        builder.setView(dialogView);
+//                        builder.setPositiveButton("이 문구로 할게요!", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
 //                                EditText firstName = (EditText)dialogView.findViewById(R.id.picName01);
 //                                EditText secondName = (EditText)dialogView.findViewById(R.id.picName02);
 //                                String strFirst = firstName.getText().toString();
@@ -114,85 +145,122 @@ public class setActivity extends BaseActivity {
 //                                MySharedPreferencesManager.setPic02(strSec,setActivity.this);
 //                                Toast.makeText(setActivity.this, "사진1을 "+strFirst+"로 변경하였습니다.", Toast.LENGTH_SHORT).show();
 //                                Toast.makeText(setActivity.this, "사진2를 "+strSec+"로 변경하였습니다.", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //Toast.makeText(setActivity.this, "문구 설정을 취소합니다.", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
-
-                        Popup popup4 = new Popup(mContext,"","메인("+MySharedPreferencesManager.getPic01(mContext)+","+MySharedPreferencesManager.getPic02(mContext)+") 문구 정하기","취소","확인");
-                        popup4.OK_Click = new Popup.onClick() {
-                            @Override
-                            public void onClick() {
-
-                            }
-                        };
-                        popup4.Cancel_Click = new Popup.onClick() {
+//                            }
+//                        });
+//                        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                //Toast.makeText(setActivity.this, "문구 설정을 취소합니다.", Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
+//                        AlertDialog dialog = builder.create();
+//                        dialog.show();
+                        final NameChangePopup nameChangePopup = new NameChangePopup(mContext);
+                        nameChangePopup.OK_Click = new NameChangePopup.onClick() {
                             @Override
                             public void onClick() {
-
+                                MySharedPreferencesManager.setPic01(nameChangePopup.getName1(),mContext);
+                                MySharedPreferencesManager.setPic02(nameChangePopup.getName2(),mContext);
+                                Toast.makeText(mContext, MySharedPreferencesManager.getPic01(mContext)+"(을)를 "+nameChangePopup.getName1()+"(으)로 변경하였습니다.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mContext, MySharedPreferencesManager.getPic02(mContext)+"(을)를 "+nameChangePopup.getName2()+"(으)로 변경하였습니다.", Toast.LENGTH_SHORT).show();
                             }
                         };
-                        popup4.show();
+                        nameChangePopup.show();
+
+//                        Popup popup4 = new Popup(mContext,"","메인("+MySharedPreferencesManager.getPic01(mContext)+","+MySharedPreferencesManager.getPic02(mContext)+") 문구 정하기","취소","확인");
+//                        popup4.OK_Click = new Popup.onClick() {
+//                            @Override
+//                            public void onClick() {
+//
+//                            }
+//                        };
+//                        popup4.Cancel_Click = new Popup.onClick() {
+//                            @Override
+//                            public void onClick() {
+//
+//                            }
+//                        };
+//                        popup4.show();
                         break;
                     case 2:
-                        AlertDialog alterDialog = null;
-                        //Toast.makeText(setActivity.this, "알림 표시하기", Toast.LENGTH_SHORT).show();
-                        AlertDialog.Builder alert = new AlertDialog.Builder(setActivity.this);
-                        final DialogInterface.OnMultiChoiceClickListener multilistener = new DialogInterface.OnMultiChoiceClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                                if(isChecked == true){
-                                  //  Toast.makeText(setActivity.this, "체크됨", Toast.LENGTH_SHORT).show();
-                                    checkint = 1;
-                                   // checkAlram = new boolean[]{true};
-                                    checkvalue = true;
-                                }
-                                else{
-                                  //  Toast.makeText(setActivity.this, "해제됨", Toast.LENGTH_SHORT).show();
-                                    checkint = 2;
-                                    //checkAlram = new boolean[]{false};
-                                    checkvalue = false;
-                                }
+//                        AlertDialog alterDialog = null;
+//                        //Toast.makeText(setActivity.this, "알림 표시하기", Toast.LENGTH_SHORT).show();
+//                        AlertDialog.Builder alert = new AlertDialog.Builder(setActivity.this);
+//                        final DialogInterface.OnMultiChoiceClickListener multilistener = new DialogInterface.OnMultiChoiceClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+//                                if(isChecked == true){
+//                                  //  Toast.makeText(setActivity.this, "체크됨", Toast.LENGTH_SHORT).show();
+//                                    checkint = 1;
+//                                   // checkAlram = new boolean[]{true};
+//                                    checkvalue = true;
+//                                }
+//                                else{
+//                                  //  Toast.makeText(setActivity.this, "해제됨", Toast.LENGTH_SHORT).show();
+//                                    checkint = 2;
+//                                    //checkAlram = new boolean[]{false};
+//                                    checkvalue = false;
+//                                }
+//
+//                            }
+//                        };
+//
+//                        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                switch (which) {
+//                                    case AlertDialog.BUTTON_POSITIVE:
+//                                        if(checkint == 1){
+//                                            Intent refintent = new Intent(setActivity.this, MyNotificationService.class);
+//                                            MySharedPreferencesManager.setCheckbox(checkvalue,setActivity.this);
+//                                            startService(refintent);
+//                                        }
+//                                        else if(checkint == 2){
+//                                            Intent refIntent = new Intent(setActivity.this, MyNotificationService.class);
+//                                            MySharedPreferencesManager.setCheckbox(checkvalue,setActivity.this);
+//                                            stopService(refIntent);
+//                                        }
+//                                        break;
+//                                    case AlertDialog.BUTTON_NEGATIVE:
+//                                        dialog.dismiss();
+//                                        break;
+//                                }
+//                            }
+//                        };
+//                        checkAlram = new boolean[]{MySharedPreferencesManager.getCheckbox(setActivity.this)};
+//                        alert.setMultiChoiceItems(strSet,checkAlram,multilistener);
+//                        alert.setPositiveButton("확인", listener);
+//                        alert.setNegativeButton("취소", listener);
+//                        alterDialog = alert.create();
+//                        alterDialog.setTitle("상단바 표시 설정하기");
+//                        alterDialog.setIcon(R.mipmap.alram);
+//                        alterDialog.show();
+//                        break;
 
+                        CheckBoxPopup checkBoxPopup = new CheckBoxPopup(mContext);
+                        checkBoxPopup.OK_Click = new CheckBoxPopup.onClick() {
+                            @Override
+                            public void onClick() {
+                                Intent intent = new Intent(mContext,MyNotificationService.class);
+                                if (MySharedPreferencesManager.getCheckbox(mContext)){
+                                    startService(intent);
+                                }else{
+                                    stopService(intent);
+                                }
                             }
                         };
-
-                        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+                        checkBoxPopup.Cancel_Click = new CheckBoxPopup.onClick() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                switch (which) {
-                                    case AlertDialog.BUTTON_POSITIVE:
-                                        if(checkint == 1){
-                                            Intent refintent = new Intent(setActivity.this, MyNotificationService.class);
-                                            MySharedPreferencesManager.setCheckbox(checkvalue,setActivity.this);
-                                            startService(refintent);
-                                        }
-                                        else if(checkint == 2){
-                                            Intent refIntent = new Intent(setActivity.this, MyNotificationService.class);
-                                            MySharedPreferencesManager.setCheckbox(checkvalue,setActivity.this);
-                                            stopService(refIntent);
-                                        }
-                                        break;
-                                    case AlertDialog.BUTTON_NEGATIVE:
-                                        dialog.dismiss();
-                                        break;
+                            public void onClick() {
+                                Intent intent = new Intent(mContext,MyNotificationService.class);
+                                if (MySharedPreferencesManager.getCheckbox(mContext)){
+                                    startService(intent);
+                                }else{
+                                    stopService(intent);
                                 }
                             }
                         };
-                        checkAlram = new boolean[]{MySharedPreferencesManager.getCheckbox(setActivity.this)};
-                        alert.setMultiChoiceItems(strSet,checkAlram,multilistener);
-                        alert.setPositiveButton("확인", listener);
-                        alert.setNegativeButton("취소", listener);
-                        alterDialog = alert.create();
-                        alterDialog.setTitle("상단바 표시 설정하기");
-                        alterDialog.setIcon(R.mipmap.alram);
-                        alterDialog.show();
+                        checkBoxPopup.show();
                         break;
 
                     case 3:
@@ -221,7 +289,7 @@ public class setActivity extends BaseActivity {
 //                        alterDialog01.setIcon(R.mipmap.askicon);
 //                        alterDialog01.show();
 
-                        Popup popup = new Popup(mContext,"","잉ing을 이용해 주셔서 감사합니다"+"\n"+"\n"+
+                        Popup popup = new Popup(mContext,"사용 설명서","잉ing을 이용해 주셔서 감사합니다"+"\n"+"\n"+
                                 "첫번째, 잉ing은 사진을 넣을 수 있는 일기장이 제공됩니다."+"\n"+"\n"+
                                 "두번째, 사람과 사람간의 만남 시간과 사용한 비용을 간략히 정리할 수 있습니다."+"\n"+"\n"+
                                 "세번째, D-DAY를 항시 상단 알림에 출력이 가능합니다." +"\n"+"\n"+
@@ -267,7 +335,7 @@ public class setActivity extends BaseActivity {
 //                         alterDialog02.setIcon(R.mipmap.myicon);
 //                         alterDialog02.show();
 
-                        Popup popup2 = new Popup(mContext,"","사용하실 때 불편한 점이나 더 편리한 기능을 넣고싶다면 "+"\n"+
+                        Popup popup2 = new Popup(mContext,"이메일 보내기","사용하실 때 불편한 점이나 더 편리한 기능을 넣고싶다면 "+"\n"+
                                 "개발자 이메일: aljjangkhj@nate.com "+"\n"+
                                 "메일 주세요. "+"\n"+"좋은 하루 되세요^^ ","취소","메일 보내기");
                         popup2.OK_Click = new Popup.onClick() {
@@ -321,7 +389,7 @@ public class setActivity extends BaseActivity {
 //                        alterDialog03.setTitle("데이터를 모두 삭제합니다.");
 //                        alterDialog03.setIcon(R.mipmap.deletecolor);
 //                        alterDialog03.show();
-                        Popup popup3 = new Popup(mContext,"","데이터들을 모두 삭제하시겠습니까? \"+\"\\n삭제된 정보들은 되돌릴 수 없습니다.","취소","삭제");
+                        Popup popup3 = new Popup(mContext,"데이터 삭제하기","데이터들을 모두 삭제하시겠습니까? \n삭제된 정보들은 되돌릴 수 없습니다.","취소","삭제");
                         popup3.OK_Click = new Popup.onClick() {
                             @Override
                             public void onClick() {
@@ -455,5 +523,4 @@ public class setActivity extends BaseActivity {
             return 0;
         }
     }
-
 }

@@ -9,7 +9,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Typeface;
+//import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,6 +40,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -100,6 +101,8 @@ public class MainActivity extends BaseActivity
     String mCurrentPhotoPath;
     Uri photoURI;
     private TextView firstname1,secondname1,firstname2,secondname2;
+    private int mainHour,mainMinute;
+    private String mainMoney = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,7 +197,7 @@ public class MainActivity extends BaseActivity
         myMainImage();//사진이벤트
         TextClickEvent();//메인클릭이벤트
         mybackgroundcolor();//배경화면설정
-        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf");//폰트
+//        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf");//폰트
         mainText = (TextView) this.findViewById(R.id.main_textview01);
         MainDdayText = (TextView) this.findViewById(R.id.main_dday_text);
         firstname1 = (TextView)findViewById(R.id.first_name_tv);
@@ -215,15 +218,15 @@ public class MainActivity extends BaseActivity
 
 
         //setTextfont(moenyset);
-        this.moenyset.setTypeface(typeface);
-        this.timeset.setTypeface(typeface);
-        this.mainText.setTypeface(typeface);
-        this.MainDdayText.setTypeface(typeface);
-        this.resultTime.setTypeface(typeface);
-        this.resultmoney.setTypeface(typeface);
-        this.manName.setTypeface(typeface);
-        this.womanName.setTypeface(typeface);
-        this.nav_textView.setTypeface(typeface);
+//        this.moenyset.setTypeface(typeface);
+//        this.timeset.setTypeface(typeface);
+//        this.mainText.setTypeface(typeface);
+//        this.MainDdayText.setTypeface(typeface);
+//        this.resultTime.setTypeface(typeface);
+//        this.resultmoney.setTypeface(typeface);
+//        this.manName.setTypeface(typeface);
+//        this.womanName.setTypeface(typeface);
+//        this.nav_textView.setTypeface(typeface);
 
         this.mainText.setText(MySharedPreferencesManager.getStartLoveDay(this));
 //        this.MainDdayText.setText(MySharedPreferencesManager.getDdaySave(this));
@@ -235,10 +238,10 @@ public class MainActivity extends BaseActivity
         firstname2.setText(MySharedPreferencesManager.getPic01(mContext));
         secondname1.setText(MySharedPreferencesManager.getPic02(mContext));
         secondname2.setText(MySharedPreferencesManager.getPic02(mContext));
-        firstname1.setTypeface(typeface);
-        firstname2.setTypeface(typeface);
-        secondname1.setTypeface(typeface);
-        secondname2.setTypeface(typeface);
+//        firstname1.setTypeface(typeface);
+//        firstname2.setTypeface(typeface);
+//        secondname1.setTypeface(typeface);
+//        secondname2.setTypeface(typeface);
         Bitmap bitmap = StringToBitMap(MySharedPreferencesManager.getManPicture(this));
         this.imageView01.setImageBitmap(bitmap);
         Bitmap bitmap2 = StringToBitMap(MySharedPreferencesManager.getWomanPicture(this));
@@ -287,10 +290,13 @@ public class MainActivity extends BaseActivity
                 finalResultTime += sqltime;
                 int hour = finalResultTime / 60;
                 int minute = finalResultTime % 60;
+                mainHour = hour;
+                mainMinute = minute;
 
                 resultTime.setText(hour + "시간 " + minute + "분");
                 finalresult += Integer.parseInt(mRefResultMoney);
                 String numberstr = nf.format(finalresult);
+                mainMoney = numberstr;
                 resultmoney.setText(numberstr + "원");
                 //Log.v("mylog","finalresult: "+ finalresult);
                 //Log.v("mylog", "date " + mRefDate);
@@ -406,7 +412,7 @@ public class MainActivity extends BaseActivity
             public void onClick(View v) {
 
                 imagebtn01 = 2;
-                Popup popup = new Popup(mContext,"","사랑하는 사람의 사진을 올려보세요!","취소","앨범선택");
+                Popup popup = new Popup(mContext,MySharedPreferencesManager.getPic01(mContext)+","+MySharedPreferencesManager.getPic02(mContext)+"의 사진 선택하기","사랑하는 사람의 사진을 올려보세요!","취소","앨범선택");
                 popup.OK_Click = new Popup.onClick() {
                     @Override
                     public void onClick() {
@@ -521,6 +527,7 @@ public class MainActivity extends BaseActivity
 
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
+        intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, PICK_FROM_ALBUM);
     }
 
@@ -579,7 +586,46 @@ public class MainActivity extends BaseActivity
             case PICK_FROM_ALBUM: {
                 // 이후의 처리가 카메라와 같으므로 일단  break없이 진행합니다.
                 // 실제 코드에서는 좀더 합리적인 방법을 선택하시기 바랍니다.
-                mImageCaptureUri = data.getData();
+                try {
+                    //Uri에서 이미지 이름을 얻어온다.
+                    //String name_Str = getImageNameToUri(data.getData());
+                    //이미지 데이터를 비트맵으로 받아온다.
+                    //배치해놓은 ImageView에 set
+                    //Toast.makeText(getBaseContext(), "name_Str : "+name_Str , Toast.LENGTH_SHORT).show();
+                    Bitmap image_bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
+                    if (imagebtn01 == 0) {
+                        setImageBitmaps(image_bitmap, imageView01);
+                        img01 = BitMapToString(image_bitmap);
+                        MySharedPreferencesManager.setManPicture(img01, this);
+                    }
+                    if (imagebtn01 == 1) {
+                        setImageBitmaps(image_bitmap, imageView02);
+                        img02 = BitMapToString(image_bitmap);
+                        MySharedPreferencesManager.setWomanPicture(img02, this);
+                    }
+                    if (imagebtn01 == 2) {
+                        setImageBitmaps(image_bitmap, imageView_nav);
+                        mainImage = BitMapToString(image_bitmap);
+                        MySharedPreferencesManager.setMainPicture(mainImage, this);
+                    }
+
+                    // 임시 파일 삭제
+                    File f = new File(mImageCaptureUri.getPath());
+                    if (f.exists()) {
+                        f.delete();
+                    }
+
+                } catch (FileNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+                break;
             }
 
             case PICK_FROM_CAMERA: {
@@ -622,12 +668,16 @@ public class MainActivity extends BaseActivity
 
     //2018.03.28
     @Override
-    public void onStart(){
-        super.onStart();
+    public void onResume(){
+        super.onResume();
         Log.v("mylog","onStart()");
         this.mainText.setText(MySharedPreferencesManager.getStartLoveDay(this));
         this.manName.setText(MySharedPreferencesManager.getPic01(this));
         this.womanName.setText(MySharedPreferencesManager.getPic02(this));
+        firstname1.setText(MySharedPreferencesManager.getPic01(mContext));
+        firstname2.setText(MySharedPreferencesManager.getPic01(mContext));
+        secondname1.setText(MySharedPreferencesManager.getPic02(mContext));
+        secondname2.setText(MySharedPreferencesManager.getPic02(mContext));
         this.nav_textView.setText(MySharedPreferencesManager.getMainEdit(MainActivity.this));
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -650,6 +700,8 @@ public class MainActivity extends BaseActivity
                 this.MainDdayText.setText("D+" + (tday - b) + " ~잉ing");
             }
         }
+        resultTime.setText(mainHour+"시간 "+mainMinute+"분");
+        resultmoney.setText(mainMoney+"원");
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -677,7 +729,7 @@ public class MainActivity extends BaseActivity
 
                         // Drawable drawable = ContextCompat.getDrawable(MainActivity.this, R.drawable.mainimage02);
 
-                        constraintlayout.setBackgroundDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.mainimage02));
+                        constraintlayout.setBackgroundDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.main_image));
                         MySharedPreferencesManager.saveColor(R.color.color2, MainActivity.this);
 
                         //strdrawable = BitMapToString(bitmap);
@@ -690,6 +742,10 @@ public class MainActivity extends BaseActivity
                         womanName.setTextColor(Color.WHITE);
                         mainText.setTextColor(Color.WHITE);
                         MainDdayText.setTextColor(Color.WHITE);
+                        firstname1.setTextColor(Color.WHITE);
+                        firstname2.setTextColor(Color.WHITE);
+                        secondname1.setTextColor(Color.WHITE);
+                        secondname2.setTextColor(Color.WHITE);
                         nav_textView.setTextColor(Color.BLACK);
 
                         // Toast.makeText(MainActivity.this, color+"", Toast.LENGTH_SHORT).show();
@@ -706,6 +762,10 @@ public class MainActivity extends BaseActivity
                         mainText.setTextColor(Color.BLACK);
                         MainDdayText.setTextColor(Color.BLACK);
                         nav_textView.setTextColor(Color.BLACK);
+                        firstname1.setTextColor(Color.BLACK);
+                        firstname2.setTextColor(Color.BLACK);
+                        secondname1.setTextColor(Color.BLACK);
+                        secondname2.setTextColor(Color.BLACK);
                      //   Toast.makeText(MainActivity.this, Color.WHITE + "", Toast.LENGTH_SHORT).show();
                         //mRefBackground = 1;
                     }
@@ -719,6 +779,10 @@ public class MainActivity extends BaseActivity
                         womanName.setTextColor(Color.WHITE);
                         mainText.setTextColor(Color.WHITE);
                         MainDdayText.setTextColor(Color.WHITE);
+                        firstname1.setTextColor(Color.WHITE);
+                        firstname2.setTextColor(Color.WHITE);
+                        secondname1.setTextColor(Color.WHITE);
+                        secondname2.setTextColor(Color.WHITE);
                         nav_textView.setTextColor(Color.BLACK);
                         MySharedPreferencesManager.saveColor(Color.BLACK, MainActivity.this);
                       //  Toast.makeText(MainActivity.this, Color.BLACK + "", Toast.LENGTH_SHORT).show();
@@ -735,6 +799,10 @@ public class MainActivity extends BaseActivity
                         womanName.setTextColor(Color.BLACK);
                         mainText.setTextColor(Color.BLACK);
                         MainDdayText.setTextColor(Color.BLACK);
+                        firstname1.setTextColor(Color.BLACK);
+                        firstname2.setTextColor(Color.BLACK);
+                        secondname1.setTextColor(Color.BLACK);
+                        secondname2.setTextColor(Color.BLACK);
                         nav_textView.setTextColor(Color.BLACK);
                         //  mRefBackground = 3;
                         MySharedPreferencesManager.saveColor(color, MainActivity.this);
@@ -821,6 +889,10 @@ public class MainActivity extends BaseActivity
         imageButton02 = (ImageButton) this.findViewById(R.id.woman);
         constraintlayout = (ConstraintLayout) this.findViewById(R.id.main_layout);
         nav_textView = (TextView) myView.findViewById(R.id.nav_header_layout_TextView);
+        firstname1 = (TextView)findViewById(R.id.first_name_tv);
+        firstname2 = (TextView)findViewById(R.id.first_name_tv2);
+        secondname1 = (TextView)findViewById(R.id.second_name_tv);
+        secondname2 = (TextView)findViewById(R.id.second_name_tv2);
 
         savebackground = MySharedPreferencesManager.getSaveColor(this);
         if (savebackground == 0){
@@ -828,7 +900,7 @@ public class MainActivity extends BaseActivity
         }
         else{
             if(R.color.color2 == savebackground){
-                constraintlayout.setBackgroundDrawable( ContextCompat.getDrawable(MainActivity.this, R.drawable.mainimage02));
+                constraintlayout.setBackgroundDrawable( ContextCompat.getDrawable(MainActivity.this, R.drawable.main_image));
                 resultmoney.setTextColor(Color.WHITE);
                 resultTime.setTextColor(Color.WHITE);
                 moenyset.setTextColor(Color.WHITE);
@@ -837,6 +909,10 @@ public class MainActivity extends BaseActivity
                 womanName.setTextColor(Color.WHITE);
                 mainText.setTextColor(Color.WHITE);
                 MainDdayText.setTextColor(Color.WHITE);
+                firstname1.setTextColor(Color.WHITE);
+                firstname2.setTextColor(Color.WHITE);
+                secondname1.setTextColor(Color.WHITE);
+                secondname2.setTextColor(Color.WHITE);
                 nav_textView.setTextColor(Color.BLACK);
             }
             else if(savebackground == Color.WHITE){
@@ -851,6 +927,10 @@ public class MainActivity extends BaseActivity
                 mainText.setTextColor(Color.BLACK);
                 MainDdayText.setTextColor(Color.BLACK);
                 nav_textView.setTextColor(Color.BLACK);
+                firstname1.setTextColor(Color.BLACK);
+                firstname2.setTextColor(Color.BLACK);
+                secondname1.setTextColor(Color.BLACK);
+                secondname2.setTextColor(Color.BLACK);
             }
             else if(savebackground == Color.BLACK){
                 int color = Color.parseColor("#000000");
@@ -863,6 +943,10 @@ public class MainActivity extends BaseActivity
                 womanName.setTextColor(Color.WHITE);
                 mainText.setTextColor(Color.WHITE);
                 MainDdayText.setTextColor(Color.WHITE);
+                firstname1.setTextColor(Color.WHITE);
+                firstname2.setTextColor(Color.WHITE);
+                secondname1.setTextColor(Color.WHITE);
+                secondname2.setTextColor(Color.WHITE);
                 nav_textView.setTextColor(Color.BLACK);
             }
             else if(savebackground == Color.parseColor("#FAED7D")){
@@ -876,6 +960,10 @@ public class MainActivity extends BaseActivity
                 mainText.setTextColor(Color.BLACK);
                 MainDdayText.setTextColor(Color.BLACK);
                 nav_textView.setTextColor(Color.BLACK);
+                firstname1.setTextColor(Color.BLACK);
+                firstname2.setTextColor(Color.BLACK);
+                secondname1.setTextColor(Color.BLACK);
+                secondname2.setTextColor(Color.BLACK);
             }
         }
     }
@@ -919,7 +1007,7 @@ public class MainActivity extends BaseActivity
             @Override
             public void onClick(View v) {
                 imagebtn01 = 0;
-                Popup popup = new Popup(mContext,"","사랑하는 사람의 사진을 올려보세요!","취소","앨범선택");
+                Popup popup = new Popup(mContext,MySharedPreferencesManager.getPic01(mContext)+"의 사진 선택하기","사랑하는 사람의 사진을 올려보세요!","취소","앨범선택");
                 popup.OK_Click = new Popup.onClick() {
                     @Override
                     public void onClick() {
@@ -959,7 +1047,7 @@ public class MainActivity extends BaseActivity
             @Override
             public void onClick(View v) {
                 imagebtn01 = 1;
-                Popup popup = new Popup(mContext,"","사랑하는 사람의 사진을 올려보세요!","취소","앨범선택");
+                Popup popup = new Popup(mContext,MySharedPreferencesManager.getPic02(mContext)+"의 사진 선택하기","사랑하는 사람의 사진을 올려보세요!","취소","앨범선택");
                 popup.OK_Click = new Popup.onClick() {
                     @Override
                     public void onClick() {

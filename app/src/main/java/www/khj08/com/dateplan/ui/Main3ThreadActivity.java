@@ -2,7 +2,7 @@ package www.khj08.com.dateplan.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Typeface;
+//import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -23,14 +23,14 @@ public class Main3ThreadActivity extends Activity {
         super.onCreate(bundle);
         onBackPressed();
         //Log.v("mylog","start Main3ThreadActivity");
-        this.setContentView(R.layout.main_thread_layout);
-        Typeface typeface = Typeface.createFromAsset(getAssets(),"fonts/BMJUA_ttf.ttf");
+        setContentView(R.layout.main_thread_layout);
+//        Typeface typeface = Typeface.createFromAsset(getAssets(),"fonts/BMJUA_ttf.ttf");
       //  Log.v("mylog","setContentView 실행");
         this.textView = (TextView)this.findViewById(R.id.mainthread_text);
         ingIMG = (ImageView)findViewById(R.id.ingIMG);
-        textView.setTypeface(typeface);
-        animation = AnimationUtils.loadAnimation(this, R.anim.loading);
-        ingIMG.setAnimation(animation);
+//        textView.setTypeface(typeface);
+//        animation = AnimationUtils.loadAnimation(this, R.anim.loading);
+//        ingIMG.setAnimation(animation);
         thread = new Thread() {
             @Override
             public void run() {

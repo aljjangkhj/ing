@@ -16,11 +16,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/finalmainicon"
+        android:icon="@mipmap/ing_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/finalmainicon"
+        android:roundIcon="@mipmap/ing_icon"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:largeHeap="true">
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="www.khj08.com.dateplan.fileprovider"

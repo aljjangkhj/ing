@@ -13,6 +13,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:fontFamily="@font/bmjua_ttf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="하고싶은 말을 아래에 적어주세요."
@@ -22,6 +23,7 @@
             android:layout_marginTop="80px"/>
 
             <EditText
+                android:fontFamily="@font/bmjua_ttf"
                 android:id="@+id/shortEdit"
                 android:layout_width="800px"
                 android:layout_height="wrap_content"
@@ -44,6 +46,7 @@
                 android:gravity="center"
                 android:orientation="horizontal">
                 <TextView
+                    android:fontFamily="@font/bmjua_ttf"
                     android:id="@+id/tv_popup_1btn_ok"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -69,6 +72,7 @@
                 android:orientation="horizontal"
                 android:background="@drawable/selector_cancel_btn">
                 <TextView
+                    android:fontFamily="@font/bmjua_ttf"
                     android:id="@+id/tv_popup_2btn_cancel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -88,6 +92,7 @@
                 android:orientation="horizontal"
                 android:background="@drawable/selector_btn">
                 <TextView
+                    android:fontFamily="@font/bmjua_ttf"
                     android:id="@+id/tv_popup_2btn_ok"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

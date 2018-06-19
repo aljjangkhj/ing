@@ -13,6 +13,7 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:fontFamily="@font/bmjua_ttf"
             android:id="@+id/notifi_text01"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -30,6 +31,7 @@
         android:gravity="center">
 
         <TextView
+            android:fontFamily="@font/bmjua_ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -57,6 +59,7 @@
             android:layout_centerInParent="true" />
 
         <TextView
+            android:fontFamily="@font/bmjua_ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="둘리"

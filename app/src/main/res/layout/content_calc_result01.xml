@@ -19,7 +19,8 @@
                 android:textStyle="bold"
                 android:textSize="18dp"
                 android:id="@+id/fonts1"
-                android:layout_marginLeft="120px"/>
+                android:layout_marginLeft="120px"
+                android:fontFamily="@font/bmjua_ttf"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -29,7 +30,8 @@
                 android:textColor="#000"
                 android:textStyle="bold"
                 android:textSize="18dp"
-                android:id="@+id/fonts2"/>
+                android:id="@+id/fonts2"
+                android:fontFamily="@font/bmjua_ttf"/>
 
     </LinearLayout>
 

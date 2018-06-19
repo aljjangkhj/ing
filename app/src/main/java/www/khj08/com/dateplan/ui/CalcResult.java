@@ -1,7 +1,7 @@
 package www.khj08.com.dateplan.ui;
 
 import android.database.Cursor;
-import android.graphics.Typeface;
+//import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -28,16 +28,16 @@ public class CalcResult extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.setContentView(R.layout.content_calc_result01);
+        setContentView(R.layout.content_calc_result01);
         init_autoscreen(1);
         listViewAdapter = new CalcResultAdapter();
         listview01 = (ListView) this.findViewById(R.id.content_calc_listview);
         listview01.setAdapter(listViewAdapter);
         font1 = (TextView)this.findViewById(R.id.fonts1);
         font2 = (TextView)this.findViewById(R.id.fonts2);
-        Typeface typeface = Typeface.createFromAsset(getAssets(),"fonts/BMJUA_ttf.ttf");
-        font1.setTypeface(typeface);
-        font2.setTypeface(typeface);
+//        Typeface typeface = Typeface.createFromAsset(getAssets(),"fonts/BMJUA_ttf.ttf");
+//        font1.setTypeface(typeface);
+//        font2.setTypeface(typeface);
         mSQLiteDBManager = SQLiteDBManager.getInstance(this);
         String[] columns = new String[]{"_id", "date", "starttime", "endtime", "title", "content", "resulthour", "manmoney", "womanmoney", "resultmoney"};
         Cursor c = mSQLiteDBManager.query(columns, null, null, null, null, null);

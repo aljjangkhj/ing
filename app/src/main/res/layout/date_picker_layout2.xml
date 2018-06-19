@@ -61,6 +61,7 @@
                         android:id="@+id/date_picker_btn">
 
                         <TextView
+                            android:fontFamily="@font/bmjua_ttf"
                             android:id="@+id/date_picker_text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -118,6 +119,7 @@
                             android:layout_gravity="center">
 
                             <TextView
+                                android:fontFamily="@font/bmjua_ttf"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="만난 시간"
@@ -125,9 +127,10 @@
                                 android:textSize="13dp"/>
 
                             <TextView
+                                android:fontFamily="@font/bmjua_ttf"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="0시0분"
+                                android:hint="0시0분"
                                 android:id="@+id/hello_time_text"
                                 android:gravity="right"/>
 
@@ -156,6 +159,7 @@
                             android:layout_gravity="center">
 
                             <TextView
+                                android:fontFamily="@font/bmjua_ttf"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="헤어진 시간"
@@ -163,10 +167,11 @@
                                 android:textSize="13dp"/>
 
                             <TextView
+                                android:fontFamily="@font/bmjua_ttf"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="12px"
-                                android:text="0시0분"
+                                android:hint="0시0분"
                                 android:id="@+id/bye_time_text"
                                 android:gravity="right"/>
 
@@ -185,8 +190,10 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="120px"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:gravity="center">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -194,10 +201,13 @@
                         android:layout_margin="20px">
 
                         <TextView
+                            android:fontFamily="@font/bmjua_ttf"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="길동의 지출"
                             android:textColor="#000"
+                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:id="@+id/first_name_datepicker"/>
 
                     </LinearLayout>
@@ -213,6 +223,7 @@
                         android:layout_gravity="center">
 
                         <EditText
+                            android:fontFamily="@font/bmjua_ttf"
                             android:layout_width="400px"
                             android:layout_height="wrap_content"
                             android:background="#ffffff"
@@ -222,6 +233,7 @@
                             android:id="@+id/man_money"/>
 
                         <TextView
+                            android:fontFamily="@font/bmjua_ttf"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="원"
@@ -242,6 +254,7 @@
                         android:gravity="center">
 
                         <TextView
+                            android:fontFamily="@font/bmjua_ttf"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="합계"
@@ -262,8 +275,10 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="120px"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:gravity="center">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -271,6 +286,7 @@
                         android:layout_margin="20px">
 
                         <TextView
+                            android:fontFamily="@font/bmjua_ttf"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="둘리의 지출"
@@ -294,6 +310,7 @@
                             android:layout_gravity="center">
 
                             <EditText
+                                android:fontFamily="@font/bmjua_ttf"
                                 android:layout_width="400px"
                                 android:layout_height="wrap_content"
                                 android:background="#ffffff"
@@ -303,6 +320,7 @@
                                 android:id="@+id/woman_money"/>
 
                             <TextView
+                                android:fontFamily="@font/bmjua_ttf"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="원"
@@ -323,12 +341,14 @@
                             android:gravity="right|center">
 
                             <TextView
+                                android:fontFamily="@font/bmjua_ttf"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="#000000"
                                 android:id="@+id/add_money"/>
 
                             <TextView
+                                android:fontFamily="@font/bmjua_ttf"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="원"
@@ -396,6 +416,7 @@
                     android:orientation="vertical">
 
                     <EditText
+                        android:fontFamily="@font/bmjua_ttf"
                         android:id="@+id/edit_text_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -406,9 +427,10 @@
                         android:hint="일기 제목을 입력하세요."/>
 
                     <EditText
+                        android:fontFamily="@font/bmjua_ttf"
                         android:id="@+id/edit_text_content"
                         android:layout_width="match_parent"
-                        android:layout_height="400px"
+                        android:layout_height="480px"
                         android:gravity="top"
                         android:background="@android:drawable/edit_text"
                         android:hint="일기 내용을 입력하세요." />

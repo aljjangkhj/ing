@@ -2,6 +2,7 @@ package www.khj08.com.dateplan.popup;
 
 import android.app.Dialog;
 import android.content.Context;
+//import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.Window;
@@ -9,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import www.khj08.com.dateplan.BaseActivity;
 import www.khj08.com.dateplan.R;
 import www.khj08.com.dateplan.utils.AutoScreen;
 
@@ -16,8 +18,10 @@ public class Popup extends Dialog
 {
     static Context mContext = null;
     private String TAG;
+    private BaseActivity baseActivity = new BaseActivity();
 
     private TextView tv_popup_msg = null;
+    private TextView titletext = null;
 
     private LinearLayout layout_popup_1btn = null;
     private FrameLayout btn_popup_1btn_ok = null;
@@ -55,6 +59,7 @@ public class Popup extends Dialog
         AutoScreen.Adjust(mContext, getWindow().getDecorView(), 1);
 
         tv_popup_msg = (TextView)this.findViewById(R.id.tv_popup_msg);
+        titletext = (TextView)findViewById(R.id.popup_textview);
 
         layout_popup_1btn = (LinearLayout)this.findViewById(R.id.layout_popup_1btn);
         btn_popup_1btn_ok = (FrameLayout)this.findViewById(R.id.btn_popup_1btn_ok);
@@ -110,6 +115,7 @@ public class Popup extends Dialog
             }
         });
 
+        titletext.setText(title);
         tv_popup_msg.setText(msg);
 
         if(Cancel.equals(""))
@@ -133,4 +139,7 @@ public class Popup extends Dialog
         super.show();
     }
 
+    public void setFont(TextView textView){
+//        textView.setTypeface(typeface);
+    }
 }

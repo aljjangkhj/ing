@@ -12,11 +12,11 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
-import android.graphics.Typeface;
+//import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.support.v7.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
@@ -69,7 +69,7 @@ public class MyNotificationService extends Service{
                     //빌더 객체를 만듭니다.
 
 
-                    Typeface typeface = Typeface.createFromAsset(getAssets(),"fonts/BMJUA_ttf.ttf");
+//                    Typeface typeface = Typeface.createFromAsset(getAssets(),"fonts/BMJUA_ttf.ttf");
                    // Log.v("mylog", "notifi if");
                     bitmap = getCircularBitmap(bitmap);
                     bitmap2 = getCircularBitmap(bitmap2);
@@ -137,9 +137,9 @@ public class MyNotificationService extends Service{
                 }
             }else{
                 Log.v("mylog","notifi else");
+                mRefNotificationThread.stopNoti();
                 Toast.makeText(MyNotificationService.this, "메인 화면에 사진을 등록해야 합니다.", Toast.LENGTH_SHORT).show();
                 MySharedPreferencesManager.setCheckbox(false,MyNotificationService.this);
-                mRefNotificationThread.stopNoti();
             }
         }
 
