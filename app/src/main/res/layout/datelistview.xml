@@ -2,68 +2,96 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/memopark"
     android:orientation="vertical">
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="160px">
+        android:layout_height="200px"
+        android:background="@color/color_ff4081">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/btn_main_menu">
+            <ImageView
+                android:layout_width="112px"
+                android:layout_height="112px"
+                android:layout_marginRight="56px"
+                android:layout_marginLeft="56px"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_action_back" />
+        </LinearLayout>
         <TextView
-            android:fontFamily="@font/bmjua_ttf"
-            android:id="@+id/fonts01"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="인생 샷"
-            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="일기 목록"
             android:textSize="18dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:fontFamily="@font/bmjua_ttf"
-            android:id="@+id/fonts02"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="날 짜"
-            android:textColor="#000"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:fontFamily="@font/bmjua_ttf"
-            android:id="@+id/fonts03"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="160px"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="일기 제목"
-            android:textColor="#000"
-            android:textSize="18dp"
-            android:textStyle="bold" />
+            android:textColor="@color/color_ffffff"
+            android:textStyle="bold"
+            android:gravity="center"/>
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/memopark"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="160px">
 
-    <View
-        android:layout_width="1200px"
-        android:layout_height="8px"
-        android:layout_gravity="center"
-        android:layout_marginTop="40px"
-        android:background="#000000"/>
+            <TextView
+                android:id="@+id/fonts01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="인생 샷"
+                android:textColor="#000"
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
-    <ListView
-        android:id="@+id/datelistview01"
-        android:layout_width="1200px"
-        android:layout_height="1420px"
-        android:layout_gravity="center"
-        android:divider="#000000"
-        android:dividerHeight="8px">
+            <TextView
+                android:id="@+id/fonts02"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="날 짜"
+                android:textColor="#000"
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
-    </ListView>
+            <TextView
+                android:id="@+id/fonts03"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="160px"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="일기 제목"
+                android:textColor="#000"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1200px"
+            android:layout_height="8px"
+            android:layout_gravity="center"
+            android:layout_marginTop="40px"
+            android:background="#000000"/>
+
+        <ListView
+            android:id="@+id/datelistview01"
+            android:layout_width="1200px"
+            android:layout_height="1420px"
+            android:layout_gravity="center"
+            android:divider="#000000"
+            android:dividerHeight="8px">
+
+        </ListView>
+    </LinearLayout>
 </LinearLayout>

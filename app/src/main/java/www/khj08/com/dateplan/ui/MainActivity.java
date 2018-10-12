@@ -2,6 +2,8 @@ package www.khj08.com.dateplan.ui;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,6 +12,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 //import android.graphics.Typeface;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,6 +39,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
@@ -47,28 +51,39 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 import www.khj08.com.dateplan.BaseActivity;
 import www.khj08.com.dateplan.R;
+import www.khj08.com.dateplan.common.log;
 import www.khj08.com.dateplan.popup.MainSideMenuDialog;
 import www.khj08.com.dateplan.popup.Popup;
+import www.khj08.com.dateplan.utils.Util;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private final int GALLERY_CODE=1112;
+
+    public SideMenuBar menubar_sidemenu = null;
+
+    private InterstitialAd interstitialAd;
     private ImageButton imageButton01;
     private ImageButton imageButton02;
     private ImageView imageView01;
     private ImageView imageView02;
-    private Button nav_btn;
+    private Button get_admob;
     private int imagebtn01 = 0;
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
     private static final int CROP_FROM_CAMERA = 2;
+    private static final int REQUEST_IMAGE_CROP = 3;
     private String img01;
     private String img02;
     private String mainImage;
@@ -93,16 +108,16 @@ public class MainActivity extends BaseActivity
     private int sqltime;
     private ImageButton imageButton_nav;
     private ImageView imageView_nav;
-    private ConstraintLayout constraintlayout;
     private int mRefBackground = 0;
     private String strdrawable;
     private Bitmap bitmap;
     private int savebackground;
     String mCurrentPhotoPath;
-    Uri photoURI;
+    Uri photoURI,albumURI;
     private TextView firstname1,secondname1,firstname2,secondname2;
     private int mainHour,mainMinute;
     private String mainMoney = "0";
+    private LinearLayout btn_main_menu,constraintlayout,write_diary_btn,list_diary_btn,d_day_btn,account_btn, setting_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,73 +126,23 @@ public class MainActivity extends BaseActivity
         init_autoscreen(1);
         //권한체크
         checkPermission();
-        /*if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){ //사용자의 안드로이드 OS버전이 마시멜로우 이상인지 체크. 맞다면 IF문 내부의 소스코드 작동.
-            Log.v("mylog","if=1");
-            int permissionResult = checkSelfPermission(Manifest.permission.CALL_PHONE); // 해당 퍼미션 체크.
-            Log.v("mylog","permissionResult: "+ permissionResult);
-            if(permissionResult == PackageManager.PERMISSION_DENIED){ // 해당 퍼미션 권한여부 체크.
-                *//*
-                 * 해당 권한이 거부된 적이 있는지 유무 판별 해야함.
-                 * 거부된 적이 있으면 true, 거부된 적이 없으면 false 리턴
-                 *//*
-                Log.v("mylog","if=2");
-                if(shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)){ // 거부된 적이 있으면 해당 권한을 사용할 때 상세 내용을 설명. 거부한 적 있으면 true 리턴.
-                    Log.v("mylog","if=3");
-                    android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(MainActivity.this);
-                    dialog.setTitle("권한이 필요합니다.")
-                            .setMessage("이 기능을 사용하기 위해서는 단말기의 \"카메라\"권한이 필요합니다. 계속 하시겠습니까?")
-                            .setPositiveButton("네", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                                        requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, 1000);
-                                    }
-                                }
-                            })
-                            .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Toast.makeText(MainActivity.this, "기능을 취소했습니다", Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                            .create()
-                            .show();
-                }else{ // 거부된 적이 없으면 설명 없이 해당 권한을 요청.
-                    Log.v("mylog","else=1");
-                }
-            }else{ // 사용자가 권한을 승락함. 바로 실행.
-                Log.v("mylog","else=2");
-            }
-        }else{//마시멜로우 미만 버전 즉시실행
-            Log.v("mylog","else=3");
-        }*/
-        //int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR);
-        /*String[] permissions = new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            for(String permission : permissions){
-                int result = PermissionChecker.checkSelfPermission(this, permission);
-
-                if(result == PermissionChecker.PERMISSION_GRANTED){
-
-                }else{
-                    doRequestPermission();
-                }
-            }
-        }*/
-
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        backPressCloseSystem = new BackPressCloseSystem(this);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        backPressCloseSystem = new BackPressCloseSystem(this);
         AdView mAdView = (AdView) findViewById(R.id.adView);
         //광고테스트
-        AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("1DC9651A441E938D55FC3CCE27FBB889").build();
         mAdView.loadAd(adRequest);
 
-        /*AdView mAdView2 = (AdView)findViewById(R.id.adView2);
-        AdRequest adRequest2 = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-        mAdView2.loadAd(adRequest2);*/
+        String today = Util.yyyyMMdd();
+        log.vlog(2,"KHJ today: " + today);
+
+        log.vlog(2,"KHJ 최종이길: " + Util.diffOfDate(MySharedPreferencesManager.getLoveStartDay(mContext),today));
+
+//        AdView mAdView2 = (AdView)findViewById(R.id.adView2);
+//        AdRequest adRequest2 = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+//        mAdView2.loadAd(adRequest2);
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,18 +151,24 @@ public class MainActivity extends BaseActivity
             }
         });
 */
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.setDrawerListener(toggle);
+//        toggle.syncState();
 
         /*NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);*/
         myMainImage();//사진이벤트
         TextClickEvent();//메인클릭이벤트
         mybackgroundcolor();//배경화면설정
-//        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf");//폰트
+        menubar_sidemenu = (SideMenuBar) findViewById(R.id.menubar_sidemenu);
+        btn_main_menu = (LinearLayout)findViewById(R.id.btn_main_menu);
+        write_diary_btn = (LinearLayout)findViewById(R.id.write_diary_btn);
+        list_diary_btn = (LinearLayout)findViewById(R.id.list_diary_btn);
+        d_day_btn = (LinearLayout)findViewById(R.id.d_day_btn);
+        account_btn = (LinearLayout)findViewById(R.id.account_btn);
+        setting_btn = (LinearLayout)findViewById(R.id.setting_btn);
         mainText = (TextView) this.findViewById(R.id.main_textview01);
         MainDdayText = (TextView) this.findViewById(R.id.main_dday_text);
         firstname1 = (TextView)findViewById(R.id.first_name_tv);
@@ -214,19 +185,8 @@ public class MainActivity extends BaseActivity
         imageView02 = (ImageView) this.findViewById(R.id.woman2);
         imageButton01 = (ImageButton) findViewById(R.id.man);
         imageButton02 = (ImageButton) this.findViewById(R.id.woman);
-        constraintlayout = (ConstraintLayout) this.findViewById(R.id.main_layout);
-
-
-        //setTextfont(moenyset);
-//        this.moenyset.setTypeface(typeface);
-//        this.timeset.setTypeface(typeface);
-//        this.mainText.setTypeface(typeface);
-//        this.MainDdayText.setTypeface(typeface);
-//        this.resultTime.setTypeface(typeface);
-//        this.resultmoney.setTypeface(typeface);
-//        this.manName.setTypeface(typeface);
-//        this.womanName.setTypeface(typeface);
-//        this.nav_textView.setTypeface(typeface);
+        constraintlayout = (LinearLayout) this.findViewById(R.id.main_layout);
+        get_admob = (Button) this.findViewById(R.id.get_admob);
 
         this.mainText.setText(MySharedPreferencesManager.getStartLoveDay(this));
 //        this.MainDdayText.setText(MySharedPreferencesManager.getDdaySave(this));
@@ -319,59 +279,59 @@ public class MainActivity extends BaseActivity
                 // Toast.makeText(DateListView.this, "저장된 날짜는: " + mRefDate, Toast.LENGTH_SHORT).show();
             }
         }*/
-    }
 
-    /*//권한획득
-    private void doRequestPermission(){
-        String [] permissions = new String []{ Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-
-        ArrayList<String> notGrantedPermissions = new ArrayList<>();
-        for(String perm : permissions){
-            if(!PermissionUtils.hasPermissions(this, perm)){
-                notGrantedPermissions.add(perm);
+        get_admob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setFullAd();
             }
-        }
-        ActivityCompat.requestPermissions(this,notGrantedPermissions.toArray(new String[] {}), PermissionUtils.MUST_HAVE_REQUEST_CODE);
-    }*/
-    private void checkPermission(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+        });
 
-            } else {
-                requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.GET_ACCOUNTS}, 1);
+        btn_main_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                menubar_sidemenu.show();
             }
-        }
-    }
+        });
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        write_diary_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MoveToActivity(new Intent(mContext,DatePickerActivity.class));
+            }
+        });
 
-        switch (requestCode) {
-            case 1:
-                if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        list_diary_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MoveToActivity(new Intent(mContext, DateListView.class));
+            }
+        });
 
-                }
-                break;
-            default:
-                break;
-        }
-    }
+        d_day_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MoveToActivity(new Intent(mContext, D_Day_Activity.class));
+            }
+        });
 
-    public void myMainImage() {
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        //View myView = navigationView.inflateHeaderView(R.layout.nav_header_main);
-        View myView = navigationView.getHeaderView(0);
-        imageButton_nav = (ImageButton) myView.findViewById(R.id.nav_header_layout_imageButton);
-        imageView_nav = (ImageView) myView.findViewById(R.id.nav_header_layout_imageView);
-        Bitmap bitmap = StringToBitMap(MySharedPreferencesManager.getMainPicture(this));
-        imageView_nav.setImageBitmap(bitmap);
+        account_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MoveToActivity(new Intent(mContext, CalcResult.class));
+            }
+        });
 
-        nav_btn = (Button) myView.findViewById(R.id.nav_header_layout_Btn);
-        nav_textView = (TextView) myView.findViewById(R.id.nav_header_layout_TextView);
+        setting_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MoveToActivity(new Intent(mContext, setActivity.class));
+            }
+        });
 
-        nav_btn.setOnClickListener(new View.OnClickListener() {
+        nav_textView = (TextView) findViewById(R.id.nav_header_layout_TextView);
+
+        nav_textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final MainSideMenuDialog mainSideMenuDialog = new MainSideMenuDialog(mContext);
@@ -407,6 +367,71 @@ public class MainActivity extends BaseActivity
 //                dialog.show();
             }
         });
+    }
+
+    /*//권한획득
+    private void doRequestPermission(){
+        String [] permissions = new String []{ Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
+        ArrayList<String> notGrantedPermissions = new ArrayList<>();
+        for(String perm : permissions){
+            if(!PermissionUtils.hasPermissions(this, perm)){
+                notGrantedPermissions.add(perm);
+            }
+        }
+        ActivityCompat.requestPermissions(this,notGrantedPermissions.toArray(new String[] {}), PermissionUtils.MUST_HAVE_REQUEST_CODE);
+    }*/
+    private void checkPermission(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+
+            } else {
+                requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.GET_ACCOUNTS}, 1);
+            }
+        }
+    }
+
+    private void setFullAd(){
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId(getString(R.string.full_ad_key));
+        interstitialAd.loadAd(new AdRequest.Builder().build());
+        interstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                if (interstitialAd.isLoaded()) {
+                    interstitialAd.show();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+            case 1:
+                if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void myMainImage() {
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        navigationView.setNavigationItemSelectedListener(this);
+//        //View myView = navigationView.inflateHeaderView(R.layout.nav_header_main);
+//        View myView = navigationView.getHeaderView(0);
+        imageButton_nav = (ImageButton) findViewById(R.id.nav_header_layout_imageButton);
+        imageView_nav = (ImageView) findViewById(R.id.nav_header_layout_imageView);
+        Bitmap bitmap = StringToBitMap(MySharedPreferencesManager.getMainPicture(this));
+        imageView_nav.setImageBitmap(bitmap);
+
+//        nav_btn = (Button) findViewById(R.id.nav_header_layout_Btn);
+
         imageButton_nav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -471,18 +496,24 @@ public class MainActivity extends BaseActivity
     private File createImageFile() throws IOException {
 
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
+        String imageFileName = "JPEG_" + timeStamp + ".jpg";
+//        File storageDir = getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+//        File image = File.createTempFile(imageFileName,".jpg",storageDir);
 
         // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+//        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
 
-        return image;
+        File imageFile = null;
+        File storageDir = new File(Environment.getExternalStorageDirectory() + "/Pictures","잉ing");
+
+        if (!storageDir.exists()){
+            storageDir.mkdirs();
+        }
+
+        imageFile = new File(storageDir, imageFileName);
+        mCurrentPhotoPath = imageFile.getAbsolutePath();
+
+        return imageFile;
     }
 
     public void doTakePhotoAction() {
@@ -495,7 +526,7 @@ public class MainActivity extends BaseActivity
                 try{
                     photoFile = createImageFile();
                 }catch (IOException e){
-                    Log.v("mylog", "카메라에러: " + e);
+                    log.vlog(2, "카메라에러: " + e);
                 }
                 if(photoFile != null){
                     //String mPath = "tmp_" + String.valueOf(System.currentTimeMillis()) + ".jpg";
@@ -507,8 +538,6 @@ public class MainActivity extends BaseActivity
                         photoURI = FileProvider.getUriForFile(this, getApplicationContext().getPackageName()+".fileprovider", photoFile);
                         mImageCaptureUri = photoURI;
                         intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
-                        Log.v("mylog","photoURI: "+ photoURI.toString());
-                        Log.v("mylog","photoFile: "+ photoFile.toString());
                     } else {
                         mImageCaptureUri = Uri.fromFile(photoFile);
                         intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
@@ -525,10 +554,16 @@ public class MainActivity extends BaseActivity
     private void doTakeAlbumAction() {
         // 앨범 호출
 
+//        Intent intent = new Intent(Intent.ACTION_PICK);
+//        intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
+//        intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//        startActivityForResult(intent, PICK_FROM_ALBUM);
+
+
         Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
         intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, PICK_FROM_ALBUM);
+        intent.setType("image/*");
+        startActivityForResult(intent, GALLERY_CODE);
     }
 
     //이미지 버튼이 2개이므로 전역변수로 선언
@@ -553,6 +588,24 @@ public class MainActivity extends BaseActivity
             return;
         }
         switch (requestCode) {
+            case GALLERY_CODE:
+            {
+//                sendPicture(data.getData()); //갤러리에서 가져오기
+                if (resultCode == Activity.RESULT_OK){
+                    if (data.getData() != null){
+                        try{
+                            File albumFile = null;
+                            albumFile = createImageFile();
+                            photoURI = data.getData();
+                            albumURI = Uri.fromFile(albumFile);
+                            cropImage();
+                        }catch (Exception e){
+                            log.vlog(2,"KHJ gallery error: " + e.getMessage());
+                        }
+                    }
+                }
+                break;
+            }
             case CROP_FROM_CAMERA: {
                 // 크롭이 된 이후의 이미지를 넘겨 받습니다.
                 // 이미지뷰에 이미지를 보여준다거나 부가적인 작업 이후에
@@ -633,7 +686,6 @@ public class MainActivity extends BaseActivity
                 // 이후에 이미지 크롭 어플리케이션을 호출하게 됩니다.
                 Intent intent = new Intent("com.android.camera.action.CROP");
                 intent.setDataAndType(mImageCaptureUri, "image/*");
-                Log.v("mylog","mImageCaptureUri: " + mImageCaptureUri);
                 intent.putExtra("crop","true");
                 intent.putExtra("outputX", true);
                 intent.putExtra("outputY", true);
@@ -644,19 +696,59 @@ public class MainActivity extends BaseActivity
                 startActivityForResult(intent, CROP_FROM_CAMERA);
                 break;
             }
+            case REQUEST_IMAGE_CROP:
+                if (resultCode == Activity.RESULT_OK){
+                    galleryAddPic();
+                }
+                break;
         }
+    }
+
+    private void galleryAddPic(){
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+
+        File f = new File(mCurrentPhotoPath);
+
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        sendBroadcast(mediaScanIntent);
+        Uri uri = Uri.fromFile(new File(mCurrentPhotoPath));
+
+        sendPicture(getImageContentUri(mContext,mCurrentPhotoPath));
+    }
+
+    private void cropImage(){
+        Intent cropIntent = new Intent("com.android.camera.action.CROP");
+
+        cropIntent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        cropIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        cropIntent.setDataAndType(photoURI, "image/*");
+        cropIntent.putExtra("aspectX",1);
+        cropIntent.putExtra("aspectY",1);
+        cropIntent.putExtra("scale",true);
+        cropIntent.putExtra("output",albumURI);
+        startActivityForResult(cropIntent, REQUEST_IMAGE_CROP);
     }
 
     @Override
     public void onBackPressed() {
         //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 //        backPressCloseSystem.onBackPressed();
-        ShowPopup_APPEND();
+//        ShowPopup_APPEND();
         /*if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }*/
+
+        if (menubar_sidemenu.opened)
+        {
+            menubar_sidemenu.hide();
+        }
+        else
+        {
+            ShowPopup_APPEND();
+        }
     }
 
     @Override
@@ -670,7 +762,6 @@ public class MainActivity extends BaseActivity
     @Override
     public void onResume(){
         super.onResume();
-        Log.v("mylog","onStart()");
         this.mainText.setText(MySharedPreferencesManager.getStartLoveDay(this));
         this.manName.setText(MySharedPreferencesManager.getPic01(this));
         this.womanName.setText(MySharedPreferencesManager.getPic02(this));
@@ -679,26 +770,31 @@ public class MainActivity extends BaseActivity
         secondname1.setText(MySharedPreferencesManager.getPic02(mContext));
         secondname2.setText(MySharedPreferencesManager.getPic02(mContext));
         this.nav_textView.setText(MySharedPreferencesManager.getMainEdit(MainActivity.this));
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        calendar.set(year, month + 1, day);
-        long tday = calendar.getTimeInMillis() / 86400000;
+//        Calendar calendar = Calendar.getInstance();
+//        int year = calendar.get(Calendar.YEAR);
+//        int month = calendar.get(Calendar.MONTH);
+//        int day = calendar.get(Calendar.DAY_OF_MONTH);
+//        calendar.set(year, month + 1, day);
+//        long tday = calendar.getTimeInMillis() / 86400000;
         long a = MySharedPreferencesManager.getToday(this);
         long b = MySharedPreferencesManager.getLoveDay(this);
-        // Log.v("mylog","오늘날짜시간: "+a);
-        //  Log.v("mylog","사용자 설정 날짜시간: "+b);
-        if (a == tday) {
-            //Log.v("mylog","d-day: "+(a-b));
-            this.MainDdayText.setText("D+" + (a - b) + " ~잉ing");
+//        if (a == tday) {
+//            this.MainDdayText.setText("D+" + (a - b) + " ~잉ing");
+//        } else {
+//            if (b == 0) {
+//                this.MainDdayText.setText("만나기 시작한 날을 설정해 주세요.");
+//            } else {
+//                this.MainDdayText.setText("D+" + (tday - b) + " ~잉ing");
+//            }
+//        }
+        String today = Util.yyyyMMdd();
+        log.vlog(2,"KHJ 최종이길: " + Util.diffOfDate(MySharedPreferencesManager.getLoveStartDay(mContext),today));
+        log.vlog(2,"KHJ tday: " + today);
+        long saveDateDday = Util.diffOfDate(MySharedPreferencesManager.getLoveStartDay(mContext),today) + 1;
+        if (b == 0) {
+            this.MainDdayText.setText("만나기 시작한 날을 설정해 주세요.");
         } else {
-            // Log.v("mylog","dday:"+(tday-b));
-            if (b == 0) {
-                this.MainDdayText.setText("만나기 시작한 날을 설정해 주세요.");
-            } else {
-                this.MainDdayText.setText("D+" + (tday - b) + " ~잉ing");
-            }
+            this.MainDdayText.setText("D+" + saveDateDday + " ~잉ing");
         }
         resultTime.setText(mainHour+"시간 "+mainMinute+"분");
         resultmoney.setText(mainMoney+"원");
@@ -887,7 +983,7 @@ public class MainActivity extends BaseActivity
         imageView02 = (ImageView) this.findViewById(R.id.woman2);
         imageButton01 = (ImageButton) findViewById(R.id.man);
         imageButton02 = (ImageButton) this.findViewById(R.id.woman);
-        constraintlayout = (ConstraintLayout) this.findViewById(R.id.main_layout);
+        constraintlayout = (LinearLayout) this.findViewById(R.id.main_layout);
         nav_textView = (TextView) myView.findViewById(R.id.nav_header_layout_TextView);
         firstname1 = (TextView)findViewById(R.id.first_name_tv);
         firstname2 = (TextView)findViewById(R.id.first_name_tv2);
@@ -1083,23 +1179,82 @@ public class MainActivity extends BaseActivity
             }
         });
     }
-    /*public static void setGlobalFont(Context context,View view){
-        if (view != null) {
-            if (view instanceof ViewGroup) {
-                ViewGroup vg = (ViewGroup) view;
-                int len = vg.getChildCount();
-                for (int i = 0; i < len; i++) {
-                    View v = vg.getChildAt(i);
-                    if (v instanceof TextView) {
-                        ((TextView) v).setTypeface(Typeface.createFromAsset(context.getAssets(), ""));
-                    }
-                    setGlobalFont(context, v);
-                }
-            }
-        } else {
+    private void sendPicture(Uri imgUri) {
+
+        String imagePath = getRealPathFromURI(imgUri); // path 경로
+        ExifInterface exif = null;
+        try {
+            exif = new ExifInterface(imagePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+        int exifDegree = exifOrientationToDegrees(exifOrientation);
+
+        Bitmap bitmap = BitmapFactory.decodeFile(imagePath);//경로를 통해 비트맵으로 전환
+//        ivImage.setImageBitmap(rotate(bitmap, exifDegree));//이미지 뷰에 비트맵 넣기
+        if (imagebtn01 == 0) {
+            setImageBitmaps(bitmap, imageView01);
+            img01 = BitMapToString(bitmap);
+            MySharedPreferencesManager.setManPicture(img01, this);
+        }else if (imagebtn01 == 1){
+            setImageBitmaps(bitmap, imageView02);
+            img02 = BitMapToString(bitmap);
+            MySharedPreferencesManager.setWomanPicture(img02, this);
+        }else if (imagebtn01 == 2){
+            setImageBitmaps(bitmap, imageView_nav);
+            mainImage = BitMapToString(bitmap);
+            MySharedPreferencesManager.setMainPicture(mainImage, this);
         }
 
-    }*///MainActivity.setGlobalFont(this, getWindow().getDecorView())
+        File f = new File(imagePath);
+        if (f.exists()) {
+            f.delete();
+        }
+    }
+
+    public static Uri getImageContentUri(Context context, String absPath) {
+
+        Cursor cursor = context.getContentResolver().query(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                , new String[] { MediaStore.Images.Media._ID }
+                , MediaStore.Images.Media.DATA + "=? "
+                , new String[] { absPath }, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int id = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID));
+            return Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI , Integer.toString(id));
+
+        } else if (!absPath.isEmpty()) {
+            ContentValues values = new ContentValues();
+            values.put(MediaStore.Images.Media.DATA, absPath);
+            return context.getContentResolver().insert(
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        } else {
+            return null;
+        }
+    }
+
+    private String getRealPathFromURI(Uri contentUri) {
+        int column_index = 0;
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
+        if(cursor.moveToFirst()){
+            column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        }
+
+        return cursor.getString(column_index);
+    }
+    private int exifOrientationToDegrees(int exifOrientation) {
+        if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_90) {
+            return 90;
+        } else if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_180) {
+            return 180;
+        } else if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_270) {
+            return 270;
+        }
+        return 0;
+    }
 }
 
 class BackPressCloseSystem {

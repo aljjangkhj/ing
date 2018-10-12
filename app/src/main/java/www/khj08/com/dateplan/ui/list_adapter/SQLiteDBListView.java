@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import www.khj08.com.dateplan.R;
 import www.khj08.com.dateplan.ui.list_adapter.SQLiteDBListViewItem;
+import www.khj08.com.dateplan.utils.AutoScreen;
 
 /**
  * Created by user on 2017-07-17.
@@ -43,6 +44,7 @@ public class SQLiteDBListView extends BaseAdapter {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.datelistview02, parent, false);
+            AutoScreen.Adjust(context,convertView,1);
         }
         ViewGroup.LayoutParams params = convertView.getLayoutParams();
 

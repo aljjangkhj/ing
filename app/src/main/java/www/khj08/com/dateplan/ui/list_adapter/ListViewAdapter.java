@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import www.khj08.com.dateplan.R;
+import www.khj08.com.dateplan.utils.AutoScreen;
 
 /**
  * Created by user on 2017-06-30.
@@ -41,6 +42,7 @@ public class ListViewAdapter extends BaseAdapter {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.list_viewitem, parent, false);
+            AutoScreen.Adjust(context,convertView,1);
         }
         // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
         ImageView iconImageView = (ImageView) convertView.findViewById(R.id.imageView1) ;

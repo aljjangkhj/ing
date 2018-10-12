@@ -34,6 +34,10 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -59,6 +63,7 @@ public class DatePickerActivity extends BaseActivity {
     private DecimalFormat decimalFormat = new DecimalFormat("#,###");
     private String result="";
     private boolean dateTF = false;
+    private InterstitialAd interstitialAd;
 
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
@@ -113,7 +118,7 @@ public class DatePickerActivity extends BaseActivity {
     private LinearLayout datePickerBtn;
     private Button save_Btn;
 //    private Button timeResetBtn;
-    private LinearLayout timeHelloBtn;
+    private LinearLayout timeHelloBtn,ll_save_Btn,btn_main_menu;
     private LinearLayout timeByeBtn;
     private Button list_Btn;
 //    private Button addmoneyBtn;
@@ -136,18 +141,16 @@ public class DatePickerActivity extends BaseActivity {
         init_autoscreen(1);
         listViewAdapter = new SQLiteDBListView();
 
-        Log.v("mylog", "SQLiteDBListview");
-
         //데이터베이스 테이블 생성 SQL문
         mSQLiteDBManager = SQLiteDBManager.getInstance(this);
-
-        Log.v("mylog", "SQLite023456");
 
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
 
+        ll_save_Btn = (LinearLayout)findViewById(R.id.ll_save_Btn);
+        btn_main_menu = (LinearLayout)findViewById(R.id.btn_main_menu);
         this.imageButton = (ImageButton) this.findViewById(R.id.dateplan_imagebtn);
         this.imageView = (ImageView) this.findViewById(R.id.dateplan_imageView);
         this.datePickerBtn = (LinearLayout) this.findViewById(R.id.date_picker_btn);
@@ -203,6 +206,130 @@ public class DatePickerActivity extends BaseActivity {
         secondName = (TextView)findViewById(R.id.second_name_datepicker);
         firstName.setText(MySharedPreferencesManager.getPic01(mContext)+"의 지출");
         secondName.setText(MySharedPreferencesManager.getPic02(mContext)+"의 지출");
+
+        ll_save_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Popup SaveDatePopup = new Popup(mContext,"일기 저장하기","일기를 저장하시겠습니까?","취소","확인");
+                SaveDatePopup.OK_Click = new Popup.onClick() {
+                    @Override
+                    public void onClick() {
+                        // Toast.makeText(this, "저장버튼 클릭", Toast.LENGTH_SHORT).show();
+                        // Log.v("mylog", "저장버튼 클릭");
+                        DateValue = datePickerTxt.getText().toString();
+                        TimeValue01 = timeHelloText.getText().toString();
+                        TimeValue02 = timeByeText.getText().toString();
+                        TitleValue = editText_title.getText().toString();
+                        ContentValue = editText_content.getText().toString();
+                        strManMoney = manMoney.getText().toString().replaceAll(",","");
+                        strWomanMoney = womanMoney.getText().toString().replaceAll(",","");
+                        numberstr = addMoney.getText().toString().replaceAll(",","");
+//                        strResulthour = resultHour01.getText().toString();
+
+                        /*String[] columns = new String[]{"date"};
+                        String mRefDate = null;
+                        Cursor c = mSQLiteDBManager.query(columns, null, null, null, null, null);
+                        if (c != null) {
+                            while (c.moveToNext()) {
+                                mRefDate = c.getString(0);
+                                Log.v("mylog", "date " + mRefDate);
+                                //Toast.makeText(DatePickerActivity.this, "저장된 날짜는: " + mRefDate, Toast.LENGTH_SHORT).show();
+                            }
+                            c.close();
+                        }
+                        if (mRefDate.equals(DateValue) == true) {
+                            Toast.makeText(DatePickerActivity.this, DateValue + "에 일기가 이미 저장되어 있습니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(DatePickerActivity.this, "같은 날의 일기는 저장이 되지 않습니다!", Toast.LENGTH_SHORT).show();
+                        } else {
+                        }*/
+                        if (!DateValue.equals("") && DateValue.length() != 0 && !TimeValue01.equals("") && TimeValue01.length() != 0
+                                && !TimeValue02.equals("") && TimeValue02.length() != 0 && !TitleValue.equals("") && TitleValue.length() != 0
+                                && !ContentValue.equals("") && ContentValue.length() != 0 && !strManMoney.equals("") && strManMoney.length() != 0
+                                && !strWomanMoney.equals("") && strWomanMoney.length() != 0 && !addMoney.equals("") && addMoney.length() != 0
+                            /*&& resultHour01 != null && resultHour01.length() != 0*/) {
+                            List<String> users = new ArrayList<>();
+                            mSQLiteDBManager = SQLiteDBManager.getInstance(mContext);
+                            String[] columns = new String[]{"_id", "date"};
+                            Cursor c = mSQLiteDBManager.query(columns, null, null, null, null, null);
+                            if (c != null) {
+                                while (c.moveToNext()) {
+                                    int id = c.getInt(0);
+                                    mRefDate = c.getString(1);
+                                    users.add(c.getString(1));
+                                }
+                                c.close();
+
+                                for (int i = 0; i < users.size(); i++){
+                                    if (users.get(i).equals(DateValue)){
+                                        dateTF = true;
+                                    }
+                                }
+                            } else {
+                                Toast.makeText(mContext, "일기를 쓰지않아 등록이 되어있지 않습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                            if (dateTF){
+                                Popup popup = new Popup(mContext,"오류 메시지","이미 등록된 일기가 있습니다.\n다른 날짜를 선택해 주세요.","","확인");
+                                popup.OK_Click = new Popup.onClick() {
+                                    @Override
+                                    public void onClick() {
+                                        dateTF = false;
+                                    }
+                                };
+                                popup.show();
+                            }else{
+                                ContentValues addRowValue = new ContentValues();
+                                addRowValue.put("date", DateValue);
+                                addRowValue.put("starttime", TimeValue01);
+                                addRowValue.put("endtime", TimeValue02);
+                                addRowValue.put("title", TitleValue);
+                                addRowValue.put("content", ContentValue);
+//                            addRowValue.put("resulthour", strResulthour);
+                                addRowValue.put("manmoney", strManMoney);
+                                addRowValue.put("womanmoney", strWomanMoney);
+                                addRowValue.put("resultmoney", iaddmoney);
+                                addRowValue.put("finalminute", FinalresultTime);
+                                addRowValue.put("bestphoto", img01);
+//                            Toast.makeText(DatePickerActivity.this, "일기를 저장합니다.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DatePickerActivity.this, DateValue + "의 일기가 저장되었습니다.", Toast.LENGTH_LONG).show();
+                                mSQLiteDBManager.insert(addRowValue);
+                                finish();
+                            }
+                        } else {
+                            if(DateValue.equals("") || DateValue.length() == 0){
+                                Popup popup = new Popup(mContext,"오류 메시지","날짜를 설정 해주세요.","","확인");
+                                popup.show();
+                                return;
+                            }else if(TimeValue01.equals("") || TimeValue01.length() == 0){
+                                Popup popup = new Popup(mContext,"오류 메시지","만난 시간을 설정 해주세요.","","확인");
+                                popup.show();
+                                return;
+                            }else if(TimeValue02.equals("") || TimeValue02.length() == 0){
+                                Popup popup = new Popup(mContext,"오류 메시지","헤어진 시간을 설정 해주세요.","","확인");
+                                popup.show();
+                                return;
+                            }else if(TitleValue.equals("") || TitleValue.length() == 0){
+                                Popup popup = new Popup(mContext,"오류 메시지","일기 제목을 입력 해주세요.","","확인");
+                                popup.show();
+                                return;
+                            }else if(ContentValue.equals("") || ContentValue.length() == 0){
+                                Popup popup = new Popup(mContext,"오류 메시지","일기 내용을 입력 해주세요.","","확인");
+                                popup.show();
+                                return;
+                            }else if(strManMoney.equals("") || strManMoney.length() == 0){
+                                Popup popup = new Popup(mContext,"오류 메시지",MySharedPreferencesManager.getPic01(mContext)+ "의 지출을 입력 해주세요.","","확인");
+                                popup.show();
+                                return;
+                            }else if(strWomanMoney.equals("") || strWomanMoney.length() == 0){
+                                Popup popup = new Popup(mContext,"오류 메시지",MySharedPreferencesManager.getPic02(mContext)+ "의 지출을 입력 해주세요.","","확인");
+                                popup.show();
+                                return;
+                            }
+                        }
+                    }
+                };
+                SaveDatePopup.show();
+            }
+        });
 
         TextWatcher watcher = new TextWatcher() {
             @Override
@@ -275,6 +402,13 @@ public class DatePickerActivity extends BaseActivity {
         manMoney.addTextChangedListener(watcher);
         womanMoney.addTextChangedListener(watcher2);
         addMoney.addTextChangedListener(watcher3);
+
+        btn_main_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         this.imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -390,20 +524,14 @@ public class DatePickerActivity extends BaseActivity {
         if (resultMinute < 0) {
             resultHour = ihour2 - ihour - 1;
             resultMinute = 60 - iminute2 - iminute;
-            Log.v("mylog", "시간: " + resultHour);
-            Log.v("mylog", "분: " + resultMinute);
         }
         if (iminute > iminute2) {
             resultMinute = (ihour2 * 60 + iminute2) - (ihour * 60 + iminute);
-            Log.v("mylog", "시간2: " + resultHour);
-            Log.v("mylog", "분2: " + resultMinute);
         }
         if (resultMinute >= 60) {
             resultMinute = resultMinute % 60;
             //resultHour = resultMinute/60;
 
-            Log.v("mylog", "시간2: " + resultHour);
-            Log.v("mylog", "분2: " + resultMinute);
         }
 //        resultHour01.setText("총 만난 시간: " + resultHour + " 시간" + resultMinute + " 분");
 //        resultHour01.setTextColor(Color.BLACK);
@@ -566,6 +694,7 @@ public class DatePickerActivity extends BaseActivity {
 //                            Toast.makeText(DatePickerActivity.this, "일기를 저장합니다.", Toast.LENGTH_SHORT).show();
                                 Toast.makeText(DatePickerActivity.this, DateValue + "의 일기가 저장되었습니다.", Toast.LENGTH_LONG).show();
                                 mSQLiteDBManager.insert(addRowValue);
+                                setFullAd();
                                 finish();
                             }
                         } else {
@@ -606,7 +735,6 @@ public class DatePickerActivity extends BaseActivity {
                 break;
             case R.id.list_Btn:
                 // Toast.makeText(this, "리스트 버튼 클릭", Toast.LENGTH_SHORT).show();
-                Log.v("mylog", "목록 버튼 클릭");
                 Intent intent = new Intent(DatePickerActivity.this, DateListView.class);
                 MoveToActivity(intent);
                 finish();
@@ -726,5 +854,19 @@ public class DatePickerActivity extends BaseActivity {
         }
 
         return myboolean;
+    }
+
+    private void setFullAd(){
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId(getString(R.string.full_ad_key));
+        interstitialAd.loadAd(new AdRequest.Builder().build());
+        interstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                if (interstitialAd.isLoaded()) {
+                    interstitialAd.show();
+                }
+            }
+        });
     }
 }

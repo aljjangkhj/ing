@@ -21,7 +21,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:fontFamily="@font/bmjua_ttf"
+
                 android:id="@+id/date_picker_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
                 android:gravity="center">
 
                 <TextView
-                    android:fontFamily="@font/bmjua_ttf"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="날짜 설정"
@@ -64,7 +64,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:fontFamily="@font/bmjua_ttf"
+
                     android:id="@+id/hello_time_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
                     android:textColorHint="#000" />
 
                 <TextView
-                    android:fontFamily="@font/bmjua_ttf"
+
                     android:id="@+id/bye_time_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
                     android:textColorHint="#000" />
 
                 <TextView
-                    android:fontFamily="@font/bmjua_ttf"
+
                     android:id="@+id/resulthour"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:fontFamily="@font/bmjua_ttf"
+
                         android:id="@+id/starttimeText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
                         android:textSize="5pt" />
 
                     <TextView
-                        android:fontFamily="@font/bmjua_ttf"
+
                         android:id="@+id/endtimeText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
                         android:visibility="invisible" />
 
                     <TextView
-                        android:fontFamily="@font/bmjua_ttf"
+
                         android:id="@+id/timeresetText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -178,7 +178,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:fontFamily="@font/bmjua_ttf"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="남자친구의 데이트 비용: "
@@ -197,7 +197,7 @@
                         android:maxLength="7" />
 
                     <TextView
-                        android:fontFamily="@font/bmjua_ttf"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="원"
@@ -212,7 +212,7 @@
                     android:layout_marginTop="1dp">
 
                     <TextView
-                        android:fontFamily="@font/bmjua_ttf"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="여자친구의 데이트 비용: "
@@ -231,7 +231,7 @@
                         android:maxLength="7" />
 
                     <TextView
-                        android:fontFamily="@font/bmjua_ttf"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="원"
@@ -253,7 +253,7 @@
                     android:gravity="center|bottom"/>
 
                 <TextView
-                    android:fontFamily="@font/bmjua_ttf"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="총 비용 계산하기"
@@ -271,7 +271,7 @@
             android:layout_marginTop="10dp">
 
             <TextView
-                android:fontFamily="@font/bmjua_ttf"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="총 데이트 비용 : "
@@ -279,7 +279,7 @@
                 android:id="@+id/font07"/>
 
             <TextView
-                android:fontFamily="@font/bmjua_ttf"
+
                 android:id="@+id/add_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -325,7 +325,7 @@
             android:layout_marginTop="10dp">
 
             <TextView
-                android:fontFamily="@font/bmjua_ttf"
+
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"

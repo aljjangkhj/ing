@@ -53,6 +53,23 @@ public class Util {
         return akID + "_" + getFormattedDateTime();
     }
 
+    public static long diffOfDate(String begin, String end)
+    {
+        SimpleDateFormat formatter = null;
+        formatter = new SimpleDateFormat("yyyy-MM-dd");
+        long diffDays = 0;
+        try{
+            Date beginDate = formatter.parse(begin);
+            Date endDate = formatter.parse(end);
+            long diff = endDate.getTime() - beginDate.getTime();
+            diffDays = diff / (24 * 60 * 60 * 1000);
+        }catch (Exception e){
+            log.vlog(2,"diffDate error: "+ e.getMessage());
+        }
+
+        return diffDays;
+    }
+
     // YYYYMMddhhmmss 형의 날짜 포맷 String 반환
     public static String getFormattedDateTime()
     {

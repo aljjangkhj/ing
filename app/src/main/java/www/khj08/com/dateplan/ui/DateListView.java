@@ -12,6 +12,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,7 @@ public class DateListView extends BaseActivity {
     private TextView font2;
     private TextView font3;
     private String mRefDate;
+    private LinearLayout btn_main_menu;
     String DateDelete;
 
     @Override
@@ -48,6 +50,7 @@ public class DateListView extends BaseActivity {
         font1 = (TextView) this.findViewById(R.id.fonts01);
         font2 = (TextView) this.findViewById(R.id.fonts02);
         font3 = (TextView) this.findViewById(R.id.fonts03);
+        btn_main_menu = (LinearLayout)findViewById(R.id.btn_main_menu);
 //        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf");
 //        font1.setTypeface(typeface);
 //        font2.setTypeface(typeface);
@@ -72,6 +75,14 @@ public class DateListView extends BaseActivity {
         } else {
             Toast.makeText(this, "일기를 쓰지않아 등록이 되어있지 않습니다.", Toast.LENGTH_SHORT).show();
         }
+
+        btn_main_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         listview01.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -87,14 +98,12 @@ public class DateListView extends BaseActivity {
                         if (c != null) {
                             while (c.moveToNext()) {
                                 mRefDate = c.getString(0);
-                                Log.v("mylog", "date: " + mRefDate);
                                 Popup popup = new Popup(mContext,"일기 불러오기",mRefDate+ "의 일기를 불러오시겠습니까?","취소","확인");
                                 popup.OK_Click = new Popup.onClick() {
                                     @Override
                                     public void onClick() {
                                         Intent intent = new Intent(DateListView.this, LoadDatePickerActivity.class);
                                         intent.putExtra("위치값", mRefDate);
-                                        Log.v("mylog", "mRefDate: " + mRefDate);
                                         //   Toast.makeText(DateListView.this, "위치값은 " + idResult, Toast.LENGTH_SHORT).show();
                                         MoveToActivity(intent);
                                         finish();

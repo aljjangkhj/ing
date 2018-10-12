@@ -18,7 +18,7 @@
             android:layout_marginLeft="40px"/>
 
         <TextView
-            android:fontFamily="@font/bmjua_ttf"
+
             android:id="@+id/Date_list_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
             android:layout_marginLeft="40px"/>
 
         <TextView
-            android:fontFamily="@font/bmjua_ttf"
+
             android:id="@+id/Date_title_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

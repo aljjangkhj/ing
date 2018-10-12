@@ -7,14 +7,24 @@ android {
         applicationId "www.khj08.com.dateplan"
         minSdkVersion 14
         targetSdkVersion 27
-        versionCode 19
-        versionName "1.1.0"
+        versionCode 20
+        versionName "2.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+            //프로가드 설정
+            proguardFile 'proguard-rules.pro'
+            //디버그에 필요한 프로가드 설정
+            proguardFile 'proguard-debug.pro'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+            proguardFile 'proguard-rules.pro'
         }
     }
 }

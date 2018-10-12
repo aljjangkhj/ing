@@ -25,7 +25,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/color_ffffff"
                 android:id="@+id/popup_textview"
-                android:fontFamily="@font/bmjua_ttf"/>
+                 />
         </LinearLayout>
 
         <TextView
@@ -41,7 +41,7 @@
             android:lineSpacingExtra="20px"
             android:text="내용"
             android:textColor="#000000"
-            android:fontFamily="@font/bmjua_ttf"/>
+             />
 
         <LinearLayout
             android:visibility="gone"
@@ -64,7 +64,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/color_ffffff"
                     android:text="확인"
-                    android:fontFamily="@font/bmjua_ttf"/>
+                     />
             </FrameLayout>
         </LinearLayout>
 
@@ -91,7 +91,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/color_ffffff"
                     android:text="취소"
-                    android:fontFamily="@font/bmjua_ttf"/>
+                     />
             </FrameLayout>
 
             <FrameLayout
@@ -111,7 +111,7 @@
                     android:textStyle="bold"
                     android:textColor="#ffffff"
                     android:text="확인"
-                    android:fontFamily="@font/bmjua_ttf"/>
+                     />
             </FrameLayout>
         </LinearLayout>
 

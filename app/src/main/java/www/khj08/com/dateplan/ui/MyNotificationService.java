@@ -24,6 +24,8 @@ import android.widget.Toast;
 import java.util.Date;
 
 import www.khj08.com.dateplan.R;
+import www.khj08.com.dateplan.common.log;
+import www.khj08.com.dateplan.utils.Util;
 
 /**
  * Created by user on 2017-07-11.
@@ -38,6 +40,7 @@ public class MyNotificationService extends Service{
     private NotificationCompat.Builder mRefNotificationCompatBuilder;
     //3) Thread 클래스 사용하는 변수 선언
     private MyNotificationThread mRefNotificationThread;
+    private Context mContext;
     //핸들러 클래스 만들기
     //-> Handler 클래스르 상속받는 자식 클래스
     private class MyHandler extends Handler {
@@ -75,7 +78,7 @@ public class MyNotificationService extends Service{
                     bitmap2 = getCircularBitmap(bitmap2);
                     RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notification_layout);
                     remoteViews.setImageViewBitmap(R.id.notifi_Img01, bitmap);
-                    remoteViews.setImageViewResource(R.id.notifi_img02, R.mipmap.mainthreadlogo);
+                    remoteViews.setImageViewResource(R.id.notifi_img02, R.drawable.mainthreadlogo1);
                     remoteViews.setImageViewBitmap(R.id.notifi_Img03, bitmap2);
                     //2018.03.28
 //                    Calendar calendar = Calendar.getInstance();
@@ -85,19 +88,22 @@ public class MyNotificationService extends Service{
 //                    calendar.set(year, month + 1, day);
 //                    long tday = calendar.getTimeInMillis() / 86400000;
 //                    long b = MySharedPreferencesManager.getLoveDay(MyNotificationService.this);
-                    Date mdate = new Date();
-                    long tt = mdate.getTime() / 86400000;
-                    Date mdate2 = new Date();
-                    mdate2.setYear(MySharedPreferencesManager.getYear(MyNotificationService.this)-1900);
-                    mdate2.setMonth(MySharedPreferencesManager.getMonth(MyNotificationService.this)-1);
-                    mdate2.setDate(MySharedPreferencesManager.getDay(MyNotificationService.this)-1);
-                    long tt2 = mdate2.getTime() / 86400000;
-                    remoteViews.setTextViewText(R.id.notifi_text01, "D+" + (tt-tt2) + " ~잉ing");
+//                    Date mdate = new Date();
+//                    long tt = mdate.getTime() / 86400000;
+//                    Date mdate2 = new Date();
+//                    mdate2.setYear(MySharedPreferencesManager.getYear(MyNotificationService.this)-1900);
+//                    mdate2.setMonth(MySharedPreferencesManager.getMonth(MyNotificationService.this)-1);
+//                    mdate2.setDate(MySharedPreferencesManager.getDay(MyNotificationService.this)-1);
+//                    long tt2 = mdate2.getTime() / 86400000;
+
+                    String today = Util.yyyyMMdd();
+                    long saveDateDday = Util.diffOfDate(MySharedPreferencesManager.getLoveStartDay(MyNotificationService.this),today) + 1;
+                    remoteViews.setTextViewText(R.id.notifi_text01, "D+" + saveDateDday + " ~잉ing");
                     remoteViews.setTextViewText(R.id.manName2, MySharedPreferencesManager.getPic01(MyNotificationService.this));
                     remoteViews.setTextViewText(R.id.womanName2, MySharedPreferencesManager.getPic02(MyNotificationService.this));
 
                     mRefNotificationCompatBuilder = new NotificationCompat.Builder(MyNotificationService.this);
-                    mRefNotificationCompatBuilder.setSmallIcon(R.mipmap.mainthreadlogo);
+                    mRefNotificationCompatBuilder.setSmallIcon(R.drawable.mainthreadlogo1);
                     mRefNotificationCompatBuilder.setContent(remoteViews);
 
                     //티커 텍스트 : 상태바에 노티피케이션이 추가된 후에 바로 출력되는 텍스트
@@ -124,19 +130,19 @@ public class MyNotificationService extends Service{
                     //notify()함수를 실행해서 화면에 출력
                     mRefNotificationManager.notify(1, refNotification);
                     //1: 아이디
-                    Log.v("mylog", "notify()");
+//                    Log.v("mylog", "notify()");
 
 
                 } else if (msg.what == 1) {
                     //화면에 출력된 Notification을 삭제하는 명령문들을 작성
-                    Log.v("mylog", "msg.what == 1 in MyHandler");
+//                    Log.v("mylog", "msg.what == 1 in MyHandler");
 
                     //cancel()함수를 실행하기 : 강제로 노티피케이션을 삭제(화면에서 없애기)
                     mRefNotificationManager.cancel(1);
                     //1: notify()함수에서 사용한 정수 값과 일치
                 }
             }else{
-                Log.v("mylog","notifi else");
+//                Log.v("mylog","notifi else");
                 mRefNotificationThread.stopNoti();
                 Toast.makeText(MyNotificationService.this, "메인 화면에 사진을 등록해야 합니다.", Toast.LENGTH_SHORT).show();
                 MySharedPreferencesManager.setCheckbox(false,MyNotificationService.this);
@@ -180,7 +186,7 @@ public class MyNotificationService extends Service{
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         //1. 로그 남기기
-        Log.v("mylog", "onStartCommand");
+//        Log.v("mylog", "onStartCommand");
 
         //2. 안드로이드 시스템이 가지고있는 Notification 서비스에 접근하기
         mRefNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);

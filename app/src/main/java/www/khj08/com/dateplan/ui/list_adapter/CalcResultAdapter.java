@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import www.khj08.com.dateplan.R;
+import www.khj08.com.dateplan.utils.AutoScreen;
 
 /**
  * Created by Administrator on 2017-07-18.
@@ -39,6 +40,7 @@ public class CalcResultAdapter extends BaseAdapter {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.content_calc_result02, parent, false);
+            AutoScreen.Adjust(context,convertView,1);
         }
         // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
         mRefDateList = (TextView) convertView.findViewById(R.id.MyDateList) ;

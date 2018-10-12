@@ -4,8 +4,64 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/notepad02"
     app:menu="@menu/loadsave">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:background="@color/color_ff4081">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/btn_main_menu">
+            <ImageView
+                android:layout_width="112px"
+                android:layout_height="112px"
+                android:layout_marginRight="56px"
+                android:layout_marginLeft="56px"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_action_back" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="일기 불러오기"
+            android:textSize="18dp"
+            android:textColor="@color/color_ffffff"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:gravity="left|center"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:id="@+id/ll_delete_Btn">
+            <ImageView
+                android:layout_width="112px"
+                android:layout_height="112px"
+                android:layout_marginRight="56px"
+                android:layout_marginLeft="56px"
+                android:layout_gravity="right|center"
+                android:background="@mipmap/deleteimage"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/ll_update_btn">
+            <ImageView
+                android:layout_width="112px"
+                android:layout_height="112px"
+                android:layout_marginRight="56px"
+                android:layout_marginLeft="56px"
+                android:layout_gravity="right|center"
+                android:background="@mipmap/insertimage"/>
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -61,7 +117,7 @@
                         android:id="@+id/date_picker_btn01">
 
                         <TextView
-                            android:fontFamily="@font/bmjua_ttf"
+
                             android:id="@+id/date_picker_text01"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -119,7 +175,7 @@
                             android:layout_gravity="center">
 
                             <TextView
-                                android:fontFamily="@font/bmjua_ttf"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="만난 시간"
@@ -127,7 +183,7 @@
                                 android:textSize="13dp"/>
 
                             <TextView
-                                android:fontFamily="@font/bmjua_ttf"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="0시0분"
@@ -160,7 +216,7 @@
                             android:layout_gravity="center">
 
                             <TextView
-                                android:fontFamily="@font/bmjua_ttf"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="헤어진 시간"
@@ -168,7 +224,7 @@
                                 android:textSize="13dp"/>
 
                             <TextView
-                                android:fontFamily="@font/bmjua_ttf"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="12px"
@@ -203,7 +259,7 @@
                         android:layout_margin="20px">
 
                         <TextView
-                            android:fontFamily="@font/bmjua_ttf"
+
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="길동의 지출"
@@ -223,7 +279,7 @@
                         android:layout_gravity="center">
 
                         <EditText
-                            android:fontFamily="@font/bmjua_ttf"
+
                             android:layout_width="400px"
                             android:layout_height="wrap_content"
                             android:background="#ffffff"
@@ -233,7 +289,7 @@
                             android:id="@+id/man_money01"/>
 
                         <TextView
-                            android:fontFamily="@font/bmjua_ttf"
+
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="원"
@@ -254,7 +310,7 @@
                         android:gravity="center">
 
                         <TextView
-                            android:fontFamily="@font/bmjua_ttf"
+
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="합계"
@@ -286,7 +342,7 @@
                         android:layout_margin="20px">
 
                         <TextView
-                            android:fontFamily="@font/bmjua_ttf"
+
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="둘리의 지출"
@@ -310,7 +366,7 @@
                             android:layout_gravity="center">
 
                             <EditText
-                                android:fontFamily="@font/bmjua_ttf"
+
                                 android:layout_width="400px"
                                 android:layout_height="wrap_content"
                                 android:background="#ffffff"
@@ -320,7 +376,7 @@
                                 android:id="@+id/woman_money01"/>
 
                             <TextView
-                                android:fontFamily="@font/bmjua_ttf"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="원"
@@ -341,14 +397,14 @@
                             android:gravity="right|center">
 
                             <TextView
-                                android:fontFamily="@font/bmjua_ttf"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="#000000"
                                 android:id="@+id/add_money01"/>
 
                             <TextView
-                                android:fontFamily="@font/bmjua_ttf"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="원"
@@ -415,7 +471,7 @@
                     android:orientation="vertical">
 
                     <EditText
-                        android:fontFamily="@font/bmjua_ttf"
+
                         android:id="@+id/edit_text_title01"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -426,7 +482,7 @@
                         android:hint="일기 제목을 입력하세요."/>
 
                     <EditText
-                        android:fontFamily="@font/bmjua_ttf"
+
                         android:id="@+id/edit_text_content01"
                         android:layout_width="match_parent"
                         android:layout_height="480px"

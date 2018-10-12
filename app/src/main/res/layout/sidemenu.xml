@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/layout_mainscreen"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <FrameLayout
+            android:id="@+id/layout_sidemenu_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#00ff0000">
+
+            <LinearLayout
+                android:id="@+id/layout_sidemenu_menu"
+                android:layout_width="1000px"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/side_click_1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="760px"
+                    android:background="@color/color_ff4081"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="220px"
+                        android:gravity="center"
+                        android:visibility="visible">
+
+                        <LinearLayout
+                            android:id="@+id/layout_sidemenu_close"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="right|center_vertical"
+                            android:contentDescription="좌측메뉴바 닫기"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="112px"
+                                android:layout_height="112px"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginRight="56px"
+                                android:background="@drawable/ic_menu_close"
+                                android:orientation="vertical" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="4px"
+                            android:layout_gravity="bottom"
+                            android:background="@color/color_ffffff" />
+
+                    </FrameLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40px"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ImageButton
+                                android:id="@+id/nav_header_layout_imageButton"
+                                android:layout_width="320px"
+                                android:layout_height="320px"
+                                android:background="#00ff0000"
+                                android:layout_gravity="center"
+                                android:src="@mipmap/ic_menu_camera"/>
+
+                            <www.khj08.com.dateplan.ui.CircleImageView
+                                android:id="@+id/nav_header_layout_imageView"
+                                android:layout_width="320px"
+                                android:layout_height="320px"
+                                android:layout_centerInParent="true"
+                                app:civ_border_color="#FFF"
+                                app:civ_border_width="2dp"
+                                android:layout_gravity="center"/>
+                        </FrameLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="120px"
+                            android:layout_gravity="center|bottom"
+                            android:layout_marginTop="40px"
+                            android:gravity="center"
+                            android:text="대화명을 설정해주세요."
+                            android:singleLine="true"
+                            android:textColor="@color/color_eef5fb"
+                            android:id="@+id/nav_header_layout_TextView"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/side_click_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/color_ffffff"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="216px"
+                        android:id="@+id/write_diary_btn">
+
+                        <ImageView
+                            android:layout_width="72px"
+                            android:layout_height="72px"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="40px"
+                            android:layout_marginLeft="80px"
+                            android:background="@mipmap/ic_launcher_plan" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="48px"
+                            android:layout_marginTop="40px"
+                            android:text="일기쓰기"
+                            android:textSize="16dp"
+                            android:textColor="@color/color_333333"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="216px"
+                        android:id="@+id/list_diary_btn">
+
+                        <ImageView
+                            android:layout_width="72px"
+                            android:layout_height="72px"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="40px"
+                            android:layout_marginLeft="80px"
+                            android:background="@mipmap/ic_launcher_date" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="48px"
+                            android:layout_marginTop="40px"
+                            android:text="일기목록"
+                            android:textSize="16dp"
+                            android:textColor="@color/color_333333"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="216px"
+                        android:id="@+id/d_day_btn">
+
+                        <ImageView
+                            android:layout_width="72px"
+                            android:layout_height="72px"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="40px"
+                            android:layout_marginLeft="80px"
+                            android:background="@drawable/ic_exposure_neg_1_black_24dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="48px"
+                            android:layout_marginTop="40px"
+                            android:text="D-Day"
+                            android:textSize="16dp"
+                            android:textColor="@color/color_333333"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="216px"
+                        android:id="@+id/account_btn">
+
+                        <ImageView
+                            android:layout_width="72px"
+                            android:layout_height="72px"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="40px"
+                            android:layout_marginLeft="80px"
+                            android:background="@mipmap/ic_launcher_calc" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="48px"
+                            android:layout_marginTop="40px"
+                            android:text="가계부"
+                            android:textSize="16dp"
+                            android:textColor="@color/color_333333"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="216px"
+                        android:id="@+id/setting_btn">
+
+                        <ImageView
+                            android:layout_width="72px"
+                            android:layout_height="72px"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="40px"
+                            android:layout_marginLeft="80px"
+                            android:background="@drawable/ic_settings_applications_black_24dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="48px"
+                            android:layout_marginTop="40px"
+                            android:text="설정"
+                            android:textSize="16dp"
+                            android:textColor="@color/color_333333"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <Button
+                            android:id="@+id/get_admob"
+                            android:layout_width="match_parent"
+                            android:layout_height="200px"
+                            android:layout_gravity="bottom"
+                            android:background="@color/color_333333"
+                            android:text="개발자 후원하기"
+                            android:textSize="18dp"
+                            android:textColor="@color/color_ffffff"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+        </FrameLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_softkey_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FF000000"
+        android:orientation="vertical">
+    </LinearLayout>
+
+</LinearLayout>

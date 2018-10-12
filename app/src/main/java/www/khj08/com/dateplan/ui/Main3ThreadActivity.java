@@ -11,8 +11,9 @@ import android.widget.TextView;
 
 import www.khj08.com.dateplan.BaseActivity;
 import www.khj08.com.dateplan.R;
+import www.khj08.com.dateplan.common.log;
 
-public class Main3ThreadActivity extends Activity {
+public class Main3ThreadActivity extends BaseActivity {
 
     private Thread thread;
     private TextView textView;
@@ -28,6 +29,17 @@ public class Main3ThreadActivity extends Activity {
       //  Log.v("mylog","setContentView 실행");
         this.textView = (TextView)this.findViewById(R.id.mainthread_text);
         ingIMG = (ImageView)findViewById(R.id.ingIMG);
+        Intent intent = new Intent(mContext,MyNotificationService.class);
+
+        if (MySharedPreferencesManager.getCheckbox(mContext)){
+            startService(intent);
+            log.vlog(2,"KHJ startService");
+        }else{
+            stopService(intent);
+            MySharedPreferencesManager.setCheckbox(false, mContext);
+            log.vlog(2,"KHJ stopService");
+        }
+
 //        textView.setTypeface(typeface);
 //        animation = AnimationUtils.loadAnimation(this, R.anim.loading);
 //        ingIMG.setAnimation(animation);

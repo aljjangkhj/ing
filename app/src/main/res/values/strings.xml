@@ -19,6 +19,7 @@
     <string name="configure">Configure</string>
     <string name="add_widget">Add widget</string>
     <string name="banner_ad_unit_id">ca-app-pub-8169681360843984/9306096651</string>
+    <string name="full_ad_key">ca-app-pub-3940256099942544/1033173712</string>
     <string name="data_failed">서버와 통신에 실패 했습니다.</string>
     <!--나의 광고 코드 ca-app-pub-8169681360843984/9306096651--> <!--테스트용 코드ca-app-pub-3940256099942544/6300978111-->
 

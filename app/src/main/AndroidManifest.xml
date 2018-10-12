@@ -14,6 +14,8 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
+    <uses-feature android:name="android.hardware.camera2"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ing_icon"
@@ -39,8 +41,8 @@
         </activity>
         <activity
             android:name=".ui.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/app_name">
+            <!--android:theme="@style/AppTheme.NoActionBar">-->
             <meta-data
                 android:name="com.google.android.gms.version"
                 android:value="@integer/google_play_services_version" />
@@ -49,18 +51,6 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:theme="@android:style/Theme.Translucent" />
 
-        <!--
-        <string name="app_name01">일기 쓰기</string>
-        <string name="app_name02">일기 목록</string>
-        <string name="app_name03">일기 불러오기</string>
-        <string name="app_name04">D - DAY</string>
-        <string name="app_name05">가계부</string>
-        <string name="app_name06">설정</string>
-
-        -->
-        <!--<activity
-            android:name="com.google.android.gms.ads.AdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>-->
         <activity
             android:name=".ui.DatePickerActivity"
             android:windowSoftInputMode="adjustResize"
@@ -98,6 +88,7 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/new_app_widget_info" />
         </receiver>
+
         <receiver
             android:name=".ui.BootReceiver"
             android:enabled="true"

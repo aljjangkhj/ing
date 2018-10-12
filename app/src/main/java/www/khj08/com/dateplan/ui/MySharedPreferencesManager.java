@@ -21,7 +21,6 @@ public class MySharedPreferencesManager {
         //if(year > 0) {
         refEditor.putString("ymd", year + "년 " + month + "월 " + day + "일 부터 ~잉ing");
         refEditor.commit();
-        Log.v("mylog", "이름 저장 완료");
     }
 
     //사랑을 시작한날을 불러오는 함수
@@ -63,7 +62,6 @@ public class MySharedPreferencesManager {
         SharedPreferences.Editor refEditor = refSharedPreferences.edit();
         refEditor.putString("dday", "D+" + dday + " ~잉");
         refEditor.commit();
-        Log.v("mylog", "dday 저장완료");
     }
 
     //D-Day 날짜 불러오기 함수
@@ -237,5 +235,19 @@ public class MySharedPreferencesManager {
         SharedPreferences sharedPreferences = context.getSharedPreferences("colorData",context.MODE_PRIVATE);
         int saveColor = sharedPreferences.getInt("color", 0);
         return saveColor;
+    }
+
+    //명언 남기기 editText 저장함수
+    public static void setLoveStartDay(String str, Context context){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("LoveStartDay",context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("LSD",str);
+        editor.commit();
+    }
+    //명언 남기기 editText 불러오기 함수
+    public static String getLoveStartDay(Context context){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("LoveStartDay",context.MODE_PRIVATE);
+        String picName01 = sharedPreferences.getString("LSD","");
+        return  picName01;
     }
 }

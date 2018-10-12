@@ -31,11 +31,11 @@
             android:id="@+id/la_intro_lottieview2" />
     </LinearLayout>
     <TextView
-        android:fontFamily="@font/bmjua_ttf"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="right"
-        android:text="잉ing ver1.1.0"
+        android:text="잉ing ver2.0.0"
         android:id="@+id/mainthread_text"
         android:layout_gravity="bottom"/>
 

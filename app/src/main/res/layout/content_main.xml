@@ -1,160 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_image"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="www.khj08.com.dateplan.ui.MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="300px"
-                android:layout_gravity="center"
-                android:src="@drawable/mainlogo01"
-                android:layout_marginTop="120px"/>
-
-            <TextView
-                android:id="@+id/main_dday_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="00일째 ~잉"
-                android:textColor="#fff"
-                android:textSize="9pt"
-                android:textStyle="bold"
-                android:layout_marginTop="80px"
-                android:fontFamily="@font/bmjua_ttf"/>
-
-            <TextView
-                android:fontFamily="@font/bmjua_ttf"
-                android:id="@+id/main_textview01"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="aaaa"
-                android:textColor="#fff"
-                android:textSize="7pt"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="200px"
-                android:gravity="center">
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center">
-
-                    <ImageButton
-                        android:id="@+id/man"
-                        android:layout_width="400px"
-                        android:layout_height="400px"
-                        android:background="#00ff0000"
-                        android:src="@mipmap/ic_menu_camera" />
-
-                    <www.khj08.com.dateplan.ui.CircleImageView
-                        android:id="@+id/man01"
-                        android:layout_width="400px"
-                        android:layout_height="400px"
-                        android:layout_centerInParent="true"
-                        app:civ_border_color="@android:color/white"
-                        app:civ_border_width="2dp" />
-                </FrameLayout>
-
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginLeft="120px"
-                    android:layout_marginRight="120px"
-                    android:background="@drawable/mainthreadlogo1" />
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center">
-
-                    <ImageButton
-                        android:id="@+id/woman"
-                        android:layout_width="400px"
-                        android:layout_height="400px"
-                        android:background="#00ff0000"
-                        android:src="@mipmap/ic_menu_camera" />
-
-                    <www.khj08.com.dateplan.ui.CircleImageView
-                        android:id="@+id/woman2"
-                        android:layout_width="400px"
-                        android:layout_height="400px"
-                        android:layout_centerInParent="true"
-                        app:civ_border_color="@android:color/white"
-                        app:civ_border_width="2dp" />
-                    <!--android:layout_width="160dp"
-                    android:layout_height="160dp"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/hugh"
-                    app:civ_border_width="2dp"
-                    app:civ_border_color="@color/dark"-->
-                </FrameLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="80px"
-                android:gravity="center">
-
-                <TextView
-                    android:fontFamily="@font/bmjua_ttf"
-                    android:id="@+id/manName"
-                    android:layout_width="400px"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="사진1"
-                    android:textColor="#fff"
-                    android:textSize="6pt"
-                    android:textStyle="bold" />
-
-                <LinearLayout
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="120px"
-                    android:layout_marginRight="120px"/>
-
-                <TextView
-                    android:fontFamily="@font/bmjua_ttf"
-                    android:id="@+id/womanName"
-                    android:layout_width="400px"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="사진2"
-                    android:textColor="#fff"
-                    android:textSize="6pt"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200px"
+                    android:background="@color/color_ff4081">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/btn_main_menu">
+                        <ImageView
+                            android:layout_width="112px"
+                            android:layout_height="112px"
+                            android:layout_marginRight="56px"
+                            android:layout_marginLeft="56px"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/ic_action_menu_main" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="잉ing"
+                        android:textSize="18dp"
+                        android:textColor="@color/color_ffffff"
+                        android:textStyle="bold"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="300px"
+                    android:layout_gravity="center"
+                    android:src="@drawable/mainlogo01"
+                    android:layout_marginTop="120px"/>
+
+                <TextView
+                    android:id="@+id/main_dday_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="00일째 ~잉"
+                    android:textColor="#fff"
+                    android:textSize="9pt"
+                    android:textStyle="bold"
+                    android:layout_marginTop="80px" />
+
+                <TextView
+                    android:id="@+id/main_textview01"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="aaaa"
+                    android:textColor="#fff"
+                    android:textSize="7pt"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -162,109 +86,226 @@
                     android:layout_marginTop="200px"
                     android:gravity="center">
 
-                    <TextView
-                        android:fontFamily="@font/bmjua_ttf"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="100px"
-                        android:text="OO"
-                        android:textColor="#fff"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        android:id="@+id/first_name_tv"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:fontFamily="@font/bmjua_ttf"
-                        android:layout_width="wrap_content"
-                        android:layout_height="100px"
-                        android:text="OO"
-                        android:textColor="#fff"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        android:id="@+id/second_name_tv"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:fontFamily="@font/bmjua_ttf"
-                        android:id="@+id/moneyset_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="100px"
-                        android:gravity="center"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:layout_gravity="center"
-                        android:text="의 함께했던 지출: "
-                        android:textColor="#fff"
-                        android:textSize="7pt" />
+                        android:gravity="center">
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center">
 
-                    <TextView
-                        android:fontFamily="@font/bmjua_ttf"
-                        android:id="@+id/resultMoney"
-                        android:layout_width="400px"
-                        android:layout_height="100px"
-                        android:text="2,000,000원"
-                        android:textColor="#fff"
-                        android:textSize="7pt"
-                        android:gravity="center"/>
+                            <ImageButton
+                                android:id="@+id/man"
+                                android:layout_width="360px"
+                                android:layout_height="400px"
+                                android:background="#00ff0000"
+                                android:src="@mipmap/ic_menu_camera" />
+
+                            <www.khj08.com.dateplan.ui.CircleImageView
+                                android:id="@+id/man01"
+                                android:layout_width="360px"
+                                android:layout_height="400px"
+                                android:layout_centerInParent="true"
+                                app:civ_border_color="@android:color/white"
+                                app:civ_border_width="2dp" />
+                        </FrameLayout>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="320px"
+                        android:layout_height="360px"
+                        android:layout_marginLeft="80px"
+                        android:layout_marginRight="80px"
+                        android:background="@drawable/mainthreadlogo1"
+                        android:layout_weight="1"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center">
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center">
+
+                            <ImageButton
+                                android:id="@+id/woman"
+                                android:layout_width="360px"
+                                android:layout_height="400px"
+                                android:background="#00ff0000"
+                                android:src="@mipmap/ic_menu_camera" />
+
+                            <www.khj08.com.dateplan.ui.CircleImageView
+                                android:id="@+id/woman2"
+                                android:layout_width="360px"
+                                android:layout_height="400px"
+                                android:layout_centerInParent="true"
+                                app:civ_border_color="@android:color/white"
+                                app:civ_border_width="2dp"/>
+                            <!--android:layout_width="160dp"
+                            android:layout_height="160dp"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/hugh"
+                            app:civ_border_width="2dp"
+                            app:civ_border_color="@color/dark"-->
+                        </FrameLayout>
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="80px"
                     android:gravity="center">
 
                     <TextView
-                        android:fontFamily="@font/bmjua_ttf"
-                        android:layout_width="wrap_content"
-                        android:layout_height="100px"
-                        android:text="OO"
-                        android:textColor="#fff"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        android:id="@+id/first_name_tv2"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:fontFamily="@font/bmjua_ttf"
-                        android:layout_width="wrap_content"
-                        android:layout_height="100px"
-                        android:text="OO"
-                        android:textColor="#fff"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        android:id="@+id/second_name_tv2"
-                        android:gravity="center"/>
-                    <TextView
-                        android:fontFamily="@font/bmjua_ttf"
-                        android:id="@+id/timeset_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="100px"
-                        android:gravity="center"
-                        android:layout_gravity="center"
-                        android:text="의 함께했던 시간: "
-                        android:textColor="#fff"
-                        android:textSize="7pt" />
-
-                    <TextView
-                        android:fontFamily="@font/bmjua_ttf"
-                        android:id="@+id/resultTime"
+                        android:id="@+id/manName"
                         android:layout_width="400px"
-                        android:layout_height="100px"
-                        android:text=" 101시간 0분"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="사진1"
                         android:textColor="#fff"
-                        android:textSize="7pt"
-                        android:gravity="center"/>
+                        android:textSize="6pt"
+                        android:textStyle="bold" />
 
+                    <LinearLayout
+                        android:layout_width="300px"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="120px"
+                        android:layout_marginRight="120px"/>
+
+                    <TextView
+                        android:id="@+id/womanName"
+                        android:layout_width="400px"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="사진2"
+                        android:textColor="#fff"
+                        android:textSize="6pt"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="200px"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="100px"
+                            android:text="OO"
+                            android:textColor="#fff"
+                            android:textSize="16dp"
+                            android:textStyle="bold"
+                            android:id="@+id/first_name_tv"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="100px"
+                            android:text="OO"
+                            android:textColor="#fff"
+                            android:textSize="16dp"
+                            android:textStyle="bold"
+                            android:id="@+id/second_name_tv"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/moneyset_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="100px"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="의 함께했던 지출: "
+                            android:textColor="#fff"
+                            android:textSize="7pt" />
+
+                        <TextView
+                            android:id="@+id/resultMoney"
+                            android:layout_width="400px"
+                            android:layout_height="100px"
+                            android:text="2,000,000원"
+                            android:textColor="#fff"
+                            android:textSize="7pt"
+                            android:gravity="center"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="100px"
+                            android:text="OO"
+                            android:textColor="#fff"
+                            android:textSize="16dp"
+                            android:textStyle="bold"
+                            android:id="@+id/first_name_tv2"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="100px"
+                            android:text="OO"
+                            android:textColor="#fff"
+                            android:textSize="16dp"
+                            android:textStyle="bold"
+                            android:id="@+id/second_name_tv2"
+                            android:gravity="center"/>
+                        <TextView
+                            android:id="@+id/timeset_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="100px"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="의 함께했던 시간: "
+                            android:textColor="#fff"
+                            android:textSize="7pt" />
+
+                        <TextView
+                            android:id="@+id/resultTime"
+                            android:layout_width="400px"
+                            android:layout_height="100px"
+                            android:text=" 101시간 0분"
+                            android:textColor="#fff"
+                            android:textSize="7pt"
+                            android:gravity="center"/>
+
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        ads:layout_constraintBottom_toBottomOf="parent"
-        ads:layout_constraintRight_toRightOf="parent"
-        ads:layout_constraintLeft_toLeftOf="parent"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id">
-    </com.google.android.gms.ads.AdView>
-</android.support.constraint.ConstraintLayout>
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            ads:layout_constraintBottom_toBottomOf="parent"
+            ads:layout_constraintRight_toRightOf="parent"
+            ads:layout_constraintLeft_toLeftOf="parent"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad_unit_id">
+        </com.google.android.gms.ads.AdView>
+
+        <www.khj08.com.dateplan.ui.SideMenuBar
+            android:id="@+id/menubar_sidemenu"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="top"
+            android:visibility="gone"
+            class="kr.co.seeroo.apppos.ui.menubar.SideMenuBar"/>
+    </FrameLayout>
+</LinearLayout>

@@ -27,8 +27,7 @@
                 android:text="상단 알림바 표시"
                 android:layout_marginLeft="120px"
                 android:textColor="#333333"
-                android:textSize="16dp"
-                android:fontFamily="@font/bmjua_ttf"/>
+                android:textSize="16dp" />
 
             <LinearLayout
                 android:layout_width="360px"
@@ -60,8 +59,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textStyle="bold"
-                    android:text="확인"
-                    android:fontFamily="@font/bmjua_ttf"/>
+                    android:text="확인" />
             </FrameLayout>
         </LinearLayout>
 
@@ -87,8 +85,7 @@
                     android:layout_gravity="center"
                     android:textStyle="bold"
                     android:textColor="@color/color_ffffff"
-                    android:text="취소"
-                    android:fontFamily="@font/bmjua_ttf"/>
+                    android:text="취소" />
             </FrameLayout>
 
             <FrameLayout
@@ -107,8 +104,7 @@
                     android:layout_gravity="center"
                     android:textStyle="bold"
                     android:textColor="#ffffff"
-                    android:text="확인"
-                    android:fontFamily="@font/bmjua_ttf"/>
+                    android:text="확인" />
             </FrameLayout>
         </LinearLayout>
 

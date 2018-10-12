@@ -2,17 +2,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/notepad123"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/dday_listview"
-        android:layout_marginTop="240px"
-        android:layout_width="1200px"
-        android:layout_height="1400px"
-        android:layout_gravity="center"
-        android:divider="#000000"
-        android:dividerHeight="8px"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:background="@color/color_ff4081">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/btn_main_menu">
+            <ImageView
+                android:layout_width="112px"
+                android:layout_height="112px"
+                android:layout_marginRight="56px"
+                android:layout_marginLeft="56px"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_action_back" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="D-Day"
+            android:textSize="18dp"
+            android:textColor="@color/color_ffffff"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/notepad123"
+        android:gravity="center">
+        <ListView
+            android:id="@+id/dday_listview"
+            android:layout_marginTop="120px"
+            android:layout_width="1120px"
+            android:layout_height="1400px"
+            android:layout_gravity="center"
+            android:divider="#333333"
+            android:dividerHeight="8px"/>
+    </LinearLayout>
 </LinearLayout>

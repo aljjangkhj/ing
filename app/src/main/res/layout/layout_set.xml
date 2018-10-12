@@ -3,9 +3,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
     android:background="@drawable/notepad02">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:background="@color/color_ff4081">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/btn_main_menu">
+            <ImageView
+                android:layout_width="112px"
+                android:layout_height="112px"
+                android:layout_marginRight="56px"
+                android:layout_marginLeft="56px"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_action_back" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="설정"
+            android:textSize="18dp"
+            android:textColor="@color/color_ffffff"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+    </LinearLayout>
 
     <ListView
         android:id="@+id/listview1"

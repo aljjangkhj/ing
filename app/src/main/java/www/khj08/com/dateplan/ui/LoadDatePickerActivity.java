@@ -35,6 +35,10 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+
 import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
@@ -54,6 +58,7 @@ public class LoadDatePickerActivity extends BaseActivity {
     //날짜 정보를 가져올때 사용할 변수 선언: 달력 변수
     private Calendar calendar;
     private Uri mImageCaptureUri;
+    private InterstitialAd interstitialAd;
 
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
@@ -108,7 +113,7 @@ public class LoadDatePickerActivity extends BaseActivity {
 
     private Button list_Btn;
 //    private Button addmoneyBtn;
-    private LinearLayout datePickerBtn;
+    private LinearLayout datePickerBtn,ll_delete_Btn,ll_update_btn,btn_main_menu;
     private LinearLayout timeHelloBtn;
     private LinearLayout timeByeBtn;
 //    private Button timeResetBtn;
@@ -140,6 +145,9 @@ public class LoadDatePickerActivity extends BaseActivity {
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
 
+        ll_delete_Btn = (LinearLayout)findViewById(R.id.ll_delete_Btn);
+        ll_update_btn = (LinearLayout)findViewById(R.id.ll_update_btn);
+        btn_main_menu = (LinearLayout)findViewById(R.id.btn_main_menu);
         this.datePickerBtn = (LinearLayout) this.findViewById(R.id.date_picker_btn01);
         this.timeHelloBtn = (LinearLayout) this.findViewById(R.id.time_Hello_btn01);
         this.timeByeBtn = (LinearLayout) this.findViewById(R.id.time_Bye_btn01);
@@ -275,6 +283,13 @@ public class LoadDatePickerActivity extends BaseActivity {
             }
         });
 
+        btn_main_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         Intent intent = getIntent();
         intid = intent.getStringExtra("위치값");
 
@@ -386,6 +401,118 @@ public class LoadDatePickerActivity extends BaseActivity {
 //        });
 //        addmoneyBtn.performClick();//계산 강제클릭
 //
+
+        ll_delete_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Popup deletePopup = new Popup(mContext,"일기 삭제하기","일기를 삭제하시겠습니까?","취소","확인");
+                deletePopup.OK_Click = new Popup.onClick() {
+                    @Override
+                    public void onClick() {
+                        String deleteManager = "date='" + intid + "'";
+                        mSQLiteDBManager.delete(deleteManager, null);
+                        finish();
+                    }
+                };
+                deletePopup.show();
+            }
+        });
+
+        ll_update_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Popup LoadDatePopup = new Popup(mContext, "일기 수정하기","일기를 수정하시겠습니까?","취소","확인");
+                LoadDatePopup.OK_Click = new Popup.onClick() {
+                    @Override
+                    public void onClick() {
+                        DateValue = datePickerTxt.getText().toString();
+                        TimeValue01 = timeHelloText.getText().toString();
+                        TimeValue02 = timeByeText.getText().toString();
+                        TitleValue = editText_title.getText().toString();
+                        ContentValue = editText_content.getText().toString();
+                        strManMoney = manMoney.getText().toString().replaceAll(",","");;
+                        strWomanMoney = womanMoney.getText().toString().replaceAll(",","");;
+                        numberstr = addMoney.getText().toString().replaceAll(",","");;
+//                        strResulthour = resultHour01.getText().toString();
+                        String LoadBitmap = "";
+                        if(myBitmap != null) {
+                            LoadBitmap = BitMapToString(myBitmap);
+                        }
+                        if (!DateValue.equals("") && DateValue.length() != 0 && !TimeValue01.equals("") && TimeValue01.length() != 0
+                                && !TimeValue02.equals("") && TimeValue02.length() != 0 && !TitleValue.equals("") && TitleValue.length() != 0
+                                && !ContentValue.equals("") && ContentValue.length() != 0 && !strManMoney.equals("") && strManMoney.length() != 0
+                                && !strWomanMoney.equals("") && strWomanMoney.length() != 0 && !addMoney.equals("") && addMoney.length() != 0
+                            /*&& resultHour01 != null && resultHour01.length() != 0*/) {
+                            //img01 = BitMapToString(myBitmap);
+
+                            ContentValues updateRowValue = new ContentValues();
+//                            Log.v("mylog", "날짜는 " + DateValue);
+//                            Log.v("mylog", "만난 시간은 " + TimeValue01);
+//                            Log.v("mylog", "헤어진 시간은 " + TimeValue02);
+//                            Log.v("mylog", "제목은 " + TitleValue);
+//                            Log.v("mylog", "내용은 " + ContentValue);
+//                            Log.v("mylog", "총만난 시간: " + strResulthour);
+//                            Log.v("mylog", "남자지출: " + strManMoney);
+//                            Log.v("mylog", "여자지출: " + strWomanMoney);
+//                            Log.v("mylog", "총지출: " + numberstr);
+                            updateRowValue.put("date", DateValue);
+                            updateRowValue.put("starttime", TimeValue01);
+                            updateRowValue.put("endtime", TimeValue02);
+                            updateRowValue.put("title", TitleValue);
+                            updateRowValue.put("content", ContentValue);
+                            updateRowValue.put("resulthour", strResulthour);
+                            updateRowValue.put("manmoney", strManMoney);
+                            updateRowValue.put("womanmoney", strWomanMoney);
+                            updateRowValue.put("resultmoney", iaddmoney);
+                            updateRowValue.put("finalminute", FinalresultTime);
+                            updateRowValue.put("bestphoto",  img01 = (img01 == null)? LoadBitmap : img01 );
+
+                            //Intent intent = getIntent();
+                            // intid = intent.getIntExtra("위치값",0);
+                            // Toast.makeText(LoadDatePickerActivity.this, "불러온 위치값은: "+ intid, Toast.LENGTH_SHORT).show();
+                            mSQLiteDBManager.update(updateRowValue, "date='" + intid+"'", null);
+                            //  Toast.makeText(LoadDatePickerActivity.this, "_id"+intid+"가 수정됌", Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(DatePickerActivity.this, DateValue+"의 일기가 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                            //mSQLiteDBManager.insert(updateRowValue);
+                            Toast.makeText(LoadDatePickerActivity.this, "수정 되었습니다!", Toast.LENGTH_SHORT).show();
+                            setFullAd();
+                            finish();
+                        } else {
+                            if(DateValue.equals("") || DateValue.length() == 0){
+                                Popup popup = new Popup(mContext,"오류 메시지","날짜를 설정 해주세요.","","확인");
+                                popup.show();
+                                return;
+                            }else if(TimeValue01.equals("") || TimeValue01.length() == 0){
+                                Popup popup = new Popup(mContext,"오류 메시지","만난 시간을 설정 해주세요.","","확인");
+                                popup.show();
+                                return;
+                            }else if(TimeValue02.equals("") || TimeValue02.length() == 0){
+                                Popup popup = new Popup(mContext,"오류 메시지","헤어진 시간을 설정 해주세요.","","확인");
+                                popup.show();
+                                return;
+                            }else if(TitleValue.equals("") || TitleValue.length() == 0){
+                                Popup popup = new Popup(mContext,"오류 메시지","일기 제목을 입력 해주세요.","","확인");
+                                popup.show();
+                                return;
+                            }else if(ContentValue.equals("") || ContentValue.length() == 0){
+                                Popup popup = new Popup(mContext,"오류 메시지","일기 내용을 입력 해주세요.","","확인");
+                                popup.show();
+                                return;
+                            }else if(strManMoney.equals("") || strManMoney.length() == 0){
+                                Popup popup = new Popup(mContext,"오류 메시지",MySharedPreferencesManager.getPic01(mContext)+ "의 지출을 입력 해주세요.","","확인");
+                                popup.show();
+                                return;
+                            }else if(strWomanMoney.equals("") || strWomanMoney.length() == 0){
+                                Popup popup = new Popup(mContext,"오류 메시지",MySharedPreferencesManager.getPic02(mContext)+ "의 지출을 입력 해주세요.","","확인");
+                                popup.show();
+                                return;
+                            }
+                        }
+                    }
+                };
+                LoadDatePopup.show();
+            }
+        });
     }
 
     public void myTime() {
@@ -405,20 +532,13 @@ public class LoadDatePickerActivity extends BaseActivity {
         if (resultMinute < 0) {
             resultHour = ihour2 - ihour - 1;
             resultMinute = 60 - iminute2 - iminute;
-            Log.v("mylog", "시간: " + resultHour);
-            Log.v("mylog", "분: " + resultMinute);
         }
         if (iminute > iminute2) {
             resultMinute = (ihour2 * 60 + iminute2) - (ihour * 60 + iminute);
-            Log.v("mylog", "시간2: " + resultHour);
-            Log.v("mylog", "분2: " + resultMinute);
         }
         if (resultMinute >= 60) {
             resultMinute = resultMinute % 60;
             //resultHour = resultMinute/60;
-
-            Log.v("mylog", "시간2: " + resultHour);
-            Log.v("mylog", "분2: " + resultMinute);
         }
 //        resultHour01.setText("총 만난 시간: " + resultHour + " 시간" + resultMinute + " 분");
 //        resultHour01.setTextColor(Color.BLACK);
@@ -483,108 +603,10 @@ public class LoadDatePickerActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.insert_btn:
-                Popup LoadDatePopup = new Popup(mContext, "일기 수정하기","일기를 수정하시겠습니까?","취소","확인");
-                LoadDatePopup.OK_Click = new Popup.onClick() {
-                    @Override
-                    public void onClick() {
-                        DateValue = datePickerTxt.getText().toString();
-                        TimeValue01 = timeHelloText.getText().toString();
-                        TimeValue02 = timeByeText.getText().toString();
-                        TitleValue = editText_title.getText().toString();
-                        ContentValue = editText_content.getText().toString();
-                        strManMoney = manMoney.getText().toString().replaceAll(",","");;
-                        strWomanMoney = womanMoney.getText().toString().replaceAll(",","");;
-                        numberstr = addMoney.getText().toString().replaceAll(",","");;
-//                        strResulthour = resultHour01.getText().toString();
-                        String LoadBitmap = "";
-                        if(myBitmap != null) {
-                            LoadBitmap = BitMapToString(myBitmap);
-                        }
-                        if (!DateValue.equals("") && DateValue.length() != 0 && !TimeValue01.equals("") && TimeValue01.length() != 0
-                                && !TimeValue02.equals("") && TimeValue02.length() != 0 && !TitleValue.equals("") && TitleValue.length() != 0
-                                && !ContentValue.equals("") && ContentValue.length() != 0 && !strManMoney.equals("") && strManMoney.length() != 0
-                                && !strWomanMoney.equals("") && strWomanMoney.length() != 0 && !addMoney.equals("") && addMoney.length() != 0
-                            /*&& resultHour01 != null && resultHour01.length() != 0*/) {
-                            //img01 = BitMapToString(myBitmap);
-
-                            ContentValues updateRowValue = new ContentValues();
-//                            Log.v("mylog", "날짜는 " + DateValue);
-//                            Log.v("mylog", "만난 시간은 " + TimeValue01);
-//                            Log.v("mylog", "헤어진 시간은 " + TimeValue02);
-//                            Log.v("mylog", "제목은 " + TitleValue);
-//                            Log.v("mylog", "내용은 " + ContentValue);
-//                            Log.v("mylog", "총만난 시간: " + strResulthour);
-//                            Log.v("mylog", "남자지출: " + strManMoney);
-//                            Log.v("mylog", "여자지출: " + strWomanMoney);
-//                            Log.v("mylog", "총지출: " + numberstr);
-                            updateRowValue.put("date", DateValue);
-                            updateRowValue.put("starttime", TimeValue01);
-                            updateRowValue.put("endtime", TimeValue02);
-                            updateRowValue.put("title", TitleValue);
-                            updateRowValue.put("content", ContentValue);
-                            updateRowValue.put("resulthour", strResulthour);
-                            updateRowValue.put("manmoney", strManMoney);
-                            updateRowValue.put("womanmoney", strWomanMoney);
-                            updateRowValue.put("resultmoney", iaddmoney);
-                            updateRowValue.put("finalminute", FinalresultTime);
-                            updateRowValue.put("bestphoto",  img01 = (img01 == null)? LoadBitmap : img01 );
-
-                            //Intent intent = getIntent();
-                            // intid = intent.getIntExtra("위치값",0);
-                            // Toast.makeText(LoadDatePickerActivity.this, "불러온 위치값은: "+ intid, Toast.LENGTH_SHORT).show();
-                            mSQLiteDBManager.update(updateRowValue, "date='" + intid+"'", null);
-                            //  Toast.makeText(LoadDatePickerActivity.this, "_id"+intid+"가 수정됌", Toast.LENGTH_SHORT).show();
-                            // Toast.makeText(DatePickerActivity.this, DateValue+"의 일기가 저장되었습니다.", Toast.LENGTH_SHORT).show();
-                            //mSQLiteDBManager.insert(updateRowValue);
-                            Toast.makeText(LoadDatePickerActivity.this, "수정 되었습니다!", Toast.LENGTH_SHORT).show();
-                            finish();
-                        } else {
-                            if(DateValue.equals("") || DateValue.length() == 0){
-                                Popup popup = new Popup(mContext,"오류 메시지","날짜를 설정 해주세요.","","확인");
-                                popup.show();
-                                return;
-                            }else if(TimeValue01.equals("") || TimeValue01.length() == 0){
-                                Popup popup = new Popup(mContext,"오류 메시지","만난 시간을 설정 해주세요.","","확인");
-                                popup.show();
-                                return;
-                            }else if(TimeValue02.equals("") || TimeValue02.length() == 0){
-                                Popup popup = new Popup(mContext,"오류 메시지","헤어진 시간을 설정 해주세요.","","확인");
-                                popup.show();
-                                return;
-                            }else if(TitleValue.equals("") || TitleValue.length() == 0){
-                                Popup popup = new Popup(mContext,"오류 메시지","일기 제목을 입력 해주세요.","","확인");
-                                popup.show();
-                                return;
-                            }else if(ContentValue.equals("") || ContentValue.length() == 0){
-                                Popup popup = new Popup(mContext,"오류 메시지","일기 내용을 입력 해주세요.","","확인");
-                                popup.show();
-                                return;
-                            }else if(strManMoney.equals("") || strManMoney.length() == 0){
-                                Popup popup = new Popup(mContext,"오류 메시지",MySharedPreferencesManager.getPic01(mContext)+ "의 지출을 입력 해주세요.","","확인");
-                                popup.show();
-                                return;
-                            }else if(strWomanMoney.equals("") || strWomanMoney.length() == 0){
-                                Popup popup = new Popup(mContext,"오류 메시지",MySharedPreferencesManager.getPic02(mContext)+ "의 지출을 입력 해주세요.","","확인");
-                                popup.show();
-                                return;
-                            }
-                        }
-                    }
-                };
-                LoadDatePopup.show();
 
                 break;
             case R.id.delete_btn:
-                Popup deletePopup = new Popup(mContext,"일기 삭제하기","일기를 삭제하시겠습니까?","취소","확인");
-                deletePopup.OK_Click = new Popup.onClick() {
-                    @Override
-                    public void onClick() {
-                        String deleteManager = "date='" + intid + "'";
-                        mSQLiteDBManager.delete(deleteManager, null);
-                        finish();
-                    }
-                };
-                deletePopup.show();
+
                 break;
         }
         return super.onOptionsItemSelected(menuItem);
@@ -701,5 +723,19 @@ public class LoadDatePickerActivity extends BaseActivity {
             e.getMessage();
             return null;
         }
+    }
+
+    private void setFullAd(){
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId(getString(R.string.full_ad_key));
+        interstitialAd.loadAd(new AdRequest.Builder().build());
+        interstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                if (interstitialAd.isLoaded()) {
+                    interstitialAd.show();
+                }
+            }
+        });
     }
 }

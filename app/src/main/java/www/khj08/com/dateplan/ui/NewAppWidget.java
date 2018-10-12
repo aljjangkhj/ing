@@ -34,13 +34,11 @@ public class NewAppWidget extends AppWidgetProvider {
         }
         @Override
         public int onStartCommand(Intent intent, int flags, int startId) {
-            Log.v("mylog","onStartCommand");
             RemoteViews remoteViews = buildUpdate(this);
 
             ComponentName thisWidget = new ComponentName(this, NewAppWidget.class);
             AppWidgetManager manager = AppWidgetManager.getInstance(this);
             manager.updateAppWidget(thisWidget, remoteViews);
-            Log.v("mylog","위젯 업데이트됨.");
 
             return super.onStartCommand(intent, flags, startId);
         }

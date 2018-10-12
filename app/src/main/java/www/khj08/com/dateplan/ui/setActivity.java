@@ -14,17 +14,24 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.Calendar;
 
 import www.khj08.com.dateplan.BaseActivity;
 import www.khj08.com.dateplan.R;
+import www.khj08.com.dateplan.common.log;
 import www.khj08.com.dateplan.popup.CheckBoxPopup;
 import www.khj08.com.dateplan.popup.NameChangePopup;
 import www.khj08.com.dateplan.popup.Popup;
 import www.khj08.com.dateplan.ui.list_adapter.ListViewAdapter;
+import www.khj08.com.dateplan.utils.Util;
 
 public class setActivity extends BaseActivity {
 
@@ -37,6 +44,8 @@ public class setActivity extends BaseActivity {
     int checkint;
     boolean checkvalue = false;
     private String[] strSet = {"항상 상단 알림 표시 설정"};
+    private LinearLayout btn_main_menu;
+    private InterstitialAd interstitialAd;
 
     public SQLiteDBManager mSQLiteDBManager = null;
     @Override
@@ -54,6 +63,7 @@ public class setActivity extends BaseActivity {
 
         // 리스트뷰 참조 및 Adapter달기
         listview = (ListView) findViewById(R.id.listview1);
+        btn_main_menu = (LinearLayout) findViewById(R.id.btn_main_menu);
         listview.setAdapter(adapter);
         // 첫 번째 아이템 추가.
 
@@ -71,6 +81,13 @@ public class setActivity extends BaseActivity {
 
         adapter.addItem(ContextCompat.getDrawable(this, R.mipmap.myicon),"피드백","불편하셨던 기능이나 추가했으면 좋겠다는 기능을 개발자에게 피드백을 줍니다.");
         adapter.addItem(ContextCompat.getDrawable(this, R.mipmap.deletecolor),"모두 삭제","저장되있는 모든 데이터를 삭제하고 처음 상태로 되돌립니다.");
+
+        btn_main_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -115,9 +132,11 @@ public class setActivity extends BaseActivity {
                                 day = dayOfMonth;
                                 MySharedPreferencesManager.setStartLoveDay(year, month, day, setActivity.this);
                                 //  Toast.makeText(setActivity.this,year+"년"+month+"월"+day+"일" , Toast.LENGTH_SHORT).show();
+                                setFullAd();
                                 Toast.makeText(setActivity.this, "메인화면에 등록 되었습니다.", Toast.LENGTH_SHORT).show();
 
                                 DdayManager(year, month, day);
+
                             }
                         }, MyYear, MyMonth, MyDay);
 
@@ -289,15 +308,15 @@ public class setActivity extends BaseActivity {
 //                        alterDialog01.setIcon(R.mipmap.askicon);
 //                        alterDialog01.show();
 
-                        Popup popup = new Popup(mContext,"사용 설명서","잉ing을 이용해 주셔서 감사합니다"+"\n"+"\n"+
-                                "첫번째, 잉ing은 사진을 넣을 수 있는 일기장이 제공됩니다."+"\n"+"\n"+
-                                "두번째, 사람과 사람간의 만남 시간과 사용한 비용을 간략히 정리할 수 있습니다."+"\n"+"\n"+
-                                "세번째, D-DAY를 항시 상단 알림에 출력이 가능합니다." +"\n"+"\n"+
-                                "네번째, 메인 화면에 사랑하는 사람의 얼굴과 한줄 평을 남길 수 있습니다."+ "\n"+"\n"+
-                                "다섯번째, D-DAY로 100일부터 18200일의 기념일과 1년부터 50년의 기념일이 제공됩니다."+ "\n"+"\n"+
-                                "여섯번째, 일기 목록을 통해 간편하게 자신이 써왔던 일기를 볼 수 있습니다." + "\n"+"\n"+
+                        Popup popup = new Popup(mContext,"사용 설명서","잉ing을 이용해 주셔서 감사합니다"+"\n"+
+                                "첫번째, 잉ing은 사진을 넣을 수 있는 일기장이 제공됩니다."+"\n"+
+                                "두번째, 사람과 사람간의 만남 시간과 사용한 비용을 간략히 정리할 수 있습니다."+"\n"+
+                                "세번째, D-DAY를 항시 상단 알림에 출력이 가능합니다." +"\n"+
+                                "네번째, 메인 화면에 사랑하는 사람의 얼굴과 한줄 평을 남길 수 있습니다."+ "\n"+
+                                "다섯번째, D-DAY로 100일부터 18200일의 기념일과 1년부터 50년의 기념일이 제공됩니다."+ "\n"+
+                                "여섯번째, 일기 목록을 통해 간편하게 자신이 써왔던 일기를 볼 수 있습니다." + "\n"+
                                 "※ 사용시 주의할점: 저장이 되어있는 날짜의 일기는 또 다시 저장할 수 없습니다!! 또한 상단 알림은 메인화면에서 사진을 선택 하셔야 상단 알림을 출력 할 수 있습니다. "+
-                                "일기나 D-DAY를 저장 또는 삭제 하였으나 출력이 되지 않을시 새로고침 버튼을 눌러주시거나 어플을 종료 후 다시 실행하면 출력됩니다." +"\n"+"\n"+ "감사합니다.","","확인");
+                                "일기나 D-DAY를 저장 또는 삭제 하였으나 출력이 되지 않을시 어플을 종료 후 다시 실행하면 출력됩니다." +"\n"+ "감사합니다.","","확인");
                         popup.show();
 
                         break;
@@ -434,93 +453,67 @@ public class setActivity extends BaseActivity {
             Calendar dday = Calendar.getInstance();
             calendar.set(year, month + 1, day);
             dday.set(myyear, mmonth, mday);// D-day의 날짜를 입력합니다.
-            // 각각 날의 시간 값을 얻어온 다음
-            //( 1일의 값(86400000 = 24시간 * 60분 * 60초 * 1000(1초값)))
-//            if(myyear == 1960&&mmonth == 2|| myyear == 1964&&mmonth == 2|| myyear == 1968&&mmonth == 2 || myyear == 1972&&mmonth == 2|| myyear == 1976&&mmonth == 2
-//                    || myyear == 1980&&mmonth == 2 || myyear == 1984&&mmonth == 2 || myyear == 1988&&mmonth == 2 || myyear == 1992&&mmonth == 2 || myyear == 1996&&mmonth == 2
-//                    || myyear == 2000&&mmonth == 2 || myyear == 2004&&mmonth == 2 || myyear == 2008&&mmonth == 2 || myyear == 2012&&mmonth == 2 || myyear == 2016&&mmonth == 2 || myyear == 2020&&mmonth == 2){
-//                dday.set(myyear,mmonth,mday);
-//                Log.v("mylog","myyear 2012 mmonth 2");
-//            }else if(mmonth == 2){dday.set(myyear,mmonth,mday+2);Log.v("mylog","else if");}
-//            else{dday.set(myyear,mmonth,mday-1);}
-//            if(mmonth == 1){dday.set(myyear,mmonth,mday-2);Log.v("mylog","월 1");}
-//            if(mmonth == 3){dday.set(myyear,mmonth,mday-2);Log.v("mylog","월 3");}
-//            if(mmonth == 5){dday.set(myyear,mmonth,mday-2);Log.v("mylog","월 5");}
-//            if(mmonth == 7){dday.set(myyear,mmonth,mday-2);Log.v("mylog","월 7");}
-//            if(mmonth == 8){dday.set(myyear,mmonth,mday-2);Log.v("mylog","월 8");}
-//            if(mmonth == 9){dday.set(myyear,mmonth,mday-1);Log.v("mylog","월 9");}
-//            if(mmonth == 10){dday.set(myyear,mmonth,mday-2);Log.v("mylog","월 10");}
-//            if(mmonth == 12){dday.set(myyear,mmonth,mday-2);Log.v("mylog","월 12");}
             //2018.03.27
-//            if(mmonth == 4){dday.set(myyear,mmonth,mday);Log.v("mylog","444444");}
-//            switch (mmonth){
-//                case 1 : mday = 31; break;
-//                case 2 :
-//                    if((myyear% 4 == 0 && myyear% 100 != 0) || myyear % 400 == 0){
-//                        mday = 29;
-//                    }else{
-//                        mday = 28;
+//            if(month%2 == 0){//홀수의 달일경우 (month+1)
+//                if(mmonth == 4|| mmonth == 6 || mmonth == 9 || mmonth == 11){
+//                    dday.set(myyear,mmonth,mday);
+//                }else if(mmonth == 2){
+//                    if(myyear%4 == 0) {
+//                        dday.set(myyear, mmonth, mday + 1);
+//                    }else {
+//                        dday.set(myyear, mmonth, mday + 2);
 //                    }
-//                    break;
-//                case 3 : mday = 31; break;
-//                case 4 : mday = 30; break;
-//                case 5 : mday = 31; break;
-//                case 6 : mday = 30; break;
-//                case 7 : mday = 31; break;
-//                case 8 : mday = 31; break;
-//                case 9 : mday = 30; break;
-//                case 10 : mday = 31; break;
-//                case 11 : mday = 30; break;
-//                case 12 : mday = 31; break;
-//            }  2015년 2월 -2 1,3,5,7,8,10,12월 +1 2016년 1,3,5,7월 +1 2월 -1
-            //2018.03.27
-            if(month%2 == 0){//홀수의 달일경우 (month+1)
-                if(mmonth == 4|| mmonth == 6 || mmonth == 9 || mmonth == 11){
-                    dday.set(myyear,mmonth,mday);
-                }else if(mmonth == 2){
-                    if(myyear%4 == 0) {
-                        dday.set(myyear, mmonth, mday + 1);
-                    }else {
-                        dday.set(myyear, mmonth, mday + 2);
-                    }
-                }else{
-                    dday.set(myyear,mmonth,mday-1);
-                }
-            }else{
-                if(mmonth == 4|| mmonth == 6 || mmonth == 9 || mmonth == 11){
-                    dday.set(myyear,mmonth,mday-1);
-                }else if(mmonth == 2){
-                    if(myyear%4 == 0) {
-                        dday.set(myyear, mmonth, mday);
-                    }else {
-                        dday.set(myyear, mmonth, mday + 1);
-                    }
-                }else{
-                    dday.set(myyear,mmonth,mday-2);
-                }
-            }
+//                }else{
+//                    dday.set(myyear,mmonth,mday-1);
+//                }
+//            }else{
+//                if(mmonth == 4|| mmonth == 6 || mmonth == 9 || mmonth == 11){
+//                    dday.set(myyear,mmonth,mday-1);
+//                }else if(mmonth == 2){
+//                    if(myyear%4 == 0) {
+//                        dday.set(myyear, mmonth, mday);
+//                    }else {
+//                        dday.set(myyear, mmonth, mday + 1);
+//                    }
+//                }else{
+//                    dday.set(myyear,mmonth,mday-2);
+//                }
+//            }
 
-            Log.v("mylog", "오늘 날짜는" + year + "년 " + (month+1) + "월 " + day + "일 ");
-            Log.v("mylog", "dday설정 날짜는" + myyear + "년 " + mmonth + "월 " + mday + "일");
             long tday = calendar.getTimeInMillis() / 86400000;
             long lday = dday.getTimeInMillis() / 86400000;
-            Log.v("mylog", "tday.Time " + calendar.getTimeInMillis());
-            Log.v("mylog", "lday.Time " + dday.getTimeInMillis());
-            Log.v("mylog", "D-DAY 값은 " + (tday-lday));
-            Log.v("mylog", "tday: " + (tday-lday));
-            MySharedPreferencesManager.setToday(tday,setActivity.this);
-            MySharedPreferencesManager.setLoveDay(lday,setActivity.this);
+            MySharedPreferencesManager.setToday(tday,mContext);
+            MySharedPreferencesManager.setLoveDay(lday,mContext);
+
+            MySharedPreferencesManager.setLoveStartDay(myyear+"-"+mmonth+"-"+mday,mContext);
+            String today = Util.yyyyMMdd();
+            log.vlog(2,"KHJ 최종이길: " + Util.diffOfDate(MySharedPreferencesManager.getLoveStartDay(mContext),today));
+            log.vlog(2,"KHJ tday: " + tday);
+            long saveDateDday = Util.diffOfDate(MySharedPreferencesManager.getLoveStartDay(mContext),today) + 1;
             long count = tday - lday; // 오늘 날짜에서 dday 날짜를 빼주게 됩니다.
-        //    Toast.makeText(this, "저장된 D-Day는" + myyear + "년 " + mmonth + "월 " + mday + "일 입니다." + "D-DAY는 " + "-" + count, Toast.LENGTH_SHORT).show();
-            MySharedPreferencesManager.setDdaySave((int) count, setActivity.this);
+            log.vlog(2, "KHJ 저장된 D-Day는" + myyear + "년 " + mmonth + "월 " + mday + "일 입니다." + "D-DAY는 " + "-" + count);
+            MySharedPreferencesManager.setDdaySave((int) saveDateDday, setActivity.this);
             //MySharedPreferencesManager.setDdaySaveint((int) count,setActivity.this);
             MySharedPreferencesManager.setYear(myyear,setActivity.this);
             MySharedPreferencesManager.setMonth(mmonth,setActivity.this);
             MySharedPreferencesManager.setDay(mday,setActivity.this);
-            return (int) count;
+            return (int) saveDateDday;
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
         }
+    }
+    private void setFullAd(){
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId(getString(R.string.full_ad_key));
+        interstitialAd.loadAd(new AdRequest.Builder().build());
+        interstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                if (interstitialAd.isLoaded()) {
+                    interstitialAd.show();
+                }
+            }
+        });
     }
 }

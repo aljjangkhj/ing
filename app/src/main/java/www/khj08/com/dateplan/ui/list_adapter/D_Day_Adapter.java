@@ -13,6 +13,8 @@ import java.util.Arrays;
 import java.util.Date;
 
 import www.khj08.com.dateplan.R;
+import www.khj08.com.dateplan.common.log;
+import www.khj08.com.dateplan.utils.AutoScreen;
 
 /**
  * Created by user on 2017-07-10.
@@ -60,6 +62,7 @@ public class D_Day_Adapter extends BaseAdapter {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.d_day_layout02, parent, false);
+            AutoScreen.Adjust(mRefContext,convertView,1);
         }
         // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
         ddayTextView = (TextView) convertView.findViewById(R.id.dday_text01) ;
@@ -116,7 +119,7 @@ public class D_Day_Adapter extends BaseAdapter {
                 titleTextView.setTextColor(Color.BLACK);
             }
         } catch(NumberFormatException nfe) {
-            Log.v("mylog","Could not parse " + nfe);
+            log.vlog(2, "Could not parse " + nfe);
         }
         /*int resultCount = DdayPreferences01 - integerdday[position];
 

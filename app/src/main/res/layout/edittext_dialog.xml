@@ -15,7 +15,7 @@
         android:background="#ffffff">
 
         <TextView
-            android:fontFamily="@font/bmjua_ttf"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="96px"
@@ -59,7 +59,7 @@
                 android:gravity="center">
 
                 <TextView
-                    android:fontFamily="@font/bmjua_ttf"
+
                     android:layout_width="300px"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="48px"
@@ -82,7 +82,7 @@
                     android:gravity="left">
 
                     <EditText
-                        android:fontFamily="@font/bmjua_ttf"
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
@@ -123,7 +123,7 @@
                 android:gravity="center">
 
                 <TextView
-                    android:fontFamily="@font/bmjua_ttf"
+
                     android:layout_width="300px"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="48px"
@@ -146,7 +146,7 @@
                     android:gravity="left">
 
                     <EditText
-                        android:fontFamily="@font/bmjua_ttf"
+
                         android:layout_marginLeft="48px"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -178,7 +178,7 @@
                 android:gravity="center"
                 android:orientation="horizontal">
                 <TextView
-                    android:fontFamily="@font/bmjua_ttf"
+
                     android:id="@+id/tv_popup_1btn_ok"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -204,7 +204,7 @@
                 android:orientation="horizontal"
                 android:background="@drawable/selector_cancel_btn">
                 <TextView
-                    android:fontFamily="@font/bmjua_ttf"
+
                     android:id="@+id/tv_popup_2btn_cancel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -224,7 +224,7 @@
                 android:orientation="horizontal"
                 android:background="@drawable/selector_btn">
                 <TextView
-                    android:fontFamily="@font/bmjua_ttf"
+
                     android:id="@+id/tv_popup_2btn_ok"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_weight="2"
     android:orientation="vertical"
@@ -10,10 +10,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32px">
 
         <TextView
-            android:fontFamily="@font/bmjua_ttf"
             android:id="@+id/notifi_text01"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -28,42 +28,50 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_marginBottom="32px">
 
         <TextView
-            android:fontFamily="@font/bmjua_ttf"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="길동"
             android:textColor="#000"
-            android:id="@+id/manName2"/>
+            android:id="@+id/manName2"
+            android:layout_weight="1"
+            android:layout_marginRight="40px"
+            android:gravity="right"/>
 
         <ImageView
             android:id="@+id/notifi_Img01"
-            android:layout_height="wrap_content"
-            android:layout_width="100px"/>
+            android:layout_height="200px"
+            android:layout_width="200px"
+            android:layout_marginRight="40px"/>
 
 
         <ImageView
             android:id="@+id/notifi_img02"
-            android:layout_width="100px"
-            android:layout_height="100px"
-            android:background="@drawable/mainlogo02" />
+            android:layout_width="200px"
+            android:layout_height="200px" />
 
         <ImageView
             android:id="@+id/notifi_Img03"
-            android:layout_width="100px"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
+            android:layout_width="200px"
+            android:layout_height="200px"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="40px"/>
 
         <TextView
-            android:fontFamily="@font/bmjua_ttf"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="둘리"
             android:textColor="#000"
-            android:id="@+id/womanName2"/>
+            android:id="@+id/womanName2"
+            android:gravity="left"
+            android:layout_marginLeft="40px"
+            android:layout_weight="1"/>
     </LinearLayout>
 
 </LinearLayout>

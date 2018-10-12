@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +25,7 @@ public class CalcResult extends BaseActivity {
 
     private TextView font1;
     private TextView font2;
+    private LinearLayout btn_main_menu;
 
 
     @Override
@@ -35,16 +38,22 @@ public class CalcResult extends BaseActivity {
         listview01.setAdapter(listViewAdapter);
         font1 = (TextView)this.findViewById(R.id.fonts1);
         font2 = (TextView)this.findViewById(R.id.fonts2);
+        btn_main_menu = (LinearLayout)findViewById(R.id.btn_main_menu);
+
+        btn_main_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 //        Typeface typeface = Typeface.createFromAsset(getAssets(),"fonts/BMJUA_ttf.ttf");
 //        font1.setTypeface(typeface);
 //        font2.setTypeface(typeface);
         mSQLiteDBManager = SQLiteDBManager.getInstance(this);
         String[] columns = new String[]{"_id", "date", "starttime", "endtime", "title", "content", "resulthour", "manmoney", "womanmoney", "resultmoney"};
         Cursor c = mSQLiteDBManager.query(columns, null, null, null, null, null);
-        Log.v("mylog", "SQLite 불러옴");
         if (c != null) {
             while (c.moveToNext()) {
-                Log.v("mylog", "while 반복문 실행");
                 int id = c.getInt(0);
                 String mRefDate = c.getString(1);
                 String mRefstart = c.getString(2);
@@ -55,16 +64,6 @@ public class CalcResult extends BaseActivity {
                 String mRefManmoney = c.getString(7);
                 String mRefWomanmoney = c.getString(8);
                 String mRefresultmoeny = c.getString(9);
-                Log.v("mylog", "id " + id);
-                Log.v("mylog", "date " + mRefDate);
-                Log.v("mylog", "starttime " + mRefstart);
-                Log.v("mylog", "endtime " + mRefEnd);
-                Log.v("mylog", "title " + mRefTitle);
-                Log.v("mylog", "content " + mRefContent);
-                Log.v("mylog", "resulthour" + mRefResulthour);
-                Log.v("mylog", "manmoney " + mRefManmoney);
-                Log.v("mylog", "womanmoney " + mRefWomanmoney);
-                Log.v("mylog", "resultmoney " + mRefresultmoeny);
                 NumberFormat nf = NumberFormat.getNumberInstance();
                 String numberstr;
                 int numberResult = Integer.parseInt(mRefresultmoeny);

@@ -504,9 +504,4 @@ public class BaseActivity extends AppCompatActivity
         AppPosPreferenceManager.setAutoLogin(mContext, false);
         HttpPostSend.clearCookie();
     }
-
-//    public void setFont(TextView textView){
-//        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf");//폰트
-//        textView.setTypeface(typeface);
-//    }
 }

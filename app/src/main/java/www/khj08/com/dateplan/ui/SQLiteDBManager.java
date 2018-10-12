@@ -43,8 +43,6 @@ public class SQLiteDBManager {
                 "finalminute INTEGER," +
                 "bestphoto TEXT ); ");
 
-        Log.v("mylog","SQLite Diary테이블 생성");
-
         /*addRowValue.put("manmoney", strManMoney);
         addRowValue.put("womanmoney",strWomanMoney);
         addRowValue.put("resultmoney",numberstr);*/
