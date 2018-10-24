@@ -311,8 +311,6 @@ public class LoadDatePickerActivity extends BaseActivity {
                 String mRefWomanmoney = c.getString(8);
                 String mRefresultmoeny = c.getString(9);
                 String mRefbestphoto = c.getString(10);
-                //Log.v("mylog", "date " + mRefDate);
-//                Toast.makeText(this, "불러온 아이디는 "+id01 + "불러온 날짜는 "+ mRefDate, Toast.LENGTH_SHORT).show();
 
                 myBitmap = StringToBitMap(mRefbestphoto);
                 imageView.setImageBitmap(myBitmap);
@@ -446,15 +444,6 @@ public class LoadDatePickerActivity extends BaseActivity {
                             //img01 = BitMapToString(myBitmap);
 
                             ContentValues updateRowValue = new ContentValues();
-//                            Log.v("mylog", "날짜는 " + DateValue);
-//                            Log.v("mylog", "만난 시간은 " + TimeValue01);
-//                            Log.v("mylog", "헤어진 시간은 " + TimeValue02);
-//                            Log.v("mylog", "제목은 " + TitleValue);
-//                            Log.v("mylog", "내용은 " + ContentValue);
-//                            Log.v("mylog", "총만난 시간: " + strResulthour);
-//                            Log.v("mylog", "남자지출: " + strManMoney);
-//                            Log.v("mylog", "여자지출: " + strWomanMoney);
-//                            Log.v("mylog", "총지출: " + numberstr);
                             updateRowValue.put("date", DateValue);
                             updateRowValue.put("starttime", TimeValue01);
                             updateRowValue.put("endtime", TimeValue02);

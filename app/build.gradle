@@ -23,7 +23,9 @@ android {
         }
         release {
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt')
+            debuggable false // debugging 허용 안함
+            zipAlignEnabled true  // apk 최적화
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
             proguardFile 'proguard-rules.pro'
         }
     }

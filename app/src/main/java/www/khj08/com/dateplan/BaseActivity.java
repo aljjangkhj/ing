@@ -317,7 +317,6 @@ public class BaseActivity extends AppCompatActivity
     {
         if(TimeOut_timer != null)
         {
-            log.vlog(2, "TimeOut 중지됨");
             TimeOut_timer.cancel();
         }
     }
@@ -350,7 +349,6 @@ public class BaseActivity extends AppCompatActivity
 
         if(timer != null)
         {
-            log.vlog(2, "폴링중지됨");
             timer.cancel();
         }
     }
@@ -358,7 +356,6 @@ public class BaseActivity extends AppCompatActivity
     // 오버라이드 해서 써야함.
     public void PollingTimeOut()
     {
-        log.vlog(2, "폴링 타임아웃");
     }
 
     // 오버라이드 해서 써야함.

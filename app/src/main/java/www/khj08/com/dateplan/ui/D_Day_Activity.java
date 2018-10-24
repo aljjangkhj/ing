@@ -155,8 +155,6 @@ public class D_Day_Activity extends BaseActivity {
 //        if (!changeDay) {
             for (int dayPat = 100; dayPat <= 18200; dayPat += 100) {
                 String today = Util.yyyyMMdd();
-                log.vlog(2,"KHJ 최종이길: " + Util.diffOfDate(MySharedPreferencesManager.getLoveStartDay(mContext),today));
-                log.vlog(2,"KHJ tday: " + today);
                 long saveDateDday = Util.diffOfDate(MySharedPreferencesManager.getLoveStartDay(mContext),today) + 1;
                 listViewAdapter.addItem2(HJYear, HJMonth, HJDay + dayPat - 1, dayPat + " 일", getDate((int) (saveDateDday - (dayPat)) * -1), 0);
             }

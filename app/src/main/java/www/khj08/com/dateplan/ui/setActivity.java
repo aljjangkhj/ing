@@ -487,11 +487,8 @@ public class setActivity extends BaseActivity {
 
             MySharedPreferencesManager.setLoveStartDay(myyear+"-"+mmonth+"-"+mday,mContext);
             String today = Util.yyyyMMdd();
-            log.vlog(2,"KHJ 최종이길: " + Util.diffOfDate(MySharedPreferencesManager.getLoveStartDay(mContext),today));
-            log.vlog(2,"KHJ tday: " + tday);
             long saveDateDday = Util.diffOfDate(MySharedPreferencesManager.getLoveStartDay(mContext),today) + 1;
             long count = tday - lday; // 오늘 날짜에서 dday 날짜를 빼주게 됩니다.
-            log.vlog(2, "KHJ 저장된 D-Day는" + myyear + "년 " + mmonth + "월 " + mday + "일 입니다." + "D-DAY는 " + "-" + count);
             MySharedPreferencesManager.setDdaySave((int) saveDateDday, setActivity.this);
             //MySharedPreferencesManager.setDdaySaveint((int) count,setActivity.this);
             MySharedPreferencesManager.setYear(myyear,setActivity.this);

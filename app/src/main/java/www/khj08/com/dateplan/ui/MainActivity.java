@@ -132,13 +132,10 @@ public class MainActivity extends BaseActivity
 //        backPressCloseSystem = new BackPressCloseSystem(this);
         AdView mAdView = (AdView) findViewById(R.id.adView);
         //광고테스트
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("1DC9651A441E938D55FC3CCE27FBB889").build();
+        AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
         String today = Util.yyyyMMdd();
-        log.vlog(2,"KHJ today: " + today);
-
-        log.vlog(2,"KHJ 최종이길: " + Util.diffOfDate(MySharedPreferencesManager.getLoveStartDay(mContext),today));
 
 //        AdView mAdView2 = (AdView)findViewById(R.id.adView2);
 //        AdRequest adRequest2 = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
@@ -222,13 +219,9 @@ public class MainActivity extends BaseActivity
         mdate2.setDate(MySharedPreferencesManager.getDay(this)-1);
         long tt2 = mdate2.getTime() / 86400000;
 
-        // Log.v("mylog","오늘날짜시간: "+a);
-        //  Log.v("mylog","사용자 설정 날짜시간: "+b);
         if (a == tday) {
-            //Log.v("mylog","d-day: "+(a-b));
             this.MainDdayText.setText("D+" + (tt - tt2) + " ~잉ing");
         } else {
-            // Log.v("mylog","dday:"+(tday-b));
             if (b == 0) {
                 this.MainDdayText.setText("만나기 시작한 날을 설정해 주세요.");
             } else {
@@ -258,9 +251,6 @@ public class MainActivity extends BaseActivity
                 String numberstr = nf.format(finalresult);
                 mainMoney = numberstr;
                 resultmoney.setText(numberstr + "원");
-                //Log.v("mylog","finalresult: "+ finalresult);
-                //Log.v("mylog", "date " + mRefDate);
-                // Toast.makeText(DateListView.this, "저장된 날짜는: " + mRefDate, Toast.LENGTH_SHORT).show();
             }
         }
         /*String [] strarray = {String.valueOf(iid)};
@@ -273,10 +263,7 @@ public class MainActivity extends BaseActivity
             while (c02.moveToNext()) {
                 int iid = c02.getInt(0);
                 String mRefResultmoney = c02.getString(1);
-                Log.v("mylog","비용 불러오기: "+ mRefResultmoney);
                 Toast.makeText(this, "총 비용은 " + mRefResultmoney, Toast.LENGTH_SHORT).show();
-                //Log.v("mylog", "date " + mRefDate);
-                // Toast.makeText(DateListView.this, "저장된 날짜는: " + mRefDate, Toast.LENGTH_SHORT).show();
             }
         }*/
 
@@ -788,8 +775,6 @@ public class MainActivity extends BaseActivity
 //            }
 //        }
         String today = Util.yyyyMMdd();
-        log.vlog(2,"KHJ 최종이길: " + Util.diffOfDate(MySharedPreferencesManager.getLoveStartDay(mContext),today));
-        log.vlog(2,"KHJ tday: " + today);
         long saveDateDday = Util.diffOfDate(MySharedPreferencesManager.getLoveStartDay(mContext),today) + 1;
         if (b == 0) {
             this.MainDdayText.setText("만나기 시작한 날을 설정해 주세요.");

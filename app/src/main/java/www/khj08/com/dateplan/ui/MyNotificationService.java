@@ -55,7 +55,6 @@ public class MyNotificationService extends Service{
             if(bitmap != null && bitmap.toString().length() != 0 && bitmap2 != null && bitmap2.toString().length() != 0) {
                 if (msg.what == 0) {
                     //개발자가 정합니다. -> 화면에 Notification을 출력하는 명령문들을 작성
-                   // Log.v("mylog", "msg.what ==0 in MyHandler");
 
                     //1.인텐트 객체를 생성하고 임시 변수에 저장합니다.
                     //-> 액티비티 클래스 정보를 저장하기 위한 변수(객체)
@@ -73,7 +72,6 @@ public class MyNotificationService extends Service{
 
 
 //                    Typeface typeface = Typeface.createFromAsset(getAssets(),"fonts/BMJUA_ttf.ttf");
-                   // Log.v("mylog", "notifi if");
                     bitmap = getCircularBitmap(bitmap);
                     bitmap2 = getCircularBitmap(bitmap2);
                     RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notification_layout);
@@ -130,19 +128,14 @@ public class MyNotificationService extends Service{
                     //notify()함수를 실행해서 화면에 출력
                     mRefNotificationManager.notify(1, refNotification);
                     //1: 아이디
-//                    Log.v("mylog", "notify()");
-
-
                 } else if (msg.what == 1) {
                     //화면에 출력된 Notification을 삭제하는 명령문들을 작성
-//                    Log.v("mylog", "msg.what == 1 in MyHandler");
 
                     //cancel()함수를 실행하기 : 강제로 노티피케이션을 삭제(화면에서 없애기)
                     mRefNotificationManager.cancel(1);
                     //1: notify()함수에서 사용한 정수 값과 일치
                 }
             }else{
-//                Log.v("mylog","notifi else");
                 mRefNotificationThread.stopNoti();
                 Toast.makeText(MyNotificationService.this, "메인 화면에 사진을 등록해야 합니다.", Toast.LENGTH_SHORT).show();
                 MySharedPreferencesManager.setCheckbox(false,MyNotificationService.this);
@@ -186,7 +179,6 @@ public class MyNotificationService extends Service{
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         //1. 로그 남기기
-//        Log.v("mylog", "onStartCommand");
 
         //2. 안드로이드 시스템이 가지고있는 Notification 서비스에 접근하기
         mRefNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);

@@ -57,7 +57,6 @@ public class D_Day_Adapter extends BaseAdapter {
 
         final int pos = position;
         final Context context = parent.getContext();
-        //Log.v("mylog","position: "+pos);
         // "listview_item" Layout을 inflate하여 convertView 참조 획득.
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -70,12 +69,9 @@ public class D_Day_Adapter extends BaseAdapter {
         descTextView = (TextView) convertView.findViewById(R.id.dday_text03) ;
 
        // int DdayPreferences01 = MySharedPreferencesManager.getDdaySaveint(mRefContext);
-       // Log.v("mylog","Ddaypreferences01: "+ DdayPreferences01);
 
        /* for(int i = 100; i <= 18200; i += 100 ) {
             int resultCount = DdayPreferences01 - i;
-            Log.v("mylog", "resultCount: " + resultCount);
-            Log.v("mylog", "integerdday[i]: " + i);
 
             if(resultCount > 0){
                 // this.addItem(i, i + " 일", "", "D+"+resultCount);
@@ -99,7 +95,6 @@ public class D_Day_Adapter extends BaseAdapter {
         String ddaylist = descTextView.getText().toString();
         try {
             int intlist = Integer.parseInt(ddaylist);
-            //Log.v("mylog","intlist: "+intlist);
             if (intlist > 0){
                 descTextView.setTextColor(Color.parseColor("#EAEAEA"));
                 ddayTextView.setTextColor(Color.parseColor("#EAEAEA"));

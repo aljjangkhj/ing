@@ -51,7 +51,6 @@ public class SQLiteDBManager {
 
     public long insert(ContentValues addRowValue) {
 
-        // Log.v("mylog","SQLite Insert함수");
         return mDatabase.insert(TABLE_DIARY, null, addRowValue);
     }
 
@@ -59,7 +58,6 @@ public class SQLiteDBManager {
 
         /*Cursor c = null;
         c = mDatabase.rawQuery("SELECT * FROME " + TABLE_DIARY + "WHERE date=" + "'" +  "'",  null);*/
-        //Log.v("mylog", "c 값은 " + c);
 
         return mDatabase.query(TABLE_DIARY,columns,selection,selectionArgs,groupBy,having,orderBy);
     }

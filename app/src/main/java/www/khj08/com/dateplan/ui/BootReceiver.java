@@ -14,6 +14,7 @@ public class BootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        // api 28~ error
 //        if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
 //            Intent i = new Intent(context, MyNotificationService.class);
 //            context.startService(i);

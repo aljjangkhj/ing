@@ -23,3 +23,30 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+
+#-dontobfuscate                              #난독화를 수행하지 않도록 함
+#-keepattributes SoureFile,LineNumberTable   #소스파일, 라인 전보 유지
+
+#-keep class org.xmlpull.v1.** { *; }
+#-dontwarn org.ejml.**
+#-dontwarn org.xmlpull.**
+#-dontwarn io.reactivex.**
+#-dontwarn com.squareup.okhttp.**
+#-dontwarn com.thoughtworks.xstream.**
+#-dontwarn boofcv.**
+#-dontwarn java.awt.**
+
+#-keep class com.google.** { *; }
+-dontwarn com.google.android.gms.common.GooglePlayServicesUtil
+
+
+-assumenosideeffects class android.util.Log{
+    public static boolean isLoggable(java.lang.string ,int);
+    public static int v(...);
+    public static int i(...);
+    public static int w(...);
+    public static int d(...);
+    public static int e(...);
+
+}

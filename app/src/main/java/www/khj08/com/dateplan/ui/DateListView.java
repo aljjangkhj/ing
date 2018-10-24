@@ -121,7 +121,6 @@ public class DateListView extends BaseActivity {
 //                                    public void onClick(DialogInterface dialog, int which) {
 //                                        Intent intent = new Intent(DateListView.this, LoadDatePickerActivity.class);
 //                                        intent.putExtra("위치값", mRefDate);
-//                                        Log.v("mylog", "mRefDate: " + mRefDate);
 //                                        //   Toast.makeText(DateListView.this, "위치값은 " + idResult, Toast.LENGTH_SHORT).show();
 //                                        MoveToActivity(intent);
 //                                        finish();
@@ -164,10 +163,6 @@ public class DateListView extends BaseActivity {
                         }
                     }
                 }
-//                Log.v("mylog","additem: "+ additem[0]);
-//                Log.v("mylog","additem: "+ additem[1]);
-//                Log.v("mylog","additem: "+ additem[2]);
-                // Toast.makeText(DateListView.this, "포지션값은: "+id, Toast.LENGTH_SHORT).show();
             }
         });
     }

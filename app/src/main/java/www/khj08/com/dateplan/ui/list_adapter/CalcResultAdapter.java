@@ -35,7 +35,6 @@ public class CalcResultAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         int pos = position;
         final Context context = parent.getContext();
-        //Log.v("mylog","position: "+pos);
         // "listview_item" Layout을 inflate하여 convertView 참조 획득.
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

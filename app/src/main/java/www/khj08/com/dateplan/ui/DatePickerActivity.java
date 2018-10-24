@@ -215,7 +215,6 @@ public class DatePickerActivity extends BaseActivity {
                     @Override
                     public void onClick() {
                         // Toast.makeText(this, "저장버튼 클릭", Toast.LENGTH_SHORT).show();
-                        // Log.v("mylog", "저장버튼 클릭");
                         DateValue = datePickerTxt.getText().toString();
                         TimeValue01 = timeHelloText.getText().toString();
                         TimeValue02 = timeByeText.getText().toString();
@@ -232,7 +231,6 @@ public class DatePickerActivity extends BaseActivity {
                         if (c != null) {
                             while (c.moveToNext()) {
                                 mRefDate = c.getString(0);
-                                Log.v("mylog", "date " + mRefDate);
                                 //Toast.makeText(DatePickerActivity.this, "저장된 날짜는: " + mRefDate, Toast.LENGTH_SHORT).show();
                             }
                             c.close();
@@ -440,7 +438,6 @@ public class DatePickerActivity extends BaseActivity {
                 if (c != null) {
                     while (c.moveToNext()) {
                         mRefDate = c.getString(0);
-                        Log.v("mylog", "date " + mRefDate);
                         Toast.makeText(DatePickerActivity.this, "저장된 날짜는: " + mRefDate, Toast.LENGTH_SHORT).show();
                     }
                     c.close();
@@ -617,7 +614,6 @@ public class DatePickerActivity extends BaseActivity {
                     @Override
                     public void onClick() {
                         // Toast.makeText(this, "저장버튼 클릭", Toast.LENGTH_SHORT).show();
-                        // Log.v("mylog", "저장버튼 클릭");
                         DateValue = datePickerTxt.getText().toString();
                         TimeValue01 = timeHelloText.getText().toString();
                         TimeValue02 = timeByeText.getText().toString();
@@ -634,7 +630,6 @@ public class DatePickerActivity extends BaseActivity {
                         if (c != null) {
                             while (c.moveToNext()) {
                                 mRefDate = c.getString(0);
-                                Log.v("mylog", "date " + mRefDate);
                                 //Toast.makeText(DatePickerActivity.this, "저장된 날짜는: " + mRefDate, Toast.LENGTH_SHORT).show();
                             }
                             c.close();

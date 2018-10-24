@@ -23,21 +23,17 @@ public class Main3ThreadActivity extends BaseActivity {
     public void onCreate(Bundle bundle){
         super.onCreate(bundle);
         onBackPressed();
-        //Log.v("mylog","start Main3ThreadActivity");
         setContentView(R.layout.main_thread_layout);
 //        Typeface typeface = Typeface.createFromAsset(getAssets(),"fonts/BMJUA_ttf.ttf");
-      //  Log.v("mylog","setContentView 실행");
         this.textView = (TextView)this.findViewById(R.id.mainthread_text);
         ingIMG = (ImageView)findViewById(R.id.ingIMG);
         Intent intent = new Intent(mContext,MyNotificationService.class);
 
         if (MySharedPreferencesManager.getCheckbox(mContext)){
             startService(intent);
-            log.vlog(2,"KHJ startService");
         }else{
             stopService(intent);
             MySharedPreferencesManager.setCheckbox(false, mContext);
-            log.vlog(2,"KHJ stopService");
         }
 
 //        textView.setTypeface(typeface);

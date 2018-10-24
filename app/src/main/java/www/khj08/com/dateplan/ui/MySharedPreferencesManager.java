@@ -77,7 +77,6 @@ public class MySharedPreferencesManager {
         SharedPreferences.Editor refEditor = refSharedPreferences.edit();
         refEditor.putInt("ddayint", dday);
         refEditor.commit();
-        Log.v("mylog", "dday 저장완료");
     }
     //dday를 정수로만 불러오는 함수
     public static int getDdaySaveint(Context context) {
