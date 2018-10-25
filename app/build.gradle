@@ -7,7 +7,7 @@ android {
         applicationId "www.khj08.com.dateplan"
         minSdkVersion 14
         targetSdkVersion 27
-        versionCode 20
+        versionCode 21
         versionName "2.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

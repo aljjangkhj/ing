@@ -31,7 +31,6 @@
             android:id="@+id/la_intro_lottieview2" />
     </LinearLayout>
     <TextView
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="right"

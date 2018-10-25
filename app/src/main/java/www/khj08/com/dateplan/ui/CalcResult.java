@@ -25,6 +25,7 @@ public class CalcResult extends BaseActivity {
 
     private TextView font1;
     private TextView font2;
+    private TextView second_name_calc,first_name_calc;
     private LinearLayout btn_main_menu;
 
 
@@ -38,6 +39,8 @@ public class CalcResult extends BaseActivity {
         listview01.setAdapter(listViewAdapter);
         font1 = (TextView)this.findViewById(R.id.fonts1);
         font2 = (TextView)this.findViewById(R.id.fonts2);
+        first_name_calc = (TextView)findViewById(R.id.first_name_calc);
+        second_name_calc = (TextView)findViewById(R.id.second_name_calc);
         btn_main_menu = (LinearLayout)findViewById(R.id.btn_main_menu);
 
         btn_main_menu.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +52,13 @@ public class CalcResult extends BaseActivity {
 //        Typeface typeface = Typeface.createFromAsset(getAssets(),"fonts/BMJUA_ttf.ttf");
 //        font1.setTypeface(typeface);
 //        font2.setTypeface(typeface);
+        if (!MySharedPreferencesManager.getPic01(mContext).equals("길동")){
+            first_name_calc.setText(MySharedPreferencesManager.getPic01(mContext));
+        }
+        if (!MySharedPreferencesManager.getPic02(mContext).equals("둘리")){
+            second_name_calc.setText(MySharedPreferencesManager.getPic02(mContext));
+        }
+
         mSQLiteDBManager = SQLiteDBManager.getInstance(this);
         String[] columns = new String[]{"_id", "date", "starttime", "endtime", "title", "content", "resulthour", "manmoney", "womanmoney", "resultmoney"};
         Cursor c = mSQLiteDBManager.query(columns, null, null, null, null, null);

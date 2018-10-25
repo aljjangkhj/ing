@@ -66,8 +66,7 @@ import www.khj08.com.dateplan.utils.Util;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
-public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity /*implements NavigationView.OnNavigationItemSelectedListener*/ {
 
     private final int GALLERY_CODE=1112;
 
@@ -827,7 +826,7 @@ public class MainActivity extends BaseActivity
                         firstname2.setTextColor(Color.WHITE);
                         secondname1.setTextColor(Color.WHITE);
                         secondname2.setTextColor(Color.WHITE);
-                        nav_textView.setTextColor(Color.BLACK);
+//                        nav_textView.setTextColor(Color.BLACK);
 
                         // Toast.makeText(MainActivity.this, color+"", Toast.LENGTH_SHORT).show();
                     }
@@ -842,7 +841,7 @@ public class MainActivity extends BaseActivity
                         womanName.setTextColor(Color.BLACK);
                         mainText.setTextColor(Color.BLACK);
                         MainDdayText.setTextColor(Color.BLACK);
-                        nav_textView.setTextColor(Color.BLACK);
+//                        nav_textView.setTextColor(Color.BLACK);
                         firstname1.setTextColor(Color.BLACK);
                         firstname2.setTextColor(Color.BLACK);
                         secondname1.setTextColor(Color.BLACK);
@@ -864,7 +863,7 @@ public class MainActivity extends BaseActivity
                         firstname2.setTextColor(Color.WHITE);
                         secondname1.setTextColor(Color.WHITE);
                         secondname2.setTextColor(Color.WHITE);
-                        nav_textView.setTextColor(Color.BLACK);
+//                        nav_textView.setTextColor(Color.BLACK);
                         MySharedPreferencesManager.saveColor(Color.BLACK, MainActivity.this);
                       //  Toast.makeText(MainActivity.this, Color.BLACK + "", Toast.LENGTH_SHORT).show();
                         // mRefBackground = 2;
@@ -884,7 +883,7 @@ public class MainActivity extends BaseActivity
                         firstname2.setTextColor(Color.BLACK);
                         secondname1.setTextColor(Color.BLACK);
                         secondname2.setTextColor(Color.BLACK);
-                        nav_textView.setTextColor(Color.BLACK);
+//                        nav_textView.setTextColor(Color.BLACK);
                         //  mRefBackground = 3;
                         MySharedPreferencesManager.saveColor(color, MainActivity.this);
                        // Toast.makeText(MainActivity.this, color + "", Toast.LENGTH_SHORT).show();
@@ -914,48 +913,10 @@ public class MainActivity extends BaseActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            //   Toast.makeText(this, "일기쓰기", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainActivity.this, DatePickerActivity.class);
-            MoveToActivity(intent);
-
-        } else if (id == R.id.nav_gallery) {
-            //  Toast.makeText(this, "D - DAY", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainActivity.this, D_Day_Activity.class);
-            MoveToActivity(intent);
-
-        } else if (id == R.id.nav_slideshow) {
-            //Toast.makeText(this, "일기 목록", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainActivity.this, DateListView.class);
-            MoveToActivity(intent);
-
-        } else if (id == R.id.nav_calc) {
-            //Toast.makeText(this, "가계부", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainActivity.this, CalcResult.class);
-            MoveToActivity(intent);
-
-        } /*else if (id == R.id.nav_massage) {
-            Toast.makeText(this, "대화하기", Toast.LENGTH_SHORT).show();
-
-        }*/ else if (id == R.id.nav_set) {
-            //Toast.makeText(this, "설정", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainActivity.this, setActivity.class);
-            MoveToActivity(intent);
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
     public void mybackgroundcolor(){
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        View myView = navigationView.getHeaderView(0);
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        navigationView.setNavigationItemSelectedListener(this);
+//        View myView = navigationView.getHeaderView(0);
         mainText = (TextView) this.findViewById(R.id.main_textview01);
         MainDdayText = (TextView) this.findViewById(R.id.main_dday_text);
         resultTime = (TextView) this.findViewById(R.id.resultTime);
@@ -969,7 +930,7 @@ public class MainActivity extends BaseActivity
         imageButton01 = (ImageButton) findViewById(R.id.man);
         imageButton02 = (ImageButton) this.findViewById(R.id.woman);
         constraintlayout = (LinearLayout) this.findViewById(R.id.main_layout);
-        nav_textView = (TextView) myView.findViewById(R.id.nav_header_layout_TextView);
+//        nav_textView = (TextView) myView.findViewById(R.id.nav_header_layout_TextView);
         firstname1 = (TextView)findViewById(R.id.first_name_tv);
         firstname2 = (TextView)findViewById(R.id.first_name_tv2);
         secondname1 = (TextView)findViewById(R.id.second_name_tv);
@@ -994,7 +955,7 @@ public class MainActivity extends BaseActivity
                 firstname2.setTextColor(Color.WHITE);
                 secondname1.setTextColor(Color.WHITE);
                 secondname2.setTextColor(Color.WHITE);
-                nav_textView.setTextColor(Color.BLACK);
+//                nav_textView.setTextColor(Color.BLACK);
             }
             else if(savebackground == Color.WHITE){
                 int color = Color.parseColor("#FFFFFF");
@@ -1007,7 +968,7 @@ public class MainActivity extends BaseActivity
                 womanName.setTextColor(Color.BLACK);
                 mainText.setTextColor(Color.BLACK);
                 MainDdayText.setTextColor(Color.BLACK);
-                nav_textView.setTextColor(Color.BLACK);
+//                nav_textView.setTextColor(Color.BLACK);
                 firstname1.setTextColor(Color.BLACK);
                 firstname2.setTextColor(Color.BLACK);
                 secondname1.setTextColor(Color.BLACK);
@@ -1028,7 +989,7 @@ public class MainActivity extends BaseActivity
                 firstname2.setTextColor(Color.WHITE);
                 secondname1.setTextColor(Color.WHITE);
                 secondname2.setTextColor(Color.WHITE);
-                nav_textView.setTextColor(Color.BLACK);
+//                nav_textView.setTextColor(Color.BLACK);
             }
             else if(savebackground == Color.parseColor("#FAED7D")){
                 constraintlayout.setBackgroundColor(Color.parseColor("#FAED7D"));
@@ -1040,7 +1001,7 @@ public class MainActivity extends BaseActivity
                 womanName.setTextColor(Color.BLACK);
                 mainText.setTextColor(Color.BLACK);
                 MainDdayText.setTextColor(Color.BLACK);
-                nav_textView.setTextColor(Color.BLACK);
+//                nav_textView.setTextColor(Color.BLACK);
                 firstname1.setTextColor(Color.BLACK);
                 firstname2.setTextColor(Color.BLACK);
                 secondname1.setTextColor(Color.BLACK);
@@ -1197,7 +1158,6 @@ public class MainActivity extends BaseActivity
             f.delete();
         }
     }
-
     public static Uri getImageContentUri(Context context, String absPath) {
 
         Cursor cursor = context.getContentResolver().query(
@@ -1219,6 +1179,45 @@ public class MainActivity extends BaseActivity
             return null;
         }
     }
+
+//    @SuppressWarnings("StatementWithEmptyBody")
+//    @Override
+//    public boolean onNavigationItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//
+//        if (id == R.id.nav_camera) {
+//            //   Toast.makeText(this, "일기쓰기", Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(MainActivity.this, DatePickerActivity.class);
+//            MoveToActivity(intent);
+//
+//        } else if (id == R.id.nav_gallery) {
+//            //  Toast.makeText(this, "D - DAY", Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(MainActivity.this, D_Day_Activity.class);
+//            MoveToActivity(intent);
+//
+//        } else if (id == R.id.nav_slideshow) {
+//            //Toast.makeText(this, "일기 목록", Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(MainActivity.this, DateListView.class);
+//            MoveToActivity(intent);
+//
+//        } else if (id == R.id.nav_calc) {
+//            //Toast.makeText(this, "가계부", Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(MainActivity.this, CalcResult.class);
+//            MoveToActivity(intent);
+//
+//        } /*else if (id == R.id.nav_massage) {
+//            Toast.makeText(this, "대화하기", Toast.LENGTH_SHORT).show();
+//
+//        }*/ else if (id == R.id.nav_set) {
+//            //Toast.makeText(this, "설정", Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(MainActivity.this, setActivity.class);
+//            MoveToActivity(intent);
+//        }
+//
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
+//        return true;
+//    }
 
     private String getRealPathFromURI(Uri contentUri) {
         int column_index = 0;
