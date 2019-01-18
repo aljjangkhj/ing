@@ -50,6 +50,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="길동"
+                android:maxWidth="350px"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:textColor="#000"
                 android:id="@+id/widget_name1"
                 android:layout_marginRight="5dp"/>
@@ -78,6 +81,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxWidth="350px"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:text="둘리"
                 android:textColor="#000"
                 android:id="@+id/widget_Name2"

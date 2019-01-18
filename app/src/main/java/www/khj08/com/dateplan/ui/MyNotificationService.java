@@ -58,7 +58,7 @@ public class MyNotificationService extends Service {
             Bitmap bitmap = MainActivity.StringToBitMap(MySharedPreferencesManager.getManPicture(MyNotificationService.this));
             if (bitmap != null && bitmap.toString().length() != 0 && bitmap2 != null && bitmap2.toString().length() != 0) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                    NotificationManager notificationManager = (NotificationManager) getSystemService(mContext.NOTIFICATION_SERVICE);
                     NotificationChannel notificationChannel = new NotificationChannel("channel_id", "channel_name", NotificationManager.IMPORTANCE_DEFAULT);
                     notificationChannel.setDescription("channel description");
                     notificationChannel.enableLights(true);
@@ -83,7 +83,7 @@ public class MyNotificationService extends Service {
                     remoteViews.setTextViewText(R.id.womanName2, MySharedPreferencesManager.getPic02(MyNotificationService.this));
 
                     mRefNotificationCompatBuilder = new NotificationCompat.Builder(MyNotificationService.this, notificationChannel.getId());
-                    mRefNotificationCompatBuilder = new NotificationCompat.Builder(MyNotificationService.this);
+//                    mRefNotificationCompatBuilder = new NotificationCompat.Builder(MyNotificationService.this);
                     mRefNotificationCompatBuilder.setSmallIcon(R.drawable.mainthreadlogo1);
                     mRefNotificationCompatBuilder.setContent(remoteViews);
 

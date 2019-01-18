@@ -12,7 +12,7 @@ public class Config
     static public String TAG = "";
     // PROJECT Default
     final static public boolean RELEASE = true; // 프로젝트 동작모드 true : 배포용, false : 개발용
-    final static public int SERVERMODE = 2; // 1 : 운영, 2 : 개발, 3 : 스테이징
+    final static public int SERVERMODE = 1; // 1 : 운영, 2 : 개발, 3 : 스테이징
 
     static public int DEVICE_SCREEN_HEIGHT = 2560; //
     static public int DEVICE_SCREEN_WIDTH = 1440; //

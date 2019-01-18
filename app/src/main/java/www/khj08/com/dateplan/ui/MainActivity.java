@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -56,6 +57,10 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardItem;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 import www.khj08.com.dateplan.BaseActivity;
 import www.khj08.com.dateplan.R;
@@ -68,56 +73,33 @@ import static android.os.Environment.getExternalStoragePublicDirectory;
 
 public class MainActivity extends BaseActivity /*implements NavigationView.OnNavigationItemSelectedListener*/ {
 
-    private final int GALLERY_CODE=1112;
+    private final int GALLERY_CODE = 1112;
 
     public SideMenuBar menubar_sidemenu = null;
 
     private InterstitialAd interstitialAd;
-    private ImageButton imageButton01;
-    private ImageButton imageButton02;
-    private ImageView imageView01;
-    private ImageView imageView02;
+    private RewardedVideoAd mRewardedVideoAd;
+    private Bitmap myBitmap;
+
+    private int mRefid,finalresult,finalResultTime,sqltime,savebackground,mainHour,mainMinute;
+    private String img01,img02,mainImage,mRefResultMoney,mCurrentPhotoPath;
+
+    private TextView resultmoney,resultTime,moenyset,timeset,manName,womanName,mainText,MainDdayText,nav_textView,firstname1,secondname1,firstname2,secondname2;
+    private ImageButton imageButton01,imageButton02,imageButton_nav;
+    private ImageView imageView01,imageView02,imageView_nav;
+
+    private Uri photoURI,albumURI,mImageCaptureUri;
+    private SQLiteDBManager mSQLiteDBManager;
+
+    private String mainMoney = "0";
+    private LinearLayout btn_main_menu,constraintlayout,write_diary_btn,list_diary_btn,d_day_btn,account_btn, setting_btn;
     private Button get_admob;
+
     private int imagebtn01 = 0;
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
     private static final int CROP_FROM_CAMERA = 2;
     private static final int REQUEST_IMAGE_CROP = 3;
-    private String img01;
-    private String img02;
-    private String mainImage;
-    private Bitmap myBitmap;
-    private int selectpick;
-    private Uri mImageCaptureUri;
-    private TextView resultmoney;
-    private TextView resultTime;
-    private TextView moenyset;
-    private TextView timeset;
-    private TextView manName;
-    private TextView womanName;
-    private TextView mainText;
-    private TextView MainDdayText;
-    private TextView nav_textView;
-    private SQLiteDBManager mSQLiteDBManager;
-    private String mRefResultMoney;
-    private int mRefid;
-    private int finalresult;
-    private BackPressCloseSystem backPressCloseSystem;
-    private int finalResultTime;
-    private int sqltime;
-    private ImageButton imageButton_nav;
-    private ImageView imageView_nav;
-    private int mRefBackground = 0;
-    private String strdrawable;
-    private Bitmap bitmap;
-    private int savebackground;
-    String mCurrentPhotoPath;
-    Uri photoURI,albumURI;
-    private TextView firstname1,secondname1,firstname2,secondname2;
-    private int mainHour,mainMinute;
-    private String mainMoney = "0";
-    private LinearLayout btn_main_menu,constraintlayout,write_diary_btn,list_diary_btn,d_day_btn,account_btn, setting_btn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -183,6 +165,7 @@ public class MainActivity extends BaseActivity /*implements NavigationView.OnNav
         imageButton02 = (ImageButton) this.findViewById(R.id.woman);
         constraintlayout = (LinearLayout) this.findViewById(R.id.main_layout);
         get_admob = (Button) this.findViewById(R.id.get_admob);
+        nav_textView = (TextView) findViewById(R.id.nav_header_layout_TextView);
 
         this.mainText.setText(MySharedPreferencesManager.getStartLoveDay(this));
 //        this.MainDdayText.setText(MySharedPreferencesManager.getDdaySave(this));
@@ -270,6 +253,46 @@ public class MainActivity extends BaseActivity /*implements NavigationView.OnNav
             @Override
             public void onClick(View v) {
                 setFullAd();
+//                mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(mContext);
+//                mRewardedVideoAd.setRewardedVideoAdListener(new RewardedVideoAdListener() {
+//                    @Override
+//                    public void onRewardedVideoAdLoaded() {
+//                        if (mRewardedVideoAd.isLoaded()) {
+//                            mRewardedVideoAd.show();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onRewardedVideoAdOpened() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onRewardedVideoStarted() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onRewardedVideoAdClosed() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onRewarded(RewardItem rewardItem) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onRewardedVideoAdLeftApplication() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onRewardedVideoAdFailedToLoad(int i) {
+//
+//                    }
+//                });
+//                loadRewardedVideoAd();
             }
         });
 
@@ -284,6 +307,7 @@ public class MainActivity extends BaseActivity /*implements NavigationView.OnNav
             @Override
             public void onClick(View v) {
                 MoveToActivity(new Intent(mContext,DatePickerActivity.class));
+                menubar_sidemenu.hide();
             }
         });
 
@@ -291,6 +315,7 @@ public class MainActivity extends BaseActivity /*implements NavigationView.OnNav
             @Override
             public void onClick(View v) {
                 MoveToActivity(new Intent(mContext, DateListView.class));
+                menubar_sidemenu.hide();
             }
         });
 
@@ -298,6 +323,7 @@ public class MainActivity extends BaseActivity /*implements NavigationView.OnNav
             @Override
             public void onClick(View v) {
                 MoveToActivity(new Intent(mContext, D_Day_Activity.class));
+                menubar_sidemenu.hide();
             }
         });
 
@@ -305,6 +331,7 @@ public class MainActivity extends BaseActivity /*implements NavigationView.OnNav
             @Override
             public void onClick(View v) {
                 MoveToActivity(new Intent(mContext, CalcResult.class));
+                menubar_sidemenu.hide();
             }
         });
 
@@ -312,10 +339,11 @@ public class MainActivity extends BaseActivity /*implements NavigationView.OnNav
             @Override
             public void onClick(View v) {
                 MoveToActivity(new Intent(mContext, setActivity.class));
+                menubar_sidemenu.hide();
             }
         });
 
-        nav_textView = (TextView) findViewById(R.id.nav_header_layout_TextView);
+
 
         nav_textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -355,18 +383,6 @@ public class MainActivity extends BaseActivity /*implements NavigationView.OnNav
         });
     }
 
-    /*//권한획득
-    private void doRequestPermission(){
-        String [] permissions = new String []{ Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-
-        ArrayList<String> notGrantedPermissions = new ArrayList<>();
-        for(String perm : permissions){
-            if(!PermissionUtils.hasPermissions(this, perm)){
-                notGrantedPermissions.add(perm);
-            }
-        }
-        ActivityCompat.requestPermissions(this,notGrantedPermissions.toArray(new String[] {}), PermissionUtils.MUST_HAVE_REQUEST_CODE);
-    }*/
     private void checkPermission(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
@@ -545,7 +561,6 @@ public class MainActivity extends BaseActivity /*implements NavigationView.OnNav
 //        intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 //        startActivityForResult(intent, PICK_FROM_ALBUM);
 
-
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
@@ -718,14 +733,6 @@ public class MainActivity extends BaseActivity /*implements NavigationView.OnNav
 
     @Override
     public void onBackPressed() {
-        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        backPressCloseSystem.onBackPressed();
-//        ShowPopup_APPEND();
-        /*if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }*/
 
         if (menubar_sidemenu.opened)
         {
@@ -780,8 +787,40 @@ public class MainActivity extends BaseActivity /*implements NavigationView.OnNav
         } else {
             this.MainDdayText.setText("D+" + saveDateDday + " ~잉ing");
         }
-        resultTime.setText(mainHour+"시간 "+mainMinute+"분");
-        resultmoney.setText(mainMoney+"원");
+
+//        mSQLiteDBManager = SQLiteDBManager.getInstance(this);
+        int ResultHour = 0;
+        int ResultMoney = 0;
+        int moneySet = 0;
+        int timeSet = 0;
+        int tiemHour = 0;
+        int timeMinute = 0;
+
+        Cursor c = null;
+        SQLiteDatabase mDatabase = mContext.openOrCreateDatabase("Diary.db", Context.MODE_PRIVATE, null);
+        c = mDatabase.rawQuery(" SELECT finalminute,resultmoney FROM Diary",  null);
+        if (c != null) {
+            while (c.moveToNext()) {
+                ResultHour = c.getInt(0);
+                ResultMoney = c.getInt(1);
+
+                moneySet += ResultMoney;
+
+                timeSet += ResultHour;
+
+                tiemHour = timeSet / 60;
+                timeMinute = timeSet % 60;
+
+                log.vlog(2,"KHJ4 ResultHour: " + ResultHour);
+                log.vlog(2,"KHJ4 ResultMoney: " + ResultMoney);
+            }
+            NumberFormat nf = NumberFormat.getNumberInstance();
+            String numberstr = nf.format(moneySet);
+            resultmoney.setText(numberstr + "원");
+            resultTime.setText(tiemHour + "시간 " + timeMinute + "분");
+            log.vlog(2, "KHJ4 ResultHour2: " + ResultHour);
+            log.vlog(2, "KHJ4 timeMinute2: " + tiemHour + "시간 " + timeMinute + "분");
+        }
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -1239,46 +1278,8 @@ public class MainActivity extends BaseActivity /*implements NavigationView.OnNav
         }
         return 0;
     }
-}
 
-class BackPressCloseSystem {
-    private long backKeyPressedTime = 0;
-    private Toast toast;
-    private Activity activity;
-
-    public BackPressCloseSystem(Activity activity) {
-        this.activity = activity;
-    }
-
-    public void onBackPressed() {
-        if (isAfter2Seconds()) {
-            backKeyPressedTime = System.currentTimeMillis();
-            // 현재시간을 다시 초기화
-            toast = Toast.makeText(activity,
-                    "뒤로 버튼을 한번 더 누르시면 종료됩니다.",
-                    Toast.LENGTH_SHORT);
-            toast.show();
-            return;
-        }
-        if (isBefore2Seconds()) {
-            programShutdown();
-            toast.cancel();
-        }
-    }
-
-    private Boolean isAfter2Seconds() {
-        return System.currentTimeMillis() > backKeyPressedTime + 2000;
-        // 2초 지났을 경우
-    }
-
-    private Boolean isBefore2Seconds() {
-        return System.currentTimeMillis() <= backKeyPressedTime + 2000;
-        // 2초가 지나지 않았을 경우
-    }
-
-    private void programShutdown() {
-        activity.moveTaskToBack(true);
-        activity.finish();
-        android.os.Process.killProcess(android.os.Process.myPid());
+    private void loadRewardedVideoAd() {
+        mRewardedVideoAd.loadAd(getString(R.string.reward_ad_key), new AdRequest.Builder().build());
     }
 }

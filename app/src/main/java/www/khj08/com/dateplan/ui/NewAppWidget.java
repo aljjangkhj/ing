@@ -8,6 +8,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -49,8 +50,8 @@ public class NewAppWidget extends AppWidgetProvider {
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
             views.setOnClickPendingIntent(R.id.widget_btn, pendingIntent);
 
-            Bitmap bitmap2 = MainActivity.StringToBitMap(MySharedPreferencesManager.getWomanPicture(context));
             Bitmap bitmap = MainActivity.StringToBitMap(MySharedPreferencesManager.getManPicture(context));
+            Bitmap bitmap2 = MainActivity.StringToBitMap(MySharedPreferencesManager.getWomanPicture(context));
             //CharSequence widgetText = context.getString(R.string.appwidget_text);
             // Construct the RemoteViews object
             if (bitmap != null && bitmap.toString().length() != 0 && bitmap2 != null && bitmap2.toString().length() != 0) {
@@ -112,6 +113,5 @@ public class NewAppWidget extends AppWidgetProvider {
         canvas.drawBitmap(bitmap, rect, rect, paint);
         return output;
     }
-
 }
 

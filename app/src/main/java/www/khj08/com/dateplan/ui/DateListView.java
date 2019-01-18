@@ -79,7 +79,7 @@ public class DateListView extends BaseActivity {
         btn_main_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                finish();
             }
         });
 

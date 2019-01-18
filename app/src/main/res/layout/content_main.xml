@@ -235,7 +235,7 @@
                             android:id="@+id/resultMoney"
                             android:layout_width="400px"
                             android:layout_height="100px"
-                            android:text="2,000,000원"
+                            android:text="0원"
                             android:textColor="#fff"
                             android:textSize="7pt"
                             android:gravity="center"/>
@@ -279,7 +279,7 @@
                             android:id="@+id/resultTime"
                             android:layout_width="400px"
                             android:layout_height="100px"
-                            android:text=" 101시간 0분"
+                            android:text=" 0시간 0분"
                             android:textColor="#fff"
                             android:textSize="7pt"
                             android:gravity="center"/>

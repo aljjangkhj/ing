@@ -31,7 +31,7 @@
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="220px"
+                        android:layout_height="200px"
                         android:gravity="center"
                         android:visibility="visible">
 

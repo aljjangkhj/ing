@@ -56,8 +56,8 @@ public class SQLiteDBManager {
 
     public Cursor query(String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
 
-        /*Cursor c = null;
-        c = mDatabase.rawQuery("SELECT * FROME " + TABLE_DIARY + "WHERE date=" + "'" +  "'",  null);*/
+//        Cursor c = null;
+//        c = mDatabase.rawQuery("SELECT * FROM " + TABLE_DIARY + "WHERE date=" + "'"+ +  "'",  null);
 
         return mDatabase.query(TABLE_DIARY,columns,selection,selectionArgs,groupBy,having,orderBy);
     }

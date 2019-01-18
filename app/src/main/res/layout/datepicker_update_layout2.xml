@@ -259,11 +259,15 @@
                         android:layout_margin="20px">
 
                         <TextView
-
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:maxWidth="360px"
+                            android:ellipsize="end"
+                            android:singleLine="true"
                             android:text="길동의 지출"
                             android:textColor="#000"
+                            android:layout_gravity="left"
+                            android:gravity="center"
                             android:id="@+id/first_name_u_datepicker"/>
 
                     </LinearLayout>
@@ -274,12 +278,12 @@
                         android:background="#333333"/>
 
                     <LinearLayout
-                        android:layout_width="500px"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center">
+                        android:layout_gravity="center"
+                        android:gravity="right">
 
                         <EditText
-
                             android:layout_width="400px"
                             android:layout_height="wrap_content"
                             android:background="#ffffff"
@@ -289,33 +293,11 @@
                             android:id="@+id/man_money01"/>
 
                         <TextView
-
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="원"
                             android:textColor="#000000"
-                            android:layout_marginLeft="12px"/>
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="8px"
-                        android:layout_height="match_parent"
-                        android:background="#333333"
-                        android:layout_marginLeft="8px"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center">
-
-                        <TextView
-
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="합계"
-                            android:layout_gravity="center"
-                            android:textColor="#000000"/>
+                            android:layout_marginRight="12px" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -342,13 +324,14 @@
                         android:layout_margin="20px">
 
                         <TextView
-
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:maxWidth="360px"
+                            android:ellipsize="end"
+                            android:singleLine="true"
                             android:text="둘리의 지출"
                             android:textColor="#000"
                             android:id="@+id/second_name_u_datepicker"/>
-
                     </LinearLayout>
 
                     <View
@@ -361,12 +344,12 @@
                         android:layout_height="wrap_content">
 
                         <LinearLayout
-                            android:layout_width="500px"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center">
+                            android:layout_gravity="center"
+                            android:gravity="right">
 
                             <EditText
-
                                 android:layout_width="400px"
                                 android:layout_height="wrap_content"
                                 android:background="#ffffff"
@@ -381,36 +364,8 @@
                                 android:layout_height="wrap_content"
                                 android:text="원"
                                 android:textColor="#000000"
-                                android:layout_marginLeft="12px"/>
+                                android:layout_marginRight="12px"/>
 
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="8px"
-                            android:layout_height="116px"
-                            android:background="#333333"
-                            android:layout_marginLeft="8px"/>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="right|center">
-
-                            <TextView
-
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#000000"
-                                android:id="@+id/add_money01"/>
-
-                            <TextView
-
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="원"
-                                android:textColor="#000000"
-                                android:layout_marginLeft="12px"
-                                android:layout_marginRight="40px"/>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -426,7 +381,48 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="800px"
+                    android:layout_height="120px">
+                    <TextView
+                        android:layout_width="250px"
+                        android:layout_height="match_parent"
+                        android:text="합계"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:textColor="#000000"/>
+                    <View
+                        android:layout_width="8px"
+                        android:layout_height="match_parent"
+                        android:background="#333333"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right|center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#000000"
+                            android:id="@+id/add_money01"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="원"
+                            android:textColor="#000000"
+                            android:layout_marginRight="12px"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8px"
+                    android:background="#333333"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="600px"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:layout_margin="12px">

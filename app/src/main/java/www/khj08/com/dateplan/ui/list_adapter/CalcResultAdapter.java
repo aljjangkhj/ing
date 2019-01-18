@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import www.khj08.com.dateplan.R;
+import www.khj08.com.dateplan.ui.MySharedPreferencesManager;
 import www.khj08.com.dateplan.utils.AutoScreen;
 
 /**
@@ -19,10 +20,7 @@ import www.khj08.com.dateplan.utils.AutoScreen;
 public class CalcResultAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
     private ArrayList<CalcResultItem> CalcResultListView = new ArrayList<CalcResultItem>();
-    private TextView mRefDateList;
-    private TextView mRefMyManMoney;
-    private TextView mRefMyWomanMoney;
-    private TextView mRefMyResultMoney;
+    private TextView mRefDateList,mRefMyManMoney,mRefMyWomanMoney,mRefMyResultMoney,first_name_calc,second_name_calc;
 
     // Adapter에 사용되는 데이터의 개수를 리턴. : 필수 구현
     @Override
@@ -46,7 +44,8 @@ public class CalcResultAdapter extends BaseAdapter {
         mRefMyManMoney = (TextView) convertView.findViewById(R.id.MyResultMan) ;
         mRefMyWomanMoney = (TextView)convertView.findViewById(R.id.myResultWoman);
         mRefMyResultMoney = (TextView)convertView.findViewById(R.id.myResultMoney);
-
+        first_name_calc = (TextView)convertView.findViewById(R.id.first_name_calc);
+        second_name_calc = (TextView)convertView.findViewById(R.id.second_name_calc);
 
         CalcResultItem MyCalcResultItem = CalcResultListView.get(position);
         // 아이템 내 각 위젯에 데이터 반영
@@ -54,6 +53,12 @@ public class CalcResultAdapter extends BaseAdapter {
         mRefMyManMoney.setText(MyCalcResultItem.getMyManMoney());
         mRefMyWomanMoney.setText(MyCalcResultItem.getMyWomanMoney());
         mRefMyResultMoney.setText(MyCalcResultItem.getMyResultMoney());
+        if (!MySharedPreferencesManager.getPic01(context).equals("길동")){
+            first_name_calc.setText(MySharedPreferencesManager.getPic01(context)+"의 지출:");
+        }
+        if (!MySharedPreferencesManager.getPic02(context).equals("둘리")){
+            second_name_calc.setText(MySharedPreferencesManager.getPic02(context)+"의 지출:");
+        }
         return convertView;
     }
 
