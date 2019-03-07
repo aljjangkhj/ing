@@ -178,10 +178,10 @@ public class setActivity extends BaseActivity {
                         nameChangePopup.OK_Click = new NameChangePopup.onClick() {
                             @Override
                             public void onClick() {
-                                MySharedPreferencesManager.setPic01(nameChangePopup.getName1(),mContext);
-                                MySharedPreferencesManager.setPic02(nameChangePopup.getName2(),mContext);
                                 Toast.makeText(mContext, MySharedPreferencesManager.getPic01(mContext)+"(을)를 "+nameChangePopup.getName1()+"(으)로 변경하였습니다.", Toast.LENGTH_SHORT).show();
                                 Toast.makeText(mContext, MySharedPreferencesManager.getPic02(mContext)+"(을)를 "+nameChangePopup.getName2()+"(으)로 변경하였습니다.", Toast.LENGTH_SHORT).show();
+                                MySharedPreferencesManager.setPic01(nameChangePopup.getName1(),mContext);
+                                MySharedPreferencesManager.setPic02(nameChangePopup.getName2(),mContext);
                             }
                         };
                         nameChangePopup.show();
