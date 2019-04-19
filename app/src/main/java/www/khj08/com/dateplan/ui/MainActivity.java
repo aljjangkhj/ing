@@ -253,45 +253,6 @@ public class MainActivity extends BaseActivity /*implements NavigationView.OnNav
             @Override
             public void onClick(View v) {
 //                setFullAd();
-                mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(mContext);
-                mRewardedVideoAd.setRewardedVideoAdListener(new RewardedVideoAdListener() {
-                    @Override
-                    public void onRewardedVideoAdLoaded() {
-                        if (mRewardedVideoAd.isLoaded()) {
-                            mRewardedVideoAd.show();
-                        }
-                    }
-
-                    @Override
-                    public void onRewardedVideoAdOpened() {
-
-                    }
-
-                    @Override
-                    public void onRewardedVideoStarted() {
-
-                    }
-
-                    @Override
-                    public void onRewardedVideoAdClosed() {
-
-                    }
-
-                    @Override
-                    public void onRewarded(RewardItem rewardItem) {
-
-                    }
-
-                    @Override
-                    public void onRewardedVideoAdLeftApplication() {
-
-                    }
-
-                    @Override
-                    public void onRewardedVideoAdFailedToLoad(int i) {
-
-                    }
-                });
                 loadRewardedVideoAd();
             }
         });
@@ -1280,6 +1241,45 @@ public class MainActivity extends BaseActivity /*implements NavigationView.OnNav
     }
 
     private void loadRewardedVideoAd() {
+        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(mContext);
+        mRewardedVideoAd.setRewardedVideoAdListener(new RewardedVideoAdListener() {
+            @Override
+            public void onRewardedVideoAdLoaded() {
+                if (mRewardedVideoAd.isLoaded()) {
+                    mRewardedVideoAd.show();
+                }
+            }
+
+            @Override
+            public void onRewardedVideoAdOpened() {
+
+            }
+
+            @Override
+            public void onRewardedVideoStarted() {
+
+            }
+
+            @Override
+            public void onRewardedVideoAdClosed() {
+
+            }
+
+            @Override
+            public void onRewarded(RewardItem rewardItem) {
+
+            }
+
+            @Override
+            public void onRewardedVideoAdLeftApplication() {
+
+            }
+
+            @Override
+            public void onRewardedVideoAdFailedToLoad(int i) {
+
+            }
+        });
         mRewardedVideoAd.loadAd(getString(R.string.reward_ad_key), new AdRequest.Builder().build());
     }
 }

@@ -21,6 +21,10 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardItem;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 import java.util.Calendar;
 
@@ -46,6 +50,7 @@ public class setActivity extends BaseActivity {
     private String[] strSet = {"항상 상단 알림 표시 설정"};
     private LinearLayout btn_main_menu;
     private InterstitialAd interstitialAd;
+    private RewardedVideoAd mRewardedVideoAd;
 
     public SQLiteDBManager mSQLiteDBManager = null;
     @Override
@@ -132,7 +137,12 @@ public class setActivity extends BaseActivity {
                                 day = dayOfMonth;
                                 MySharedPreferencesManager.setStartLoveDay(year, month, day, setActivity.this);
                                 //  Toast.makeText(setActivity.this,year+"년"+month+"월"+day+"일" , Toast.LENGTH_SHORT).show();
-                                setFullAd();
+
+                                //전면
+//                                setFullAd();
+                                //보상형
+                                loadRewardedVideoAd();
+
                                 Toast.makeText(setActivity.this, "메인화면에 등록 되었습니다.", Toast.LENGTH_SHORT).show();
 
                                 DdayManager(year, month, day);
@@ -512,5 +522,49 @@ public class setActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    //보상형광고
+    private void loadRewardedVideoAd() {
+        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(mContext);
+        mRewardedVideoAd.setRewardedVideoAdListener(new RewardedVideoAdListener() {
+            @Override
+            public void onRewardedVideoAdLoaded() {
+                if (mRewardedVideoAd.isLoaded()) {
+                    mRewardedVideoAd.show();
+                }
+            }
+
+            @Override
+            public void onRewardedVideoAdOpened() {
+
+            }
+
+            @Override
+            public void onRewardedVideoStarted() {
+
+            }
+
+            @Override
+            public void onRewardedVideoAdClosed() {
+
+            }
+
+            @Override
+            public void onRewarded(RewardItem rewardItem) {
+
+            }
+
+            @Override
+            public void onRewardedVideoAdLeftApplication() {
+
+            }
+
+            @Override
+            public void onRewardedVideoAdFailedToLoad(int i) {
+
+            }
+        });
+        mRewardedVideoAd.loadAd(getString(R.string.reward_ad_key), new AdRequest.Builder().build());
     }
 }
