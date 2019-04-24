@@ -253,6 +253,7 @@ public class MainActivity extends BaseActivity /*implements NavigationView.OnNav
             @Override
             public void onClick(View v) {
 //                setFullAd();
+                menubar_sidemenu.hide();
                 loadRewardedVideoAd();
             }
         });

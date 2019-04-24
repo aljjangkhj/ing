@@ -1,5 +1,6 @@
 package www.khj08.com.dateplan.ui;
 
+import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
@@ -29,6 +30,19 @@ import www.khj08.com.dateplan.R;
 public class NewAppWidget extends AppWidgetProvider {
 
     public static class UpdateClass extends Service{
+
+        @Override
+        public void onCreate(){
+            super.onCreate();
+            startForeground(1, new Notification());
+        }
+
+        @Override
+        public void onDestroy(){
+            super.onDestroy();
+            stopForeground(true);
+        }
+
         @Override
         public IBinder onBind(Intent intent){
 
