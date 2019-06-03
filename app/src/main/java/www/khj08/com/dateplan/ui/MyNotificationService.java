@@ -84,7 +84,8 @@ public class MyNotificationService extends Service {
 
                     mRefNotificationCompatBuilder = new NotificationCompat.Builder(MyNotificationService.this, notificationChannel.getId());
 //                    mRefNotificationCompatBuilder = new NotificationCompat.Builder(MyNotificationService.this);
-                    mRefNotificationCompatBuilder.setSmallIcon(R.drawable.mainthreadlogo1);
+//                        mRefNotificationCompatBuilder.setSmallIcon(R.drawable.mainthreadlogo1); 2019.06.03 에러 수정
+                    mRefNotificationCompatBuilder.setSmallIcon(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP ? R.drawable.mainthreadlogo1 : R.mipmap.ing_icon);
                     mRefNotificationCompatBuilder.setContent(remoteViews);
 
                     //티커 텍스트 : 상태바에 노티피케이션이 추가된 후에 바로 출력되는 텍스트
@@ -142,7 +143,8 @@ public class MyNotificationService extends Service {
                         remoteViews.setTextViewText(R.id.womanName2, MySharedPreferencesManager.getPic02(MyNotificationService.this));
 
                         mRefNotificationCompatBuilder = new NotificationCompat.Builder(MyNotificationService.this);
-                        mRefNotificationCompatBuilder.setSmallIcon(R.drawable.mainthreadlogo1);
+//                        mRefNotificationCompatBuilder.setSmallIcon(R.drawable.mainthreadlogo1); 2019.06.03 에러 수정
+                        mRefNotificationCompatBuilder.setSmallIcon(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP ? R.drawable.mainthreadlogo1 : R.mipmap.ing_icon);
                         mRefNotificationCompatBuilder.setContent(remoteViews);
 
                         //티커 텍스트 : 상태바에 노티피케이션이 추가된 후에 바로 출력되는 텍스트

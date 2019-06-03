@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 27
@@ -7,8 +9,8 @@ android {
         applicationId "www.khj08.com.dateplan"
         minSdkVersion 14
         targetSdkVersion 27
-        versionCode 25
-        versionName "2.1.1"
+        versionCode 26
+        versionName "2.1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
@@ -60,5 +62,9 @@ dependencies {
 
     /* lottie */
     implementation 'com.airbnb.android:lottie:2.3.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+}
+repositories {
+    mavenCentral()
 }
