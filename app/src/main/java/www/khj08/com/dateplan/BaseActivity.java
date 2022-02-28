@@ -3,17 +3,14 @@ package www.khj08.com.dateplan;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-//import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.DisplayMetrics;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
-import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONObject;
 
@@ -21,13 +18,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import www.khj08.com.dateplan.cipher.AES;
-import www.khj08.com.dateplan.common.log;
 import www.khj08.com.dateplan.config.AppPosPreferenceManager;
 import www.khj08.com.dateplan.config.Config;
 import www.khj08.com.dateplan.config.PollingStatus;
 import www.khj08.com.dateplan.http.HttpPostSend;
 import www.khj08.com.dateplan.popup.Popup;
 import www.khj08.com.dateplan.ui.MainActivity;
+import www.khj08.com.dateplan.common.log;
 import www.khj08.com.dateplan.utils.AutoScreen;
 import www.khj08.com.dateplan.utils.SharedValue;
 import www.khj08.com.dateplan.utils.Util;

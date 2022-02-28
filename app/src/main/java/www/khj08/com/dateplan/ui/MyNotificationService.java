@@ -19,12 +19,10 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.support.v4.app.NotificationCompat;
-import android.util.Log;
+import androidx.core.app.NotificationCompat;
+
 import android.widget.RemoteViews;
 import android.widget.Toast;
-
-import java.util.Date;
 
 import www.khj08.com.dateplan.R;
 import www.khj08.com.dateplan.common.log;

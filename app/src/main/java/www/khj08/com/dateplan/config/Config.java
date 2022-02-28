@@ -1,6 +1,6 @@
 package www.khj08.com.dateplan.config;
 
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ public class Config
     final static public String FCM_TOPIC = "/topics/push_all";  // FCM topic
     static private String FCM_TOKEN = "";  // FCM
 
-    public static ArrayList<Activity> actList = new ArrayList<Activity>();
+    public static ArrayList<AppCompatActivity> actList = new ArrayList<AppCompatActivity>();
 
     // 서버정보
     static public String SERVER_IP =  "";

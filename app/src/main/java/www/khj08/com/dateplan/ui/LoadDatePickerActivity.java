@@ -3,23 +3,19 @@ package www.khj08.com.dateplan.ui;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentValues;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-//import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Base64;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,12 +30,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-
-import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -58,7 +48,7 @@ public class LoadDatePickerActivity extends BaseActivity {
     //날짜 정보를 가져올때 사용할 변수 선언: 달력 변수
     private Calendar calendar;
     private Uri mImageCaptureUri;
-    private InterstitialAd interstitialAd;
+//    private InterstitialAd interstitialAd;
 
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
@@ -715,16 +705,16 @@ public class LoadDatePickerActivity extends BaseActivity {
     }
 
     private void setFullAd(){
-        interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId(getString(R.string.full_ad_key));
-        interstitialAd.loadAd(new AdRequest.Builder().build());
-        interstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                if (interstitialAd.isLoaded()) {
-                    interstitialAd.show();
-                }
-            }
-        });
+//        interstitialAd = new InterstitialAd(this);
+//        interstitialAd.setAdUnitId(getString(R.string.full_ad_key));
+//        interstitialAd.loadAd(new AdRequest.Builder().build());
+//        interstitialAd.setAdListener(new AdListener() {
+//            @Override
+//            public void onAdLoaded() {
+//                if (interstitialAd.isLoaded()) {
+//                    interstitialAd.show();
+//                }
+//            }
+//        });
     }
 }

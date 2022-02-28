@@ -54,7 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="300px"
                     android:layout_gravity="center"
-                    android:src="@drawable/mainlogo01"
+                    app:srcCompat="@drawable/mainlogo01"
                     android:layout_marginTop="120px"/>
 
                 <TextView
@@ -102,7 +102,7 @@
                                 android:layout_width="360px"
                                 android:layout_height="400px"
                                 android:background="#00ff0000"
-                                android:src="@mipmap/ic_menu_camera" />
+                                app:srcCompat="@mipmap/ic_menu_camera" />
 
                             <www.khj08.com.dateplan.ui.CircleImageView
                                 android:id="@+id/man01"
@@ -137,7 +137,7 @@
                                 android:layout_width="360px"
                                 android:layout_height="400px"
                                 android:background="#00ff0000"
-                                android:src="@mipmap/ic_menu_camera" />
+                                app:srcCompat="@mipmap/ic_menu_camera" />
 
                             <www.khj08.com.dateplan.ui.CircleImageView
                                 android:id="@+id/woman2"

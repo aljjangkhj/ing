@@ -1,11 +1,12 @@
 package www.khj08.com.dateplan.http;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONObject;
 
@@ -146,7 +147,7 @@ public class HttpPostSend extends AsyncTask<String, Void, String>
 
     private void ShowPopup_SessionTerminate()
     {
-        if(mContext !=null && ((Activity)mContext).isFinishing() == false)
+        if(mContext !=null && ((AppCompatActivity)mContext).isFinishing() == false)
         {
             ((BaseActivity)mContext).PollingStop();
             Popup popup = new Popup(mContext, "", "Session 정보가 없습니다.\n메인화면으로 이동하겠습니다.", "", "확인");
@@ -156,7 +157,7 @@ public class HttpPostSend extends AsyncTask<String, Void, String>
                     Intent intent = new Intent(mContext, MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     ((BaseActivity) mContext).MoveToActivity(intent);
-                    ((Activity) mContext).finish();
+                    ((AppCompatActivity) mContext).finish();
                 }
             };
             popup.show();
@@ -188,7 +189,7 @@ public class HttpPostSend extends AsyncTask<String, Void, String>
             {
                 if (dialog.isShowing())
                 {
-                    if( ((Activity)mContext).isFinishing() == false)
+                    if( ((AppCompatActivity)mContext).isFinishing() == false)
                     {
                         dialog.dismiss();
                     }
@@ -333,7 +334,7 @@ public class HttpPostSend extends AsyncTask<String, Void, String>
 
     private void ShowFailedDialog(String Error)
     {
-        if(mContext !=null && ((Activity)mContext).isFinishing() == false)
+        if(mContext !=null && ((AppCompatActivity)mContext).isFinishing() == false)
         {
             ((BaseActivity)mContext).PollingStop();
             String msg = mContext.getResources().getString(R.string.data_failed);

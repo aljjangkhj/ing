@@ -12,37 +12,31 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-//import android.graphics.Typeface;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.NavigationView;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Base64;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -52,16 +46,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.reward.RewardItem;
-import com.google.android.gms.ads.reward.RewardedVideoAd;
-import com.google.android.gms.ads.reward.RewardedVideoAdListener;
-
 import www.khj08.com.dateplan.BaseActivity;
 import www.khj08.com.dateplan.R;
 import www.khj08.com.dateplan.common.log;
@@ -69,16 +53,14 @@ import www.khj08.com.dateplan.popup.MainSideMenuDialog;
 import www.khj08.com.dateplan.popup.Popup;
 import www.khj08.com.dateplan.utils.Util;
 
-import static android.os.Environment.getExternalStoragePublicDirectory;
-
 public class MainActivity extends BaseActivity /*implements NavigationView.OnNavigationItemSelectedListener*/ {
 
     private final int GALLERY_CODE = 1112;
 
     public SideMenuBar menubar_sidemenu = null;
 
-    private InterstitialAd interstitialAd;
-    private RewardedVideoAd mRewardedVideoAd;
+//    private InterstitialAd interstitialAd;
+//    private RewardedVideoAd mRewardedVideoAd;
     private Bitmap myBitmap;
 
     private int mRefid,finalresult,finalResultTime,sqltime,savebackground,mainHour,mainMinute;
@@ -356,17 +338,17 @@ public class MainActivity extends BaseActivity /*implements NavigationView.OnNav
     }
 
     private void setFullAd(){
-        interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId(getString(R.string.full_ad_key));
-        interstitialAd.loadAd(new AdRequest.Builder().build());
-        interstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                if (interstitialAd.isLoaded()) {
-                    interstitialAd.show();
-                }
-            }
-        });
+//        interstitialAd = new InterstitialAd(this);
+//        interstitialAd.setAdUnitId(getString(R.string.full_ad_key));
+//        interstitialAd.loadAd(new AdRequest.Builder().build());
+//        interstitialAd.setAdListener(new AdListener() {
+//            @Override
+//            public void onAdLoaded() {
+//                if (interstitialAd.isLoaded()) {
+//                    interstitialAd.show();
+//                }
+//            }
+//        });
     }
 
     @Override
@@ -1242,45 +1224,45 @@ public class MainActivity extends BaseActivity /*implements NavigationView.OnNav
     }
 
     private void loadRewardedVideoAd() {
-        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(mContext);
-        mRewardedVideoAd.setRewardedVideoAdListener(new RewardedVideoAdListener() {
-            @Override
-            public void onRewardedVideoAdLoaded() {
-                if (mRewardedVideoAd.isLoaded()) {
-                    mRewardedVideoAd.show();
-                }
-            }
-
-            @Override
-            public void onRewardedVideoAdOpened() {
-
-            }
-
-            @Override
-            public void onRewardedVideoStarted() {
-
-            }
-
-            @Override
-            public void onRewardedVideoAdClosed() {
-
-            }
-
-            @Override
-            public void onRewarded(RewardItem rewardItem) {
-
-            }
-
-            @Override
-            public void onRewardedVideoAdLeftApplication() {
-
-            }
-
-            @Override
-            public void onRewardedVideoAdFailedToLoad(int i) {
-
-            }
-        });
-        mRewardedVideoAd.loadAd(getString(R.string.reward_ad_key), new AdRequest.Builder().build());
+//        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(mContext);
+//        mRewardedVideoAd.setRewardedVideoAdListener(new RewardedVideoAdListener() {
+//            @Override
+//            public void onRewardedVideoAdLoaded() {
+//                if (mRewardedVideoAd.isLoaded()) {
+//                    mRewardedVideoAd.show();
+//                }
+//            }
+//
+//            @Override
+//            public void onRewardedVideoAdOpened() {
+//
+//            }
+//
+//            @Override
+//            public void onRewardedVideoStarted() {
+//
+//            }
+//
+//            @Override
+//            public void onRewardedVideoAdClosed() {
+//
+//            }
+//
+//            @Override
+//            public void onRewarded(RewardItem rewardItem) {
+//
+//            }
+//
+//            @Override
+//            public void onRewardedVideoAdLeftApplication() {
+//
+//            }
+//
+//            @Override
+//            public void onRewardedVideoAdFailedToLoad(int i) {
+//
+//            }
+//        });
+//        mRewardedVideoAd.loadAd(getString(R.string.reward_ad_key), new AdRequest.Builder().build());
     }
 }

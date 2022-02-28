@@ -1,25 +1,26 @@
 package www.khj08.com.dateplan.ui;
 
 import android.Manifest;
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 public class permissionCheck {
 
     String permissionChk;
     boolean result = false;
-    Activity activity;
+    AppCompatActivity activity;
     Context mContext;
 
-    public boolean isCheck(final Activity act, final Context context, String per, String permissionText) {
+    public boolean isCheck(final AppCompatActivity act, final Context context, String per, String permissionText) {
         permissionChk = per;
         this.mContext = context;
         this.activity = act;

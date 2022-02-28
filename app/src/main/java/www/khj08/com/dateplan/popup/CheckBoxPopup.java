@@ -2,21 +2,18 @@ package www.khj08.com.dateplan.popup;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.view.View;
 import android.view.Window;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import www.khj08.com.dateplan.R;
-import www.khj08.com.dateplan.ui.MyNotificationService;
 import www.khj08.com.dateplan.ui.MySharedPreferencesManager;
 import www.khj08.com.dateplan.utils.AutoScreen;
 

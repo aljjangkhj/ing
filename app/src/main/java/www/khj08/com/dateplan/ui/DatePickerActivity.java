@@ -3,22 +3,18 @@ package www.khj08.com.dateplan.ui;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentValues;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-//import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Base64;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -33,10 +29,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -54,8 +46,6 @@ import www.khj08.com.dateplan.common.log;
 import www.khj08.com.dateplan.popup.Popup;
 import www.khj08.com.dateplan.ui.list_adapter.SQLiteDBListView;
 
-import static www.khj08.com.dateplan.ui.DateListView.StringToBitMap;
-
 public class DatePickerActivity extends BaseActivity {
     //날짜 정보를 가져올때 사용할 변수 선언: 달력 변수
     private Calendar calendar;
@@ -63,7 +53,7 @@ public class DatePickerActivity extends BaseActivity {
     private DecimalFormat decimalFormat = new DecimalFormat("#,###");
     private String result="";
     private boolean dateTF = false;
-    private InterstitialAd interstitialAd;
+//    private InterstitialAd interstitialAd;
 
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
@@ -852,16 +842,16 @@ public class DatePickerActivity extends BaseActivity {
     }
 
     private void setFullAd(){
-        interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId(getString(R.string.full_ad_key));
-        interstitialAd.loadAd(new AdRequest.Builder().build());
-        interstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                if (interstitialAd.isLoaded()) {
-                    interstitialAd.show();
-                }
-            }
-        });
+//        interstitialAd = new InterstitialAd(this);
+//        interstitialAd.setAdUnitId(getString(R.string.full_ad_key));
+//        interstitialAd.loadAd(new AdRequest.Builder().build());
+//        interstitialAd.setAdListener(new AdListener() {
+//            @Override
+//            public void onAdLoaded() {
+//                if (interstitialAd.isLoaded()) {
+//                    interstitialAd.show();
+//                }
+//            }
+//        });
     }
 }

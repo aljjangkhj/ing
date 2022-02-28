@@ -1,8 +1,9 @@
 package www.khj08.com.dateplan.config;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import www.khj08.com.dateplan.common.log;
 
@@ -82,7 +83,7 @@ public class AppPosPreferenceManager
         String result = "";
         try
         {
-            SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
+            SharedPreferences pref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE);
             result = pref.getString(APP_KEY_ID, "");
         }catch (Exception e)
             {
@@ -95,7 +96,7 @@ public class AppPosPreferenceManager
     {
         try
         {
-            SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
+            SharedPreferences pref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE);
             SharedPreferences.Editor editor = pref.edit();
 
             editor.putString(APP_KEY_ID, appkeyid);
@@ -112,7 +113,7 @@ public class AppPosPreferenceManager
 
         try
         {
-            SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
+            SharedPreferences pref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE);
             result = pref.getString(PUB_KEY_MOD, "");
         }catch (Exception e)
         {
@@ -125,7 +126,7 @@ public class AppPosPreferenceManager
     {
         try
         {
-            SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
+            SharedPreferences pref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE);
             SharedPreferences.Editor editor = pref.edit();
 
             editor.putString(PUB_KEY_MOD, pubKey);
@@ -139,7 +140,7 @@ public class AppPosPreferenceManager
 
     public static synchronized int getPosSeq(Context context)
     {
-        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
+        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE);
         return pref.getInt(POS_SEQ, 0);
     }
 
@@ -147,7 +148,7 @@ public class AppPosPreferenceManager
     {
         try
         {
-        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
+        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
 
         editor.putInt(POS_SEQ, posSeq);
@@ -162,7 +163,7 @@ public class AppPosPreferenceManager
     {
         String result = "";
 
-        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
+        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE);
         result = pref.getString(SAVE_ID, "");
 
         return result;
@@ -170,7 +171,7 @@ public class AppPosPreferenceManager
 
     public static synchronized void setId(Context context, String id)
     {
-        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
+        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
 
         editor.putString(SAVE_ID, id);
@@ -179,13 +180,13 @@ public class AppPosPreferenceManager
 
     public static synchronized boolean getCheckBoxState(Context context)
     {
-        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
+        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE);
         return pref.getBoolean(CHECK_BOX_STATE, false);
     }
 
     public static synchronized void setCheckBoxState(Context context, boolean checkBoxState)
     {
-        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
+        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
 
         editor.putBoolean(CHECK_BOX_STATE, checkBoxState);
@@ -194,13 +195,13 @@ public class AppPosPreferenceManager
 
     public static synchronized boolean getAutoLogin(Context context)
     {
-        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
+        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE);
         return pref.getBoolean(AUTO_LOGIN, false);
     }
 
     public static synchronized void setAutoLogin(Context context, boolean autoLogin)
     {
-        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
+        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
 
         editor.putBoolean(AUTO_LOGIN, autoLogin);
@@ -209,13 +210,13 @@ public class AppPosPreferenceManager
 
     public static synchronized long getFixedCode(Context context)
     {
-        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
+        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE);
         return pref.getLong(FIXED_CODE, 0);
     }
 
     public static synchronized void setFixedCode(Context context, long fixedCode)
     {
-        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
+        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
 
         editor.putLong(FIXED_CODE, fixedCode);
@@ -224,13 +225,13 @@ public class AppPosPreferenceManager
 
     public static synchronized int getMainPage(Context context)
     {
-        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
+        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE);
         return pref.getInt(PAGE_CODE, 0);
     }
 
     public static synchronized void setMainPage(Context context, int pageCode)
     {
-        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
+        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
 
         editor.putInt(PAGE_CODE, pageCode);
@@ -239,13 +240,13 @@ public class AppPosPreferenceManager
 
     public static synchronized long getPollingTimeOut(Context context)
     {
-        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
+        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE);
         return pref.getLong(PAGE_CODE, 0);
     }
 
     public static synchronized void setPollingTimeOut(Context context, long pageCode)
     {
-        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
+        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
 
         editor.putLong(PAGE_CODE, pageCode);

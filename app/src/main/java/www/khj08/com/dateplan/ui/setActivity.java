@@ -1,36 +1,22 @@
 package www.khj08.com.dateplan.ui;
 
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.reward.RewardItem;
-import com.google.android.gms.ads.reward.RewardedVideoAd;
-import com.google.android.gms.ads.reward.RewardedVideoAdListener;
+import androidx.core.content.ContextCompat;
 
 import java.util.Calendar;
 
 import www.khj08.com.dateplan.BaseActivity;
 import www.khj08.com.dateplan.R;
-import www.khj08.com.dateplan.common.log;
 import www.khj08.com.dateplan.popup.CheckBoxPopup;
 import www.khj08.com.dateplan.popup.NameChangePopup;
 import www.khj08.com.dateplan.popup.Popup;
@@ -49,8 +35,8 @@ public class setActivity extends BaseActivity {
     boolean checkvalue = false;
     private String[] strSet = {"항상 상단 알림 표시 설정"};
     private LinearLayout btn_main_menu;
-    private InterstitialAd interstitialAd;
-    private RewardedVideoAd mRewardedVideoAd;
+//    private InterstitialAd interstitialAd;
+//    private RewardedVideoAd mRewardedVideoAd;
 
     public SQLiteDBManager mSQLiteDBManager = null;
     @Override
@@ -511,60 +497,60 @@ public class setActivity extends BaseActivity {
         }
     }
     private void setFullAd(){
-        interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId(getString(R.string.full_ad_key));
-        interstitialAd.loadAd(new AdRequest.Builder().build());
-        interstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                if (interstitialAd.isLoaded()) {
-                    interstitialAd.show();
-                }
-            }
-        });
+//        interstitialAd = new InterstitialAd(this);
+//        interstitialAd.setAdUnitId(getString(R.string.full_ad_key));
+//        interstitialAd.loadAd(new AdRequest.Builder().build());
+//        interstitialAd.setAdListener(new AdListener() {
+//            @Override
+//            public void onAdLoaded() {
+//                if (interstitialAd.isLoaded()) {
+//                    interstitialAd.show();
+//                }
+//            }
+//        });
     }
 
     //보상형광고
     private void loadRewardedVideoAd() {
-        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(mContext);
-        mRewardedVideoAd.setRewardedVideoAdListener(new RewardedVideoAdListener() {
-            @Override
-            public void onRewardedVideoAdLoaded() {
-                if (mRewardedVideoAd.isLoaded()) {
-                    mRewardedVideoAd.show();
-                }
-            }
-
-            @Override
-            public void onRewardedVideoAdOpened() {
-
-            }
-
-            @Override
-            public void onRewardedVideoStarted() {
-
-            }
-
-            @Override
-            public void onRewardedVideoAdClosed() {
-
-            }
-
-            @Override
-            public void onRewarded(RewardItem rewardItem) {
-
-            }
-
-            @Override
-            public void onRewardedVideoAdLeftApplication() {
-
-            }
-
-            @Override
-            public void onRewardedVideoAdFailedToLoad(int i) {
-
-            }
-        });
-        mRewardedVideoAd.loadAd(getString(R.string.reward_ad_key), new AdRequest.Builder().build());
+//        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(mContext);
+//        mRewardedVideoAd.setRewardedVideoAdListener(new RewardedVideoAdListener() {
+//            @Override
+//            public void onRewardedVideoAdLoaded() {
+//                if (mRewardedVideoAd.isLoaded()) {
+//                    mRewardedVideoAd.show();
+//                }
+//            }
+//
+//            @Override
+//            public void onRewardedVideoAdOpened() {
+//
+//            }
+//
+//            @Override
+//            public void onRewardedVideoStarted() {
+//
+//            }
+//
+//            @Override
+//            public void onRewardedVideoAdClosed() {
+//
+//            }
+//
+//            @Override
+//            public void onRewarded(RewardItem rewardItem) {
+//
+//            }
+//
+//            @Override
+//            public void onRewardedVideoAdLeftApplication() {
+//
+//            }
+//
+//            @Override
+//            public void onRewardedVideoAdFailedToLoad(int i) {
+//
+//            }
+//        });
+//        mRewardedVideoAd.loadAd(getString(R.string.reward_ad_key), new AdRequest.Builder().build());
     }
 }
