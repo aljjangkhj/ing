@@ -34,9 +34,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -90,35 +87,6 @@ public class MainActivity extends BaseActivity /*implements NavigationView.OnNav
         //권한체크
         checkPermission();
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        backPressCloseSystem = new BackPressCloseSystem(this);
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-        //광고테스트
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
-        String today = Util.yyyyMMdd();
-
-//        AdView mAdView2 = (AdView)findViewById(R.id.adView2);
-//        AdRequest adRequest2 = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-//        mAdView2.loadAd(adRequest2);
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "등록되어있지 않습니다.", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-            }
-        });
-*/
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        drawer.setDrawerListener(toggle);
-//        toggle.syncState();
-
-        /*NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);*/
         myMainImage();//사진이벤트
         TextClickEvent();//메인클릭이벤트
         mybackgroundcolor();//배경화면설정
@@ -150,7 +118,6 @@ public class MainActivity extends BaseActivity /*implements NavigationView.OnNav
         nav_textView = (TextView) findViewById(R.id.nav_header_layout_TextView);
 
         this.mainText.setText(MySharedPreferencesManager.getStartLoveDay(this));
-//        this.MainDdayText.setText(MySharedPreferencesManager.getDdaySave(this));
         this.manName.setText(MySharedPreferencesManager.getPic01(this));
         this.womanName.setText(MySharedPreferencesManager.getPic02(this));
         this.nav_textView.setText(MySharedPreferencesManager.getMainEdit(MainActivity.this));
@@ -159,10 +126,6 @@ public class MainActivity extends BaseActivity /*implements NavigationView.OnNav
         firstname2.setText(MySharedPreferencesManager.getPic01(mContext));
         secondname1.setText(MySharedPreferencesManager.getPic02(mContext));
         secondname2.setText(MySharedPreferencesManager.getPic02(mContext));
-//        firstname1.setTypeface(typeface);
-//        firstname2.setTypeface(typeface);
-//        secondname1.setTypeface(typeface);
-//        secondname2.setTypeface(typeface);
         Bitmap bitmap = StringToBitMap(MySharedPreferencesManager.getManPicture(this));
         this.imageView01.setImageBitmap(bitmap);
         Bitmap bitmap2 = StringToBitMap(MySharedPreferencesManager.getWomanPicture(this));
@@ -217,26 +180,12 @@ public class MainActivity extends BaseActivity /*implements NavigationView.OnNav
                 resultmoney.setText(numberstr + "원");
             }
         }
-        /*String [] strarray = {String.valueOf(iid)};
-        for(int i = 0; i <= strarray.length; i++ ){
-            selection = "_id='"+i+"'";
-        }
-        String[] columns02 = new String[]{"_id","resultmoney"};
-        Cursor c02 = mSQLiteDBManager.query(columns02, selection, null, null, null, null);
-        if (c02 != null) {
-            while (c02.moveToNext()) {
-                int iid = c02.getInt(0);
-                String mRefResultmoney = c02.getString(1);
-                Toast.makeText(this, "총 비용은 " + mRefResultmoney, Toast.LENGTH_SHORT).show();
-            }
-        }*/
 
         get_admob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                setFullAd();
                 menubar_sidemenu.hide();
-                loadRewardedVideoAd();
             }
         });
 
@@ -335,20 +284,6 @@ public class MainActivity extends BaseActivity /*implements NavigationView.OnNav
                 requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.GET_ACCOUNTS}, 1);
             }
         }
-    }
-
-    private void setFullAd(){
-//        interstitialAd = new InterstitialAd(this);
-//        interstitialAd.setAdUnitId(getString(R.string.full_ad_key));
-//        interstitialAd.loadAd(new AdRequest.Builder().build());
-//        interstitialAd.setAdListener(new AdListener() {
-//            @Override
-//            public void onAdLoaded() {
-//                if (interstitialAd.isLoaded()) {
-//                    interstitialAd.show();
-//                }
-//            }
-//        });
     }
 
     @Override
@@ -1221,48 +1156,5 @@ public class MainActivity extends BaseActivity /*implements NavigationView.OnNav
             return 270;
         }
         return 0;
-    }
-
-    private void loadRewardedVideoAd() {
-//        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(mContext);
-//        mRewardedVideoAd.setRewardedVideoAdListener(new RewardedVideoAdListener() {
-//            @Override
-//            public void onRewardedVideoAdLoaded() {
-//                if (mRewardedVideoAd.isLoaded()) {
-//                    mRewardedVideoAd.show();
-//                }
-//            }
-//
-//            @Override
-//            public void onRewardedVideoAdOpened() {
-//
-//            }
-//
-//            @Override
-//            public void onRewardedVideoStarted() {
-//
-//            }
-//
-//            @Override
-//            public void onRewardedVideoAdClosed() {
-//
-//            }
-//
-//            @Override
-//            public void onRewarded(RewardItem rewardItem) {
-//
-//            }
-//
-//            @Override
-//            public void onRewardedVideoAdLeftApplication() {
-//
-//            }
-//
-//            @Override
-//            public void onRewardedVideoAdFailedToLoad(int i) {
-//
-//            }
-//        });
-//        mRewardedVideoAd.loadAd(getString(R.string.reward_ad_key), new AdRequest.Builder().build());
     }
 }
